@@ -8,14 +8,28 @@ Route::get('/', function()
 {
     return View::make('publico.index');
 });
+Route::get('/trabajos', function() {
+    return View::make('publico.trabajos');
+});
+Route::get('/contacto', function() {
+    return View::make('publico.contacto');
+});
+
+
+
 
 // Parte administración
 Route::get('/admin', function() {
     return View::make('admin.index');
 });
-//
-//
-//
+Route::get('', '');
+Route::get('', '');
+Route::get('', '');
+Route::get('', '');
+Route::get('', '');
+Route::get('', '');
+Route::get('', '');
+
 
 
 // Parte cliente

@@ -12,12 +12,37 @@
     {{HTML::style('css/style.css')}}
 </head>
 <body>
+@if(Auth::check() && Auth::user()->rol == "Admin")
+    {{ HTML::link('/admin', 'ADMINISTRACION') }}
+    <br/>
+    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->username) }}
+@elseif(Auth::check() && Auth::user()->rol == "Usuario")
+    {{ HTML::link('/cliente', 'MI CUENTA DE CLIENTE') }}
+    <br/>
+    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->username) }}
+@elseif(Auth::check())
+    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->username) }}
+@else
+    {{ HTML::link('/login', 'LOGIN') }}
+    <br/>
+    {{ HTML::link('/registro', 'REGISTRAR NUEVO USUARIO') }}
+@endif
+
+
+
+<hr/>
+{{ HTML::link('/', 'INICIO') }}
+<br/>
+{{ HTML::link('/trabajos', 'TRABAJOS/GALERIA') }}
+<br/>
+{{ HTML::link('/contacto', 'CONTACTO') }}
+
+
+
+
 @yield('content')
 
 
-@if (Auth::check())
-    <hr/>
-    {{  HTML::link('/logout', '// Cerrar Sesion - '.Auth::user()->username.' //')  }}
-@endif
+
 </body>
 </html>

@@ -12,6 +12,26 @@
     {{HTML::style('css/style.css')}}
 </head>
 <body>
+{{ HTML::link('/admin', 'RESUMEN/INICIO') }}
+<br/>
+{{ HTML::link('/admin/usuarios', 'USUARIOS') }}
+<br/>
+{{ HTML::link('/admin/tiendas', 'TIENDAS') }}
+<br/>
+{{ HTML::link('/admin/tarifas', 'TARIFAS') }}
+<br/>
+{{ HTML::link('/admin/categorias', 'CATEGORIAS') }}
+<br/>
+{{ HTML::link('/admin/productos', 'PRODUCTOS') }}
+<br/>
+{{ HTML::link('/admin/usuarios', 'USUARIOS') }}
+<br/>
+{{ HTML::link('/admin/facturacion', 'FACTURACION') }}
+<br/>
+{{ HTML::link('/admin/estadisticas', 'ESTADISTICAS') }}
+
+
+
 @yield('content')
 
 

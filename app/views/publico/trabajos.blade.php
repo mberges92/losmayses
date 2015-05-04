@@ -1,5 +1,5 @@
 @extends('layout')
-@section('titulo') Contacto @stop
+@section('titulo') Trabajos/Galeria @stop
 
 
 @section('content')
