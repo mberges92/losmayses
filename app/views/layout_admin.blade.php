@@ -29,6 +29,8 @@
 {{ HTML::link('/admin/facturacion', 'FACTURACION') }}
 <br/>
 {{ HTML::link('/admin/estadisticas', 'ESTADISTICAS') }}
+<hr/>
+
 
 
 

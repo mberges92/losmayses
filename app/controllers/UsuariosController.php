@@ -3,6 +3,21 @@
 
 class UsuariosController extends BaseController {
 
+    public function listado()
+    {
+
+        $usuarios = Usuario::all();
+
+        return View::make('admin.usuarios')->with('usuarios', $usuarios);
+
+    }
+
+
+    /* -----------------------------------------------------------
+     *
+     *         PARTE DE AUTENTICACION
+     *
+     ----------------------------------------------------------- */
 
     public function estaLogueado()
     {

@@ -17,14 +17,40 @@ class CrearTablaTiendas extends Migration {
             $tabla->increments('id');
             $tabla->string('nombre');
             $tabla->string('direccion');
-            $tabla->string('telefono_1');
-            $tabla->string('telefono_2');
+            $tabla->string('cif');
+            $tabla->string('telefono_1');         // Poner null manualmente
+            $tabla->string('telefono_2');         // Poner null manualmente
+            $tabla->string('correo');             //  Poner null manualmentes
             $tabla->string('provincia');
             $tabla->string('localidad');
             $tabla->string('cod_postal');
-            $tabla->tinyInteger('activo');  // Lo crea con 4 espacios
+            $tabla->tinyInteger('activo');        // Poner limite de 1 caracter
+
+            $tabla->integer('tarifa_id');         // foreign key para tarifa
+            $tabla->integer('usuario_id');        // foreign_key para los usuarios
+
             $tabla->timestamps();
         });
+
+
+        DB::table('tiendas')->insert(array(
+                'nombre' => 'tiendaDePrueba',
+                'direccion' => 'C/ Miguel Servet XX',
+                'cif' => '123456789-10',
+                'telefono_1' => '555555555',
+                'telefono_2' => '777777777',
+                'correo' => 'obrador@losmayses.com',
+                'provincia' => 'Zaragoza',
+                'localidad' => 'Zaragoza',
+                'cod_postal' => '50007',
+                'tarifa_id' => 1,                   //COMPROBAR SI CORRESPONDE CON EL ID DE TARIFA
+                'usuario_id' => 2,                  //COMPROBAR SI CORRESPONDE CON EL ID de usuario cliente
+                'activo' => 1
+            )
+        );
+
+
+
 	}
 
 	/**

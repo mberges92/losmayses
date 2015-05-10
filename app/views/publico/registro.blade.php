@@ -20,7 +20,6 @@
     {{Form::label('rol', 'Rol')}}
     {{Form::select('rol', array('Admin' => 'Admin', 'Usuario' => 'Usuario')) }}
     <br>
-    <br>
     {{Form::submit('Registrar usuario')}}
     {{ Form::close() }}
 

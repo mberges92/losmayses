@@ -27,4 +27,24 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     protected $fillable = array('*');
 
 
+    /*
+     * RELACIONES DEL MODELO USUARIO
+     *
+     */
+    /*
+    public function tiendas()
+    {
+        return $this->belongsToMany('Tienda', 'tiendas_usuarios', 'usuario_id', 'tienda_id');
+    }
+    */
+
+    // UNO A MUCHOS
+    // Un usuario tiene muchas tiendas
+    public function tiendas()
+    {
+        return $this->hasMany('Tienda', 'usuario_id');
+    }
+
+
+
 }

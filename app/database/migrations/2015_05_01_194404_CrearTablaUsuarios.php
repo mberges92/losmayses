@@ -23,6 +23,25 @@ class CrearTablaUsuarios extends Migration {
             $tabla->timestamps();
             $tabla->rememberToken();
         });
+
+        // Voy a crear un usuario por defecto para loguearme
+        DB::table('usuarios')->insert(array(
+                'username' => 'admin',
+                'password' => Hash::make('admin'),
+                'correo' => 'admin@admin.com',
+                'rol' => 'Admin',
+                'activo' => 1
+            )
+        );
+
+        DB::table('usuarios')->insert(array(
+                'username' => 'cliente',
+                'password' => Hash::make('cliente'),
+                'correo' => 'cliente@cliente.com',
+                'rol' => 'Cliente',
+                'activo' => 1
+            )
+        );
     }
 
     /**
