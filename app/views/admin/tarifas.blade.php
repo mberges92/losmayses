@@ -28,7 +28,7 @@
             {{ Form::close() }}
 
         </div>
-    </div>activ
+    </div>
 
     <hr/>
 

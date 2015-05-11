@@ -16,12 +16,6 @@
             {{ Form::label('nombre', 'Nombre') }}
             {{ Form::text('nombre', '', array('class' => 'form-control')) }}
 
-            {{-- Form::label('signo', 'Signo +/-') }}
-            {{ Form::text('signo', '', array('class' => 'form-control')) }}
-
-            {{ Form::label('valor', 'Valor') }}
-            {{ Form::text('valor', '', array('class' => 'form-control')) --}}
-
             <br/>
 
             {{ Form::submit('Enviar') }}
@@ -39,7 +33,6 @@
             <thead>
             <th>Activo</th>
             <th>Nombre</th>
-            <th>Valor</th>
             <th>Accion</th>
             </thead>
             <tbody>
@@ -47,7 +40,6 @@
                 <tr>
                     <td>{{ $categoria->activo }}</td>
                     <td>{{ $categoria->nombre }}</td>
-                    <td>{{ $categoria->signo.'  '.$tarifa->valor }}</td>
                     <td>MODIFICAR / ELIMINAR</td>
                 </tr>
             @endforeach

@@ -33,13 +33,15 @@ Route::get('/admin/tarifas', 'TarifasController@listado');
 Route::post('/admin/tarifas/nueva', 'TarifasController@nueva');
 Route::get('/admin/tarifas/eliminar/{id}', 'TarifasController@eliminar');
 
+Route::get('/admin/categorias', 'CategoriasController@listado');
+Route::post('/admin/categorias/nueva', 'CategoriasController@nueva');
+Route::get('/admin/categorias/eliminar/{id}', 'CategoriasController@eliminar');
 
-/*
+Route::get('/admin/productos', 'ProductosController@listado');
+Route::post('/admin/productos/nueva', 'ProductosController@nueva');
+Route::get('/admin/productos/eliminar/{id}', 'ProductosController@eliminar');
 
 
-Route::get('/admin/productos', '');
-Route::get('/admin/categorias', '');
-*/
 
 
 

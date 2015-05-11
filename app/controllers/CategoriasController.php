@@ -1,7 +1,7 @@
 <?php
 
 
-class TarifasController extends BaseController
+class CategoriasController extends BaseController
 {
 
     public function listado()
@@ -23,10 +23,6 @@ class TarifasController extends BaseController
             $categoria = new Categoria();
 
             $categoria->nombre = Input::get('nombre');
-            /*
-            $categoria-> = Input::get('');
-            $categoria-> = Input::get('');
-            */
 
             $categoria->save();
 

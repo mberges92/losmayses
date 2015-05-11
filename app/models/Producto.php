@@ -8,11 +8,11 @@ class Producto extends Eloquent
     protected $fillable = array('*');
 
 
-
     /*
     * RELACIONES DEL MODELO PRODUCTO
     *
     */
+
 
 
 

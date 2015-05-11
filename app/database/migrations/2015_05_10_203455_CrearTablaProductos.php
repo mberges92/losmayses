@@ -17,6 +17,8 @@ class CrearTablaProductos extends Migration {
             $tabla->increments('id');
             $tabla->string('nombre');
             $tabla->decimal('precio_unidad');
+            $tabla->integer('cantidad_por_unidad');
+            $tabla->tinyInteger('activo');
 
             $tabla->timestamps();
         });
@@ -25,7 +27,7 @@ class CrearTablaProductos extends Migration {
 
         DB::table('productos')->insert(array(
                 'nombre' => 'LECHUGA',
-                'precio_unidad' => 1.30,
+                'precio_unidad' => "1.30",
                 'activo' => 1
             )
         );
