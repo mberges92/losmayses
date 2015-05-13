@@ -15,31 +15,51 @@ class CrearTablaUsuarios extends Migration {
         Schema::create('usuarios', function($tabla)
         {
             $tabla->increments('id');
-            $tabla->string('username');
-            $tabla->string('password');
-            $tabla->string('correo');
-            $tabla->string('rol');
+            $tabla->string('correo'); //OBLIGATORIO
+            $tabla->string('password'); //OBLIGATORIO
+            $tabla->string('rol'); //OBLIGATORIO
             $tabla->tinyInteger('activo');  // Lo crea con 4 espacios
+
+            $tabla->string('nombre_contacto');
+            $tabla->string('direccion');
+            $tabla->string('telefono1');
+            $tabla->string('telefono2');
+            $tabla->string('codigo_postal');
+
+            $tabla->string('nombre_empresa');
+
+            $tabla->integer('tarifa_id');
+
             $tabla->timestamps();
             $tabla->rememberToken();
         });
 
         // Voy a crear un usuario por defecto para loguearme
         DB::table('usuarios')->insert(array(
-                'username' => 'admin',
-                'password' => Hash::make('admin'),
                 'correo' => 'admin@admin.com',
-                'rol' => 'Admin',
-                'activo' => 1
+                'password' => Hash::make('admin'),
+                'rol' => 'doble',
+                'activo' => 1,
+                'nombre_contacto' => 'Administrador',
+                'direccion' => 'C/ Miguel Servet XX',
+                'telefono1' => '976123123',
+                'telefono2' => '654778899',
+                'codigo_postal' => '50008',
+                'nombre_empresa' => 'Los Mayses'
             )
         );
 
         DB::table('usuarios')->insert(array(
-                'username' => 'cliente',
-                'password' => Hash::make('cliente'),
                 'correo' => 'cliente@cliente.com',
-                'rol' => 'Cliente',
-                'activo' => 1
+                'password' => Hash::make('cliente'),
+                'rol' => 'cliente',
+                'activo' => 1,
+                'nombre_contacto' => 'Cliente 1',
+                'direccion' => 'C/ KKKKKKKKKK',
+                'telefono1' => '976123123',
+                'telefono2' => '654778899',
+                'codigo_postal' => '50007',
+                'nombre_empresa' => 'PANICHOP'
             )
         );
     }

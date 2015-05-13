@@ -8,23 +8,15 @@ class Tienda extends Eloquent {
 
 
 
- /*
- * RELACIONES DEL MODELO TIENDA
- *
- */
+    // -----------------------| RELACIONES DEL MODELO TIENDA |----------------------- //
 
-
-    // Relacion inversa *una tienda - una tarifa*
-    public function tarifas()
+    /*
+     * Relacion inversa para el hasMany del modelo usuario.
+     * Una tienda PERTENECE A UN SOLO USUARIO.
+     */
+    public function usuario()
     {
-        return $this->belongsTo('Tarifa', 'id');
+        return $this->belongsTo('Usuario', 'usuario_id', 'id');
     }
-
-    // Relacion inversa *un usuario - una tienda*
-    public function usuarios()
-    {
-        return $this->belongsTo('Usuario', 'id');
-    }
-
 
 }

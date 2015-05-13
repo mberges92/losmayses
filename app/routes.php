@@ -3,7 +3,7 @@
 
 
 
-// Parte pública
+// Parte pública --------------------------------------------------------------------------------------------
 Route::get('/', function()
 {
     return View::make('publico.index');
@@ -18,7 +18,7 @@ Route::get('/contacto', function() {
 
 
 
-// Parte administración
+// Parte administración --------------------------------------------------------------------------------------
 Route::get('/admin', function() {
     return View::make('admin.index');
 });
@@ -38,7 +38,7 @@ Route::post('/admin/categorias/nueva', 'CategoriasController@nueva');
 Route::get('/admin/categorias/eliminar/{id}', 'CategoriasController@eliminar');
 
 Route::get('/admin/productos', 'ProductosController@listado');
-Route::post('/admin/productos/nueva', 'ProductosController@nueva');
+Route::post('/admin/productos/nuevo', 'ProductosController@nuevo');
 Route::get('/admin/productos/eliminar/{id}', 'ProductosController@eliminar');
 
 
@@ -46,10 +46,16 @@ Route::get('/admin/productos/eliminar/{id}', 'ProductosController@eliminar');
 
 
 
-// Parte cliente
-//
-//
-//
+// Parte cliente -----------------------------------------------------------------------------------------------
+Route::get('/cliente/{id}', function() {
+    return View::make('cliente.index');
+});
+Route::get('/cliente/{id}/datos', 'UsuariosController@datos_cliente');
+//Route::post('/cliente/{id}/datos', 'UsuariosController@datos_cliente');
+Route::get('/cliente/{id}tiendas', 'TiendasController@');
+Route::get('/cliente/{id}/pedidos', 'PedidosController@');
+
+
 
 
 
@@ -60,6 +66,9 @@ Route::post('/login', 'UsuariosController@validarUsuario');
 // Registro
 Route::get('/registro', 'UsuariosController@registro');
 Route::post('/registro', 'UsuariosController@crearUsuario');
+
+
+
 
 
 // Para entrar a las url contenidas en este grupo, sera obligatorio estar autenticado en el sistema

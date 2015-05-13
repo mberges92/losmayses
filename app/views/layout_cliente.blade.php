@@ -12,24 +12,13 @@
     {{HTML::style('css/style.css')}}
 </head>
 <body>
-{{ HTML::link('/admin', 'RESUMEN/INICIO') }}
+{{ HTML::link('/cliente/'.Auth::user()->id, 'RESUMEN/INICIO') }}
 <br/>
-{{ HTML::link('/admin/usuarios', 'USUARIOS') }}
+{{ HTML::link('/cliente/'.Auth::user()->id.'/datos', 'DATOS USUARIO') }}
 <br/>
-{{ HTML::link('/admin/tiendas', 'TIENDAS') }}
+{{ HTML::link('/cliente/'.Auth::user()->id.'/tiendas', 'TIENDAS') }}
 <br/>
-{{ HTML::link('/admin/tarifas', 'TARIFAS') }}
-<br/>
-{{ HTML::link('/admin/categorias', 'CATEGORIAS') }}
-<br/>
-{{ HTML::link('/admin/productos', 'PRODUCTOS') }}
-<br/>
-{{ HTML::link('/admin/usuarios', 'USUARIOS') }}
-<br/>
-{{ HTML::link('/admin/facturacion', 'FACTURACION') }}
-<br/>
-{{ HTML::link('/admin/estadisticas', 'ESTADISTICAS') }}
-<hr/>
+{{ HTML::link('/cliente/'.Auth::user()->id.'/pedidos', 'PEDIDOS') }}
 
 
 

@@ -6,16 +6,15 @@ class Tarifa extends Eloquent {
     protected $table = 'tarifas';
     protected $fillable = array('*');
 
-    /*
-    * RELACIONES DEL MODELO TARIFA
-    *
-    */
+    // -----------------------| RELACIONES DEL MODELO TARIFA |----------------------- //
 
-    // UNO A MUCHOS
-    // Una tarifa tiene muchas tiendas
-    public function tiendas()
+    /*
+     * Relacion uno a muchos, hasMany.
+     * Una tarifa PUEDE PERTENECER a muchos usuarios
+     */
+    public function usuarios()
     {
-        return $this->hasMany('Tienda', 'tarifa_id');
+        return $this->hasMany('Usuario', 'tarifa_id', 'id');
     }
 
 }

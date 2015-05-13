@@ -18,7 +18,7 @@ class CrearTablaCategorias extends Migration {
             $tabla->string('nombre');
             $tabla->tinyInteger('activo');
 
-            $tabla->timestamps();
+            //$tabla->timestamps();
         });
 
 

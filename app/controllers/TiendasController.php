@@ -3,6 +3,19 @@
 
 class TiendasController extends BaseController {
 
+    public function listado_usuario($id)
+    {
+        $tiendas = Tienda::find($id);
+
+        return View::make('cliente.tiendas')->with('tiendas', $tiendas);
+    }
+
+
+
+
+
+
+    // CONTROLADORES ADMINISTRACION //////////////////////////////////////////////////////////////////////////////// ->
     public function listado()
     {
         $tiendas = Tienda::all();
@@ -44,8 +57,7 @@ class TiendasController extends BaseController {
         $tienda->delete();
 
         return Redirect::to('/admin');
-
-
     }
+    // FIN CONTROLADORES ADMINISTRACION //////////////////////////////////////////////////////////////////////////// ->
 
 }

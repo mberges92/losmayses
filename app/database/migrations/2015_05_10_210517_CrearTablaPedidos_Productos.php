@@ -12,7 +12,7 @@ class CrearTablaPedidosProductos extends Migration {
 	 */
 	public function up()
 	{
-        Schema::create('pedidos_productos', function($tabla)
+        Schema::create('detalles_pedidos', function($tabla)
         {
             $tabla->increments('id');
             $tabla->integer('pedido_id');          // id del pedido
@@ -32,7 +32,7 @@ class CrearTablaPedidosProductos extends Migration {
 	 */
 	public function down()
 	{
-        Schema::dropIfExists('pedidos_productos');
+        Schema::dropIfExists('detalles_pedidos');
 	}
 
 }

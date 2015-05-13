@@ -19,8 +19,9 @@ class CrearTablaPedidos extends Migration {
             $tabla->integer('tienda_id');           // id de la tienda que se enviara el pedido
             $tabla->date('fechaPedido');
             $tabla->date('fechaEntrega');
-            //$tabla->decimal('precio_pedido');    // Quizas un campo de precio final, o obtenerlo en una consulta
+            $tabla->tinyInteger('estado');          // Lo usare para ver el estado del pedido
 
+            //$tabla->decimal('precio_pedido');    // Quizas un campo de precio final, o obtenerlo en una consulta
             //$tabla->timestamps();
         });
 

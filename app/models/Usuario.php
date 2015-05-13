@@ -27,24 +27,27 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     protected $fillable = array('*');
 
 
+
+    // -----------------------| RELACIONES DEL MODELO USUARIO |----------------------- //
+
     /*
-     * RELACIONES DEL MODELO USUARIO
-     *
+     * Relacion inversa para el hasMany del modelo tarifas.
+     * Un usuario o cliente tiene UNA SOLA TARIFA asignada.
      */
+    public function tarifa()
+    {
+        return $this->belongsTo('Tarifa', 'tarifa_id', 'id');
+    }
+
+
     /*
+     * Relacion uno a muchos, hasMany.
+     * Un usuario PUEDE TENER MUCHAS tiendas.
+     */
     public function tiendas()
     {
-        return $this->belongsToMany('Tienda', 'tiendas_usuarios', 'usuario_id', 'tienda_id');
+        return $this->hasMany('Tienda', 'usuario_id', 'id');
     }
-    */
-
-    // UNO A MUCHOS
-    // Un usuario tiene muchas tiendas
-    public function tiendas()
-    {
-        return $this->hasMany('Tienda', 'usuario_id');
-    }
-
 
 
 }

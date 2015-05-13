@@ -3,6 +3,26 @@
 
 class UsuariosController extends BaseController {
 
+
+    public function datos_cliente($id)
+    {
+        $cliente = Usuario::find($id);
+
+        return View::make('cliente.datos')->with('cliente', $cliente);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function listado()
     {
 
@@ -30,19 +50,20 @@ class UsuariosController extends BaseController {
     }
 
 
+
     public function validarUsuario()
     {
-        $usuario = Input::get('usr');
+        $correo = Input::get('email');
         $contrasenia = Input::get('pwd');
 
-
-        if (Auth::attempt(array('username' => $usuario, 'password' => $contrasenia))) {
+        if (Auth::attempt(array('correo' => $correo, 'password' => $contrasenia))) {
             //dd($contrasenia);
             return Redirect::to('/');
         }
 
         return Redirect::to('/login');
     }
+
 
 
     public function logout()
@@ -52,10 +73,14 @@ class UsuariosController extends BaseController {
         return Redirect::to('/');
     }
 
+
+
     public function registro()
     {
         return View::make('publico.registro');
     }
+
+
 
     public function crearUsuario()
     {

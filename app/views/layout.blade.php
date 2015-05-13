@@ -12,6 +12,15 @@
     {{HTML::style('css/style.css')}}
 </head>
 <body>
+
+@if(Auth::check() && Auth::user()->rol == "doble")
+<h2>{{ HTML::link('/admin', 'ADMINISTRACION') }}</h2>
+<h2>{{ HTML::link('/cliente/'.Auth::user()->id, 'CLIENTE') }}</h2>
+@endif
+
+<hr/>
+
+
 @if(Auth::check() && Auth::user()->rol == "Admin")
     {{ HTML::link('/admin', 'ADMINISTRACION') }}
     <br/>

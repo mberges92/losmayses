@@ -1,5 +1,5 @@
 @extends('layout_cliente')
-@section('titulo') Cliente - Index @stop
+@section('titulo') Cliente - Pedidos @stop
 
 
 @section('content')
