@@ -24,13 +24,14 @@
 @if(Auth::check() && Auth::user()->rol == "Admin")
     {{ HTML::link('/admin', 'ADMINISTRACION') }}
     <br/>
-    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->username) }}
-@elseif(Auth::check() && Auth::user()->rol == "Usuario")
-    {{ HTML::link('/cliente', 'MI CUENTA DE CLIENTE') }}
+    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->correo) }}
+@elseif(Auth::check() && Auth::user()->rol == "cliente")
+
+    {{ HTML::link('/cliente/'.Auth::user()->id, 'MI CUENTA DE CLIENTE') }}
     <br/>
-    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->username) }}
+    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->correo) }}
 @elseif(Auth::check())
-    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->username) }}
+    {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->correo) }}
 @else
     {{ HTML::link('/login', 'LOGIN') }}
     <br/>

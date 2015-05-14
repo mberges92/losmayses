@@ -51,8 +51,12 @@ Route::get('/cliente/{id}', function() {
     return View::make('cliente.index');
 });
 Route::get('/cliente/{id}/datos', 'UsuariosController@datos_cliente');
-//Route::post('/cliente/{id}/datos', 'UsuariosController@datos_cliente');
-Route::get('/cliente/{id}tiendas', 'TiendasController@');
+Route::post('/cliente/{id}/datos', 'UsuariosController@datos_cliente');
+Route::get('/cliente/{id}/tiendas', 'TiendasController@tiendas_usuario');
+Route::post('/cliente/{id}/tiendas/nueva', 'TiendasController@nueva_tienda');
+Route::get('/cliente/{id}/tiendas/{tienda}', 'TiendasController@modificar_tienda');
+Route::post('/cliente/{id}/tiendas/{tienda}', 'TiendasController@modificar_tienda');
+Route::get('/cliente/{id}/tiendas/eliminar/{tienda}', 'TiendasController@eliminar_tienda');
 Route::get('/cliente/{id}/pedidos', 'PedidosController@');
 
 

@@ -45,7 +45,8 @@ class CrearTablaUsuarios extends Migration {
                 'telefono1' => '976123123',
                 'telefono2' => '654778899',
                 'codigo_postal' => '50008',
-                'nombre_empresa' => 'Los Mayses'
+                'nombre_empresa' => 'Los Mayses',
+                'tarifa_id' => 1
             )
         );
 
@@ -59,7 +60,8 @@ class CrearTablaUsuarios extends Migration {
                 'telefono1' => '976123123',
                 'telefono2' => '654778899',
                 'codigo_postal' => '50007',
-                'nombre_empresa' => 'PANICHOP'
+                'nombre_empresa' => 'PANICHOP',
+                'tarifa_id' => 1
             )
         );
     }

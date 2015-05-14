@@ -23,6 +23,7 @@ class CategoriasController extends BaseController
             $categoria = new Categoria();
 
             $categoria->nombre = Input::get('nombre');
+            $categoria->activo = 1;
 
             $categoria->save();
 
