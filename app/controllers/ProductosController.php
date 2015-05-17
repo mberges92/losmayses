@@ -20,27 +20,56 @@ class ProductosController extends BaseController
         $producto = new Producto();
 
         $producto->nombre = Input::get('nombre');
-        $producto->cantidad_minima = Input::get('cantidad_minima');
-        $producto->iva = Input::get('iva');
-        $producto->precio_total = Input::get('precio_total');
+        $producto->activo = 0;
 
         $producto->save();
 
+        //return View::make('');
+        return Redirect::action('ProductosController@modificar', array('id' => $producto->id));
+
+
+
+    }
+
+    public function modificar($id)
+    {
+
+        if (Request::isMethod('post')) {
+
+            $categorias_seleccionadas = Input::get('kcategoria');
+
+            $pro = Producto::find($id);
+            $pro->nombre = Input::get('nombre');
+            $pro->iva = Input::get('iva');
+            $pro->precio_total = Input::get('precio_total');
+            $pro->save();
+
+            // SI NO LLEVA NADA NO ES UN ARRAY Y PETA
+            if (is_array($categorias_seleccionadas)) {
+                $pro->categorias()->sync($categorias_seleccionadas);
+            }
+
+            //dd(Input::all());
+
+            return Redirect::action('ProductosController@listado');
+
+
+        }
+
+        $producto = Producto::with('categorias')->find($id)->toArray();
+        $allCategorias = Categoria::all()->toArray();
+
+        return View::make('admin.productos_editar')->with(array('producto'=> $producto, 'allcategorias' => $allCategorias));
+
+    }
+
+    public function eliminar($id)
+    {
+
+        Producto::find($id)->categorias()->detach(); // Esto borra las relaciones intermedias con categorias
+        Producto::find($id)->delete(); // Esto borra el producto
+
         return Redirect::action('ProductosController@listado');
-
-
-
-    }
-
-    public function editar()
-    {
-
-
-    }
-
-    public function eliminar()
-    {
-
 
     }
 

@@ -19,6 +19,7 @@ class CrearTablaPedidosProductos extends Migration {
             $tabla->integer('producto_id');           // id del producto
             $tabla->decimal('precioUnidad');
             $tabla->integer('cantidad');
+            //$tabla->integer('iva');
 
 
             //$tabla->timestamps();

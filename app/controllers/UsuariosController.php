@@ -3,7 +3,7 @@
 
 class UsuariosController extends BaseController {
 
-
+    // PARTE CLIENTE //////////////////////////////////////////////////////////////////////////// ->
     public function datos_cliente($id)
     {
 
@@ -30,27 +30,72 @@ class UsuariosController extends BaseController {
 
         return View::make('cliente.datos')->with('cliente', $cliente);
     }
+    // FIN PARTE CLIENTE //////////////////////////////////////////////////////////////////////////// ->
 
 
 
 
-
-
-
-
-
-
-
-
-
+    //  PARTE ADMINISTRACION //////////////////////////////////////////////////////////////////////////// ->
     public function listado()
     {
 
         $usuarios = Usuario::all();
+        $tarifas = Tarifa::all();
 
-        return View::make('admin.usuarios')->with('usuarios', $usuarios);
+        //dd($tarifas);
+        //dd($usuarios);
+
+        return View::make('admin.usuarios')->with(array('usuarios' => $usuarios, 'tarifas' => $tarifas));
 
     }
+
+    public function modificar($id)
+    {
+
+        if (Request::isMethod('post')) {
+
+            //dd(Input::all());
+            $usu = Usuario::find($id);
+
+            $usu->correo = Input::get('correo');
+
+            if (Input::get('password')) {
+                $usu->password = Hash::make(Input::get('password'));
+            }
+
+            $usu->nombre_contacto = Input::get('nombre_contacto');
+            $usu->direccion = Input::get('direccion');
+            $usu->telefono1 = Input::get('telefono1');
+            $usu->telefono2 = Input::get('telefono2');
+            $usu->codigo_postal = Input::get('codigo_postal');
+            $usu->nombre_empresa = Input::get('nombre_empresa');
+            $usu->tarifa_id = Input::get('tarifa');
+            $usu->save();
+        }
+
+
+        // Generar lista de tarifas para cargalos con sintaxis laravel en un select
+        // Se cargan id REAL, no autonumerico segun se añaden valores -> nombre de la tarifa
+        $allTarifas = Tarifa::lists('nombre', 'id');
+
+        $usuario = Usuario::find($id)->with('tarifa')->where('id', '=', $id)->get()->toArray();
+
+        return View::make('admin.usuarios_editar')->with(array('usuario' => $usuario, 'alltarifas' => $allTarifas));
+
+    }
+
+    public function eliminar($id)
+    {
+        $usuario = Usuario::find($id);
+
+        //dd($usuario);
+        $usuario->delete();
+
+        return Redirect::action('UsuariosController@listado');
+
+    }
+    // FIN PARTE ADMINSITRACION //////////////////////////////////////////////////////////////////////////// ->
+
 
 
     /* -----------------------------------------------------------

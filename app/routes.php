@@ -23,7 +23,11 @@ Route::get('/admin', function() {
     return View::make('admin.index');
 });
 
-Route::get('/admin/usuarios', 'UsuariosController@listado');
+Route::get('/admin/clientes', 'UsuariosController@listado');
+Route::get('/admin/clientes/editar/{id}', 'UsuariosController@modificar');
+Route::post('/admin/clientes/editar/{id}', 'UsuariosController@modificar');
+Route::get('/admin/clientes/eliminar/{id}', 'UsuariosController@eliminar');
+
 
 Route::get('/admin/tiendas', 'TiendasController@listado');
 Route::post('/admin/tiendas/nueva', 'TiendasController@nueva');
@@ -35,10 +39,14 @@ Route::get('/admin/tarifas/eliminar/{id}', 'TarifasController@eliminar');
 
 Route::get('/admin/categorias', 'CategoriasController@listado');
 Route::post('/admin/categorias/nueva', 'CategoriasController@nueva');
+Route::get('/admin/categorias/editar/{id}', 'CategoriasController@modificar');
+Route::post('/admin/categorias/editar/{id}', 'CategoriasController@modificar');
 Route::get('/admin/categorias/eliminar/{id}', 'CategoriasController@eliminar');
 
 Route::get('/admin/productos', 'ProductosController@listado');
 Route::post('/admin/productos/nuevo', 'ProductosController@nuevo');
+Route::get('/admin/productos/editar/{id}', 'ProductosController@modificar');
+Route::post('/admin/productos/editar/{id}', 'ProductosController@modificar');
 Route::get('/admin/productos/eliminar/{id}', 'ProductosController@eliminar');
 
 
@@ -57,7 +65,7 @@ Route::post('/cliente/{id}/tiendas/nueva', 'TiendasController@nueva_tienda');
 Route::get('/cliente/{id}/tiendas/{tienda}', 'TiendasController@modificar_tienda');
 Route::post('/cliente/{id}/tiendas/{tienda}', 'TiendasController@modificar_tienda');
 Route::get('/cliente/{id}/tiendas/eliminar/{tienda}', 'TiendasController@eliminar_tienda');
-Route::get('/cliente/{id}/pedidos', 'PedidosController@');
+Route::get('/cliente/{id}/pedidos', 'PedidosController@inicio');
 
 
 

@@ -14,10 +14,12 @@ class Producto extends Eloquent
      * Relacion inversa para el hasMany del modelo categorias.
      * Un producto tiene UNA SOLA CATEGORIA asignada.
      */
+    /* RELACION VIEJA, INSERVIBLE
     public function categoria()
     {
         return $this->belongsTo('Categoria', 'categoria_id', 'id');
     }
+    */
 
 
     /*
@@ -29,6 +31,14 @@ class Producto extends Eloquent
         return $this->belongsToMany('Pedido', 'detalles_pedidos', 'pedido_id', 'producto_id');
     }
 
+    /*
+     * Relacion de MUCHOS A MUCHOS entre categorias y productos.
+     * Un producto PUEDE TENER MUCHAS categorias.
+     */
+    public function categorias()
+    {
+        return $this->belongsToMany('Categoria', 'categorias_productos', 'producto_id',  'categoria_id');
+    }
 
 
 

@@ -34,10 +34,35 @@ class CategoriasController extends BaseController
 
     public function eliminar($id)
     {
-        $categoria = Categoria::find($id);
-        $categoria->delete();
+        //$categoria = Categoria::find($id);
+        //$categoria->delete();
 
-        return Redirect::to('/admin');
+        //return Redirect::to('/admin');
+
+
+        Categoria::find($id)->productos()->detach(); // Esto borra las relaciones intermedias con productos
+        Categoria::find($id)->delete(); // Esto borra la categoria
+
+        return Redirect::action('CategoriasController@listado');
+    }
+
+
+    public function modificar($id)
+    {
+
+        if (Request::isMethod('post')) {
+
+            $cat = Categoria::find($id);
+
+            $cat->nombre = Input::get('nombre');
+
+            $cat->save();
+
+        }
+
+        $categoria = Categoria::find($id)->toArray();
+
+        return View::make('admin.categorias_editar')->with('categoria', $categoria);
     }
 
 

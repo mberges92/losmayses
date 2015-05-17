@@ -19,6 +19,8 @@
 <br/>
 {{ HTML::link('/cliente/'.Auth::user()->id.'/pedidos', 'PEDIDOS') }}
 
+<hr/>
+
 
 
 

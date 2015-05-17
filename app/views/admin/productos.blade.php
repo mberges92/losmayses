@@ -4,42 +4,9 @@
 
 @section('content')
 
-
-
-    <div class="container">
-        <div class="col-sm-12 col-md-6">
-            <b>FORMULARIO CREAR PRODUCTO</b>
-            {{ Form::open(array(
-                'url' => '/admin/productos/nuevo',
-                'method' => 'post',
-                'action' => 'ProductosController@nuevo')) }}
-
-            {{ Form::label('nombre', 'Nombre') }}
-            {{ Form::text('nombre', '', array('class' => 'form-control')) }}
-
-            {{ Form::label('cantidad_minima', 'Cantidad minima de compra') }}
-            {{ Form::text('cantidad_minima', '', array('class' => 'form-control')) }}
-
-            {{ Form::label('iva', 'IVA') }}
-            {{ Form::text('iva', '', array('class' => 'form-control')) }}
-
-            {{ Form::label('precio_total', 'Precio Unidad/Pack') }}
-            {{ Form::text('precio_total', '', array('class' => 'form-control')) }}
-
-            <br/>
-
-            {{ Form::submit('Enviar') }}
-
-            {{ Form::close() }}
-
-        </div>
-    </div>
+    <a href="#"><button class="btn btn-primary" data-toggle="modal" data-target="#nuevo_producto">Nuevo Producto</button></a>
 
     <hr/>
-
-
-
-
 
     <div class="container">
         <table class="table">
@@ -60,7 +27,10 @@
                     <td>{{ $producto->cantidad_minima }}</td>
                     <td>{{ $producto->iva }}</td>
                     <td>{{ $producto->precio_total }}</td>
-                    <td>MODIFICAR / ELIMINAR PRODUCTO</td>
+                    <td>{{ HTML::link('/admin/productos/editar/'.$producto['id'], 'MODIFICAR') }}</td>
+                    <td>
+                        <button  data-toggle="modal" data-target="#modal_{{ $producto['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
+                    </td>
                 </tr>
             @endforeach
             </tbody>
@@ -69,5 +39,65 @@
 
         </table>
     </div>
+
+
+
+    <!-- VENTANA MODAL CREAR PRODUCTO -->
+    <div id="nuevo_producto" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                    <h4 class="modal-title">Nuevo producto</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="add_producto" class="add_from_admin dialog_form" title="Nueva tienda">
+
+                        {{ Form::open(array(
+                            'url' => '/admin/productos/nuevo',
+                            'method' => 'post',
+                            'action' => 'ProductosController@nuevo',
+                            'id' => 'nuevoProductoForm'
+                            )) }}
+
+                        <div class="form-group required">
+                            {{Form::label('nombre', 'Nombre', array('id' => 'modalEtiqueta'))}}
+                            {{Form::text('nombre', '', array('id' => 'modalInput', 'required' => 'required'))}}
+                        </div>
+                        <br/>
+                        <div class="submit">
+                            {{Form::submit('Crear', array('class' => 'btn btn-primary'))}}
+                        </div>
+
+                        {{ Form::close() }}
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- FIN VENTANA MODAL CREAR PRODUCTO -->
+
+
+
+
+    <!-- CONFIRMACIONES BORRAR PRODUCTOS -->
+    @foreach($productos as $producto)
+        <div id="modal_{{ $producto->id }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                        <h4 class="modal-title">Borrar '{{ $producto['nombre'] }}'</h4>
+                    </div>
+                    <div class="modal-body">
+                        ¿Estás seguro de querer borrar el producto '{{ $producto['nombre'] }}'?<br/>
+                        {{ HTML::link('/admin/productos/eliminar/'.$producto['id'], 'SI') }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endforeach
+    <!-- FIN CONFIRMACIONES BORRAR PRODUCTOS -->
 
 @stop

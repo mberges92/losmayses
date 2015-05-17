@@ -55,6 +55,8 @@ class TiendasController extends BaseController {
 
             $tienda->save();
 
+            return Redirect::to('/cliente/'.$id_usuario.'/tiendas');
+
 
         }
 
@@ -115,13 +117,19 @@ class TiendasController extends BaseController {
         }
     }
 
+    public function modificar($id)
+    {
+        //DE MOMENTO SIN USO, CARACTERISTICA PARA ADMINISTRADOR NO IMPLEMENTADA
+
+    }
+
 
     public function eliminar($id)
     {
         $tienda = Tienda::find($id);
         $tienda->delete();
 
-        return Redirect::to('/admin');
+        return Redirect::to('/admin/tiendas');
     }
     // FIN CONTROLADORES ADMINISTRACION //////////////////////////////////////////////////////////////////////////// ->
 

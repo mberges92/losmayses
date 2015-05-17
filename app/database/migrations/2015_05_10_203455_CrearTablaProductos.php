@@ -16,12 +16,10 @@ class CrearTablaProductos extends Migration {
         {
             $tabla->increments('id');
             $tabla->string('nombre');
-            $tabla->integer('cantidad_minima');
+            //$tabla->integer('cantidad_minima');
             $tabla->decimal('precio_total');
             $tabla->integer('iva');
             $tabla->tinyInteger('activo');
-
-            $tabla->integer('categoria_id');
 
             $tabla->timestamps();
         });
@@ -33,8 +31,8 @@ class CrearTablaProductos extends Migration {
                 'precio_total' => '1.30',
                 'iva' => '4',
                 'activo' => 1,
-                'cantidad_minima' => 1,
-                'categoria_id' => 1
+                //'cantidad_minima' => 1,
+                //'categoria_id' => 1
             )
         );
 

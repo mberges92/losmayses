@@ -14,7 +14,7 @@
 <body>
 {{ HTML::link('/admin', 'RESUMEN/INICIO') }}
 <br/>
-{{ HTML::link('/admin/usuarios', 'USUARIOS') }}
+{{ HTML::link('/admin/clientes', 'CLIENTES') }}
 <br/>
 {{ HTML::link('/admin/tiendas', 'TIENDAS') }}
 <br/>
@@ -24,11 +24,9 @@
 <br/>
 {{ HTML::link('/admin/productos', 'PRODUCTOS') }}
 <br/>
-{{ HTML::link('/admin/usuarios', 'USUARIOS') }}
+{{-- HTML::link('/admin/facturacion', 'FACTURACION') --}}
 <br/>
-{{ HTML::link('/admin/facturacion', 'FACTURACION') }}
-<br/>
-{{ HTML::link('/admin/estadisticas', 'ESTADISTICAS') }}
+{{-- HTML::link('/admin/estadisticas', 'ESTADISTICAS') --}}
 <hr/>
 
 
