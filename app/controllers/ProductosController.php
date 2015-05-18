@@ -27,9 +27,9 @@ class ProductosController extends BaseController
         //return View::make('');
         return Redirect::action('ProductosController@modificar', array('id' => $producto->id));
 
-
-
     }
+
+
 
     public function modificar($id)
     {

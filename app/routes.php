@@ -68,6 +68,9 @@ Route::get('/cliente/{id}/tiendas/eliminar/{tienda}', 'TiendasController@elimina
 Route::get('/cliente/{id}/pedidos', 'PedidosController@inicio');
 
 
+Route::get('/cliente/getProductos', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX
+
+
 
 
 

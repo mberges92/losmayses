@@ -8,7 +8,6 @@ class Pedido extends Eloquent
     protected $fillable = array('*');
 
 
-
     // -----------------------| RELACIONES DEL MODELO PEDIDO |----------------------- //
 
     /*
@@ -21,9 +20,14 @@ class Pedido extends Eloquent
     }
 
 
-
-
-
+     /*
+     * Relacion inversa para el hasMany del modelo pedidos.
+     * Un pedido tiene UN SOLO CLIENTE asignado.
+     */
+    public function usuario()
+    {
+        return $this->belongsTo('Usuario', 'usuario_id', 'id');
+    }
 
 
 }

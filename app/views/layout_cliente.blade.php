@@ -9,6 +9,11 @@
     {{HTML::style('css/bootstrap.min.css')}}
     {{HTML::style('css/bootstrap-theme.min.css')}}
     {{HTML::style('css/style.css')}}
+
+    {{HTML::script('js/jquery-1.11.2.min.js')}}
+    {{HTML::script('js/bootstrap.min.js')}}
+
+
 </head>
 <body>
 {{ HTML::link('/cliente/'.Auth::user()->id, 'RESUMEN/INICIO') }}
@@ -32,8 +37,6 @@
     {{  HTML::link('/logout', '// Cerrar Sesion - '.Auth::user()->correo.' //')  }}
 @endif
 
-{{HTML::script('js/jquery-1.11.2.min.js')}}
-{{HTML::script('js/bootstrap.min.js')}}
 {{-- HTML::script('js/bootstrap-modal.js') --}}
 
 </body>

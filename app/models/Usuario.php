@@ -50,4 +50,14 @@ class Usuario extends Eloquent implements UserInterface, RemindableInterface {
     }
 
 
+    /*
+     * Relacion uno a muchos, hasMany.
+     * Un usuario PUEDE HACER muchos pedidos.
+     */
+    public function pedidos()
+    {
+        return $this->hasMany('Pedido', 'usuario_id', 'id');
+    }
+
+
 }
