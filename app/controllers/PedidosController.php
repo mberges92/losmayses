@@ -4,19 +4,50 @@
 class PedidosController extends BaseController
 {
 
-    public function pedir_productos_ajax()
+    public function producto_ajax($id)
     {
-        echo "HOLA";
 
-        if (Request::ajax())
-        {
-            /*
-                Respuesta JSON
-                return Response::json(array('name' => 'Steve', 'state' => 'CA'));
 
-                Crear una respuesta tipo JSONP
-                return Response::json(array('name' => 'Steve', 'state' => 'CA'))->setCallback(Input::get('callback'));
-            */
+        if (Request::ajax()) {
+
+            $producto = Producto::find($id)->toArray();
+            //dd($producto);
+
+            $variable[] = array(
+                'id' => $producto['id'],
+                'nombre' => $producto['nombre'],
+                'precio_total' => $producto['precio_total'],
+                'iva' => $producto['iva']
+            );
+
+            //return Response::json($datos);
+            return Response::json($variable);
+
+        }
+    }
+
+    public function pedir_productos_ajax($id)
+    {
+
+        //$datos = Categoria::where('id', '=', $id)->with('productos')->get()->toArray();
+        //dd($datos[0]['productos']);
+
+        if (Request::ajax()) {
+
+            $datos = Categoria::where('id', '=', $id)->with('productos')->get()->toArray();
+            //dd($datos[0]['productos']);
+
+            foreach ($datos[0]['productos'] as $producto) {
+                if($producto['activo'] == "1"){
+                    $variable[] = array(
+                        'id' => $producto['id'],
+                        'nombre' => $producto['nombre']
+                    );
+                }
+            }
+
+            return Response::json($variable);
+
         }
     }
 

@@ -72,6 +72,10 @@ Route::get('/cliente/getProductos', 'PedidosController@pedir_productos_ajax'); /
 
 
 
+Route::get('pedir_productos/{id}', 'PedidosController@pedir_productos_ajax');
+Route::get('buscar_producto/{id}', 'PedidosController@producto_ajax');
+
+
 
 
 // Autenticación
