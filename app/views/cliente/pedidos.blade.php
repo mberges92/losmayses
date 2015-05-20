@@ -6,6 +6,25 @@
 
 <div class="container">
     TABLAS CON LOS PEDIDOS DEL CLIENTE
+
+    <p>{{ $datosUsuario[0]['nombre_contacto'] }}</p>
+    <p>{{ $datosUsuario[0]['correo'] }}</p>
+    <div>
+        <select id="tiendasSelect">
+            <option selected disabled value="0">SELECCIONA TIENDA PEDIDO</option>
+            @foreach($datosUsuario[0]['tiendas'] as $tienda)
+                <option value="{{ $tienda['id'] }}">{{ $tienda['nombre'] }}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div>
+            @foreach($datosUsuario as $usu)
+                <p id="signoTarifa" style="display: none;">{{ $usu['tarifa']['signo'] }}</p>
+                <p id="valorTarifa" style="display: none;">{{ $usu['tarifa']['valor'] }}</p>
+            @endforeach
+    </div>
+
 </div>
 
 <hr/>
@@ -17,7 +36,7 @@
         <div>
             <select id="categoriasSelect">
                 <!-- <option selected disabled>SELECCIONA CATEGORIA</option> -->
-                <option selected disabled>SELECCIONA CATEGORIA</option>
+                <option selected disabled value="0">SELECCIONA CATEGORIA</option>
                 @foreach($categoriasActivas as $cat)
                     <option value="{{ $cat['id'] }}">{{ $cat['nombre'] }}</option>
                 @endforeach
@@ -42,7 +61,7 @@
     <label for="cantidadUnidad">Cantidad a comprar: </label>
     <input type="text" size="" maxlength="" value="1" name="cantidad_unidad" id="cantidadUnidad">
 
-    <button type="button" id="addTabla">Añadir</button>
+    <button type="button" id="addTabla" class="btn btn-success">Añadir</button>
     <hr/>
 
     <div class="container">
@@ -51,23 +70,22 @@
             <thead>
             <th>Articulo</th>
             <th>Cantidad</th>
-            <th>Precio de compra</th>
+            <th>Precio por unidad</th>
             <th>IVA</th>
             <th>Accion</th>
             </thead>
             <tbody>
-                <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
             </tbody>
             <tfoot>
             </tfoot>
-
         </table>
     </div>
+
+    <label for="sinIVA">Precio SIN IVA: </label>
+    <input disabled type="text" size="" maxlength="" value="0" name="cantidad_sinIVA" id="sinIVA">
+    <br/>
+    <label for="conIVA">PRECIO CON IVA</label>
+    <input disabled type="text" size="" maxlength="" value="0" name="cantidad_conIVA" id="conIVA">
 
 
 </div>
@@ -88,7 +106,6 @@
             /*var mitexto = $("#miselect option:selected").text()/*
             /*var idcategoria = $(this).val(); // Obtengo el value del option seleccionado*/
             $('#categoriasSelect').change(function(){
-
                 $.getJSON('/losmayses/public/pedir_productos/'+$(this).val(), function(data) {
                     $('#productosSelect').empty();   //Esto vacia el select multiple de productos
                         $.each(data, function() {
@@ -105,16 +122,66 @@
                     //alert(data[0]['id']);
                     $('#precioUnidad').val(data[0]['precio_total']);
                     $('#ivaUnidad').val(data[0]['iva']);
-
                 });
             });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // AÑADIR ROWS A LA TABLA CON LOS DATOS DEL PRODUCTO AL PULSAR EL BOTON AÑADIR
             $('#addTabla').click(function() {
-                $('#')
-                $('#tablaPedidoActual').append('<tr><td>column 1 value</td><td>column 2 value</td></tr>');
+                signotarifa = $('#signoTarifa').text();
+                valortarifa = $('#valorTarifa').text();
+                productoselect = $("#productosSelect option:selected" ).text();
+                cantidadproducto = $('#cantidadUnidad').val();
+                ivaproducto = $('#ivaUnidad').val();
+                precioproducto = $('#precioUnidad').val();
+
+                //alert(precioproducto);
+
+                $('#tablaPedidoActual').append('<tr><td>'+productoselect+'</td><td id="cantidadtabla">'+cantidadproducto+'</td><td id="pvptabla">'+precioproducto+'</td><td id="ivatabla">'+ivaproducto+'</td><td><button type="button" id="deletefila" class="btn btn-danger">Eliminar</button></td></tr>');
+                sumaTotales();
             });
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            // ELIMINAR FILA CORRESPONDIENTE EN LA TABLA PEDIDOS QUE PULSE EL BOTON ELIMINAR
+            $(document).on("click", "button#deletefila", function(event) {
+                $(this).closest('tr').remove();
+                //sumaTotales();
+
+                return false; //Revisar esto
+            });
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            // FUNCION PARA SUMAR  Y ACTUALIZAR EL PRECIO FINAL CON Y SIN IVA, Y ACTUALIZARLO
+            function sumaTotales() {
+                var memsuma = 0;
+                var siniva = 0;
+                var coniva = 0;
+
+                $('#tablaPedidoActual tr').each(function(){
+                    memsuma += parseInt($(this).find('td').eq(2).text()||0,10) //numero de la celda 3
+                    alert(suma);
+                });
+
+
+
+                alert('kioo');
+            }
+
+
+/*
+            pvptabla
+            cantidadtabla
+            ivatabla
+*/
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            // SUMAR Y MOSTART TOTAL CON IVA
+
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
 
