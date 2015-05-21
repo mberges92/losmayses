@@ -102,9 +102,6 @@
 
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // PRODUCTO DE LAS CATEGORIAS
-
-            /*var mitexto = $("#miselect option:selected").text()/*
-            /*var idcategoria = $(this).val(); // Obtengo el value del option seleccionado*/
             $('#categoriasSelect').change(function(){
                 $.getJSON('/losmayses/public/pedir_productos/'+$(this).val(), function(data) {
                     $('#productosSelect').empty();   //Esto vacia el select multiple de productos
@@ -151,33 +148,32 @@
             });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
-            // FUNCION PARA SUMAR  Y ACTUALIZAR EL PRECIO FINAL CON Y SIN IVA, Y ACTUALIZARLO
+            // FUNCION PARA CALCULAR EL PRECIO FINAL CON Y SIN IVA, Y ACTUALIZARLO
             function sumaTotales() {
-                var memsuma = 0;
-                var siniva = 0;
                 var coniva = 0;
+                var siniva = 0;
+                var cProducto = 0;
+                var ivaproducto = 0;
+                var pProducto = 0;
+                var mem = 0;
 
-                $('#tablaPedidoActual tr').each(function(){
-                    memsuma += parseInt($(this).find('td').eq(2).text()||0,10) //numero de la celda 3
-                    alert(suma);
+                $("#tablaPedidoActual td#pvptabla").each(function(){
+                    cProducto = parseFloat($(this).prev().text()); // CANTIDAD DEL PRODUCTO
+                    pProducto = parseFloat($(this).text()); // PRECIO DEL PRODUCTO
+                    ivaproducto = parseInt($(this).next().text()); // IVA DEL PRODUCTO, tipo integer
+
+                    /* CALCULO DE PRECIO TOTAL CON Y SIN IVA */
+                    siniva += cProducto*pProducto;
+                    mem = cProducto*pProducto;
+                    coniva += parseFloat(mem + (ivaproducto*(mem/100)));
                 });
 
-
-
-                alert('kioo');
+                $('#sinIVA').val(siniva.toFixed(2));
+                $('#conIVA').val(coniva.toFixed(2));
             }
-
-
-/*
-            pvptabla
-            cantidadtabla
-            ivatabla
-*/
-
-
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
-            // SUMAR Y MOSTART TOTAL CON IVA
+            //
 
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
