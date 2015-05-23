@@ -69,11 +69,12 @@ Route::get('/cliente/{id}/pedidos', 'PedidosController@inicio');
 
 
 Route::get('/cliente/getProductos', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX
+Route::any('/cliente/nuevoPedido', 'PedidosController@realizar_pedido_ajax'); // LLAMADA AJAX
 
 
 
-Route::get('pedir_productos/{id}', 'PedidosController@pedir_productos_ajax');
-Route::get('buscar_producto/{id}', 'PedidosController@producto_ajax');
+Route::get('pedir_productos/{id}', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX
+Route::get('buscar_producto/{id}', 'PedidosController@producto_ajax'); // LLAMADA AJAX
 
 
 

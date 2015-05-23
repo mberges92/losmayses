@@ -87,6 +87,8 @@
     <label for="conIVA">PRECIO CON IVA</label>
     <input disabled type="text" size="" maxlength="" value="0" name="cantidad_conIVA" id="conIVA">
 
+    <button id="hacerPedido" class="btn btn-block btn-success">Realizar pedido</button>
+
 
 </div>
 
@@ -142,7 +144,7 @@
             // ELIMINAR FILA CORRESPONDIENTE EN LA TABLA PEDIDOS QUE PULSE EL BOTON ELIMINAR
             $(document).on("click", "button#deletefila", function(event) {
                 $(this).closest('tr').remove();
-                //sumaTotales();
+                sumaTotales();
 
                 return false; //Revisar esto
             });
@@ -160,7 +162,7 @@
                 $("#tablaPedidoActual td#pvptabla").each(function(){
                     cProducto = parseFloat($(this).prev().text()); // CANTIDAD DEL PRODUCTO
                     pProducto = parseFloat($(this).text()); // PRECIO DEL PRODUCTO
-                    ivaproducto = parseInt($(this).next().text()); // IVA DEL PRODUCTO, tipo integer
+                    ivaproducto = parseInt($(this).next().text()); // IVA DEL PRODUCTO
 
                     /* CALCULO DE PRECIO TOTAL CON Y SIN IVA */
                     siniva += cProducto*pProducto;
@@ -170,11 +172,54 @@
 
                 $('#sinIVA').val(siniva.toFixed(2));
                 $('#conIVA').val(coniva.toFixed(2));
-            }
+            };
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
-            //
+            // ENVIAR PEDIDO POR AJAX
+            $('#hacerPedido').click(function() {
+                //alert('probando boton');
 
+                //$objDatosColumna = new Array();
+                $objDatosColumna = [];
+
+                var $objCuerpoTabla = $('#tablaPedidoActual').children().prev().parent();
+                $objCuerpoTabla.find('tbody tr').each(function(){
+
+                    var articulo2 = $(this).find('td').eq(0).html();
+                    var cantidad2 = $(this).find('td').eq(1).html();
+                    var precio2 = $(this).find('td').eq(2).html();
+                    var iva2 = $(this).find('td').eq(3).html();
+
+                    //valor = new Array(articulo2,cantidad2,precio2,iva2);
+                    //valor = new Array({articulo:articulo2,cantidad:cantidad2,precio:precio2,iva:iva2});
+                    valor = {};
+                    valor["articulo"] = articulo2;
+                    valor["cantidad"] = cantidad2;
+                    valor["precio"] = precio2;
+                    valor["iva"] = iva2;
+
+
+                    $objDatosColumna.push(valor);
+
+                }); // FIN DEL FOREACH
+
+                    $.ajax({
+                        async: false, // Puesta a false para que no pueda realizar otra llamada hasta que esta se complete
+                        type: 'post',
+                        datatype: JSON,
+                        url: '/losmayses/public/cliente/nuevoPedido',
+                        data: {
+                            objDatosColumna: $objDatosColumna
+                        },
+                        success: function(data) {
+                            alert(data);
+                        }
+
+                    }); // FIN FUNCION AJAX
+
+
+
+            }); // FIN FUNCION CLICK
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
 

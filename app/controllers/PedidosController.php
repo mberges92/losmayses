@@ -4,6 +4,29 @@
 class PedidosController extends BaseController
 {
 
+    public function realizar_pedido_ajax()
+    {
+
+        $lista_compra = Input::get('objDatosColumna');
+        //echo $lista_compra[0]['articulo'];
+        return Response::json($lista_compra, 200);
+        //dd(Input::all());
+
+/*
+        if (Request::ajax())
+        {
+            $variable = Input::all();
+            return Response::json($variable);
+
+            //echo (Input::all());
+        }
+*/
+
+    }
+
+
+
+
     public function producto_ajax($id)
     {
 

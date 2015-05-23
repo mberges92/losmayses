@@ -4,7 +4,6 @@
 
 @section('content')
 
-
     <div class="container">
         <div class="col-sm-12 col-md-6">
             <b>FORMULARIO MODIFICAR PRODUCTO</b>
@@ -26,9 +25,6 @@
             {{ Form::text('precio_total', $producto['precio_total'], array('class' => 'form-control')) }}
 
             <br/>
-
-
-
 
 
 <div class="container">
@@ -56,8 +52,6 @@
                                         @endforeach
 
 </div>
-
-
 
             {{ Form::close() }}
 
