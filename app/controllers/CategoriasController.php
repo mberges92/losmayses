@@ -20,6 +20,17 @@ class CategoriasController extends BaseController
 
             //dd(Input::all());
 
+            $rules = array(
+                'nombre' => 'required|alpha_dash|between:1,255|unique:categorias,nombre'
+            );
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails()) {
+                // No ha pasado la validacion
+
+            } else {
+
             $categoria = new Categoria();
 
             $categoria->nombre = Input::get('nombre');
@@ -28,6 +39,7 @@ class CategoriasController extends BaseController
             $categoria->save();
 
             return Redirect::to('/admin/categorias');
+            }
         }
     }
 
@@ -52,19 +64,31 @@ class CategoriasController extends BaseController
 
         if (Request::isMethod('post')) {
 
-            $cat = Categoria::find($id);
 
-            $cat->nombre = Input::get('nombre');
+            $rules = array(
+                'nombre' => 'required|alpha_dash|between:1,255|unique:categorias,nombre'
+            );
 
-            $cat->save();
+            $validator = Validator::make(Input::all(), $rules);
 
+            if ($validator->fails()) {
+                // No ha pasado la validacion
+
+            } else {
+
+
+                $cat = Categoria::find($id);
+
+                $cat->nombre = Input::get('nombre');
+
+                $cat->save();
+
+            }
         }
 
         $categoria = Categoria::find($id)->toArray();
 
         return View::make('admin.categorias_editar')->with('categoria', $categoria);
     }
-
-
 
 }

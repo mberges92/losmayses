@@ -6,7 +6,7 @@ class Pedido extends Eloquent
 
     protected $table = 'pedidos';
     protected $fillable = array('*');
-
+    public $timestamps = false;
 
     // -----------------------| RELACIONES DEL MODELO PEDIDO |----------------------- //
 
@@ -16,7 +16,7 @@ class Pedido extends Eloquent
      */
     public function productos()
     {
-        return $this->belongsToMany('Producto', 'detalles_pedidos', 'producto_id', 'pedido_id');
+        return $this->belongsToMany('Producto', 'detalles_pedidos', 'producto_id', 'pedido_id')->withPivot('precioUnidad', 'cantidad', 'iva');
     }
 
 

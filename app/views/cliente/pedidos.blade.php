@@ -34,7 +34,7 @@
 
 
         <div>
-            <select id="categoriasSelect">
+            <select disabled id="categoriasSelect">
                 <!-- <option selected disabled>SELECCIONA CATEGORIA</option> -->
                 <option selected disabled value="0">SELECCIONA CATEGORIA</option>
                 @foreach($categoriasActivas as $cat)
@@ -92,13 +92,6 @@
 
 </div>
 
-<hr/>
-
-<div class="container">
-    TABLA CON LOS PRODUCTOS COMPRADOS ACTUALMENTE
-</div>
-
-
     <script>
         $(document).ready(function() {
 
@@ -127,17 +120,22 @@
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // AÑADIR ROWS A LA TABLA CON LOS DATOS DEL PRODUCTO AL PULSAR EL BOTON AÑADIR
             $('#addTabla').click(function() {
+
                 signotarifa = $('#signoTarifa').text();
                 valortarifa = $('#valorTarifa').text();
                 productoselect = $("#productosSelect option:selected" ).text();
+                id_del_producto = $("#productosSelect option:selected" ).val();
                 cantidadproducto = $('#cantidadUnidad').val();
                 ivaproducto = $('#ivaUnidad').val();
                 precioproducto = $('#precioUnidad').val();
 
-                //alert(precioproducto);
+                if (productoselect == '' || cantidadproducto == '' || ivaproducto == '') {
+                    alert('Seleccione un producto para añadir al pedido.');
+                } else {
 
-                $('#tablaPedidoActual').append('<tr><td>'+productoselect+'</td><td id="cantidadtabla">'+cantidadproducto+'</td><td id="pvptabla">'+precioproducto+'</td><td id="ivatabla">'+ivaproducto+'</td><td><button type="button" id="deletefila" class="btn btn-danger">Eliminar</button></td></tr>');
-                sumaTotales();
+                    $('#tablaPedidoActual').append('<tr><td id="'+id_del_producto+'">'+productoselect+'</td><td id="cantidadtabla">'+cantidadproducto+'</td><td id="pvptabla">'+precioproducto+'</td><td id="ivatabla">'+ivaproducto+'</td><td><button type="button" id="deletefila" class="btn btn-danger">Eliminar</button></td></tr>');
+                    sumaTotales();
+                }
             });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
@@ -177,31 +175,34 @@
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // ENVIAR PEDIDO POR AJAX
             $('#hacerPedido').click(function() {
-                //alert('probando boton');
 
-                //$objDatosColumna = new Array();
-                $objDatosColumna = [];
+                var numeroRows = $('#tablaPedidoActual tbody>tr').length;
 
-                var $objCuerpoTabla = $('#tablaPedidoActual').children().prev().parent();
-                $objCuerpoTabla.find('tbody tr').each(function(){
+                if (numeroRows == 0) {
+                    alert('Seleccione al menos un producto para añadir al pedido.');
+                } else {
 
-                    var articulo2 = $(this).find('td').eq(0).html();
-                    var cantidad2 = $(this).find('td').eq(1).html();
-                    var precio2 = $(this).find('td').eq(2).html();
-                    var iva2 = $(this).find('td').eq(3).html();
+                    $objDatosColumna = [];
 
-                    //valor = new Array(articulo2,cantidad2,precio2,iva2);
-                    //valor = new Array({articulo:articulo2,cantidad:cantidad2,precio:precio2,iva:iva2});
-                    valor = {};
-                    valor["articulo"] = articulo2;
-                    valor["cantidad"] = cantidad2;
-                    valor["precio"] = precio2;
-                    valor["iva"] = iva2;
+                    var $objCuerpoTabla = $('#tablaPedidoActual').children().prev().parent();
+                    $objCuerpoTabla.find('tbody tr').each(function(){
 
+                        var idarticulo = $(this).find('td').eq(0).attr('id');
+                        var articulo2 = $(this).find('td').eq(0).html();
+                        var cantidad2 = $(this).find('td').eq(1).html();
+                        var precio2 = $(this).find('td').eq(2).html();
+                        var iva2 = $(this).find('td').eq(3).html();
 
-                    $objDatosColumna.push(valor);
+                        valor = {};
+                        valor['idarticulo'] = idarticulo;
+                        valor["articulo"] = articulo2;
+                        valor["cantidad"] = cantidad2;
+                        valor["precio"] = precio2;
+                        valor["iva"] = iva2;
 
-                }); // FIN DEL FOREACH
+                        $objDatosColumna.push(valor);
+
+                    }); // FIN DEL FOREACH
 
                     $.ajax({
                         async: false, // Puesta a false para que no pueda realizar otra llamada hasta que esta se complete
@@ -212,34 +213,23 @@
                             objDatosColumna: $objDatosColumna
                         },
                         success: function(data) {
-                            alert(data);
+                            if(data.status == 'success'){
+                                alert("Pedido enviado y guardado correctamente.");
+                            }else if(data.status == 'error'){
+                                alert("Error en el pedido, intentelo de nuevo.");
+                            }
+                            $('#tablaPedidoActual tbody>tr').remove();
                         }
-
                     }); // FIN FUNCION AJAX
-
-
-
+                } // FIN DE IF ELSE
             }); // FIN FUNCION CLICK
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
-
-            //////////////////////////////////////////////////////////////////////////////////////////// -----
-            //////////////////////////////////////////////////////////////////////////////////////////// -----
-
-
-
-            }); // FIN DE DOCUMENT READY
-
-        /*
-        for(var i=0;i<data.length; i++)
-        {
-            options += "<option value='"+data[i].id+"'>"+ data[i].name +"</option>";
-        }
-
-        select.append(options);
-        */
-
-
+            // COMPORTAMIENTO
+            $('#tiendasSelect').change(function() { // Cuando cambiemos a una opcion, activara las categorias
+                $('#categoriasSelect').prop('disabled', false);
+            });
+        }); // FIN DE DOCUMENT READY
     </script>
 
 

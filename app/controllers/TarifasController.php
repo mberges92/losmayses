@@ -40,5 +40,4 @@ class TarifasController extends BaseController {
         return Redirect::to('/admin');
     }
 
-
 }

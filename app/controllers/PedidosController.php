@@ -7,10 +7,60 @@ class PedidosController extends BaseController
     public function realizar_pedido_ajax()
     {
 
+
+
+        ////////////////
+        // PENSAR LA RELACION DE LOS ESTADOS PARA LOS PEDIDOS
+        ////////////////
+
+
+
         $lista_compra = Input::get('objDatosColumna');
-        //echo $lista_compra[0]['articulo'];
-        return Response::json($lista_compra, 200);
-        //dd(Input::all());
+        //$lista1 = $lista_compra[1]['cantidad'];
+
+        $fechaAhora_sql = date('Y-m-d G:i:s');
+
+        $pedido = new Pedido();
+
+        $pedido->usuario_id = Auth::user()->id;
+        $pedido->tienda_id = 1; // MANDAR LA TIENDA QUE REALIAZA EL PEIDDO POR AJAX
+        $pedido->estado = 1;
+        $pedido->fechaPedido = $fechaAhora_sql; // Solo se guarda fecha, campo en bd de solo fecha sin horas
+
+
+
+        if ($pedido->save())
+        {
+            $t = array();
+
+            foreach ($lista_compra as $lis) {
+
+                $mas = array(
+                    'pedido_id' => $pedido->id,
+                    'producto_id' => $lis['idarticulo'],
+                    'precioUnidad' => $lis['precio'],
+                    'cantidad' => $lis['cantidad'],
+                    'iva' => $lis['iva']);
+
+                array_push($t, $mas);
+
+
+            } // END FOR EACH
+
+            if (DB::table('detalles_pedidos')->insert($t)) {
+                return Response::json(array('status' => 'success'));
+
+            } else {
+
+                return Response::json(array('status' => 'error'));
+            }
+
+
+
+
+        } // FIN DEL IF GUARDAR
+
+
 
 /*
         if (Request::ajax())

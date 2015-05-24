@@ -28,7 +28,7 @@ class Producto extends Eloquent
      */
     public function pedidos()
     {
-        return $this->belongsToMany('Pedido', 'detalles_pedidos', 'pedido_id', 'producto_id');
+        return $this->belongsToMany('Pedido', 'detalles_pedidos', 'pedido_id', 'producto_id')->withPivot('precioUnidad', 'cantidad', 'iva');
     }
 
     /*

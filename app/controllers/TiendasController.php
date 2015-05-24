@@ -7,8 +7,6 @@ class TiendasController extends BaseController {
     // CONTROLADORES CLIENTE //////////////////////////////////////////////////////////////////////////////// ->
     public function tiendas_usuario($id)
     {
-        //Datos de usuario con las tiendas
-        //$usuarioConTiendas = Usuario::with('tiendas')->where('id', '=', $id)->get()->toArray();
 
         $tiendas = Tienda::where('usuario_id','=', $id)->get()->toArray();
         //dd($tiendas);
