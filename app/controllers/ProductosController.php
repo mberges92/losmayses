@@ -4,6 +4,36 @@
 class ProductosController extends BaseController
 {
 
+
+    public function comprobar_producto_existente($id_producto) {
+
+        if(Request::ajax()) {
+
+            $m = Input::get('nombre');
+
+
+            $esta = 'true';
+
+            //$producto = Producto::where('nombre', '=', $m)->get();
+            $producto = Producto::where('nombre', '=', $m)->whereNotIn( 'id', [$id_producto])->get();
+
+
+
+            if($producto->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+        }
+    }
+
     public function listado()
     {
 

@@ -11,7 +11,8 @@
             {{ Form::open(array(
                 'url' => '/admin/clientes/editar/'.$usuario[0]['id'],
                 'method' => 'post',
-                'action' => 'UsuariosController@modificar')) }}
+                'action' => 'UsuariosController@modificar',
+                'id' => 'editarUsuarioForm')) }}
 
             {{ Form::submit('Enviar') }}
             <br/>
@@ -52,5 +53,79 @@
 
         </div>
     </div>
+
+
+    <script>
+
+        $('#editarUsuarioForm').validate({
+            rules: {
+                correo: {
+                    required: true,
+                    email: true,
+                    minlength: 5,
+                    maxlength: 255,
+                    remote: "http://"+location.host+"/losmayses/public/validation/comprobar_correo/{{ $usuario[0]['id'] }}"
+                            /*
+                    {
+
+
+                        url:"http://"+location.host+"/losmayses/public/validation/comprobar_correo",
+                        type: "get",
+                        success: function(msg){
+                            if(msg.msg == 'true') {
+                                console.log('Correo esta en uso.');
+                                return true;
+                            }
+                            console.log('Este correo no existe, puedes usarlo.');
+                            return false;
+                        }
+
+
+                    }
+*/
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 255
+                },
+                nombre_empresa: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                },
+                nombre_contacto: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                },
+                direccion: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 255
+                },
+                telefono1: {
+                    required: true,
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                telefono2: {
+                    required: true,
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                codigo_postal: {
+                    required: true,
+                    digits: true,
+                    minlength: 5,
+                    maxlength: 5
+                }
+            } // FIN DE RULES
+
+        });
+
+    </script>
 
 @stop

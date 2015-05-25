@@ -6,6 +6,8 @@
 
     {{HTML::script('js/jquery-1.11.2.min.js')}}
     {{HTML::script('js/bootstrap.min.js')}}
+    {{ HTML::script('js/jquery.validate.min.js') }}
+    {{ HTML::script('js/messages_es.js') }}
 
     {{HTML::style('css/bootstrap.min.css')}}
     {{HTML::style('css/bootstrap-theme.min.css')}}

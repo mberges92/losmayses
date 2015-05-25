@@ -10,7 +10,8 @@
     {{ Form::open(array(
         'url' => '/admin/categorias/editar/'.$categoria['id'],
         'method' => 'post',
-        'action' => 'CategoriasController@modificar')) }}
+        'action' => 'CategoriasController@modificar',
+        'id' => 'editarCategoriaForm')) }}
 
     {{ Form::label('nombre', 'Nombre') }}
     {{ Form::text('nombre', $categoria['nombre'], array('class' => 'form-control')) }}
@@ -24,5 +25,20 @@
 </div>
 
 
-@stop
+<script>
 
+    $('#editarCategoriaForm').validate({
+        rules: {
+            nombre: {
+                required: true,
+                maxlength: 255,
+                remote: "http://"+location.host+"/losmayses/public/validation/comprobar_categoria/{{$categoria['id']}}"
+            }
+        } // FIN DE RULES
+
+    });
+
+</script>
+
+
+@stop

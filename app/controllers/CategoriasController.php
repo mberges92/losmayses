@@ -4,6 +4,34 @@
 class CategoriasController extends BaseController
 {
 
+    public function comprobar_categoria_existente($id_categoria) {
+
+        if(Request::ajax()) {
+            $m = Input::get('nombre');
+
+            $esta = 'true';
+
+            //$user = Usuario::where('correo', '=', $m)->get();
+            $categoria = Categoria::where('nombre', '=', $m)->whereNotIn( 'id', [$id_categoria])->get();
+
+            if($categoria->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+        }
+
+    }
+
+
+
     public function listado()
     {
         $categorias = Categoria::all();

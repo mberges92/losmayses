@@ -3,6 +3,34 @@
 
 class UsuariosController extends BaseController {
 
+    public function comprobar_email_existente($id_usuario) {
+
+        if(Request::ajax()) {
+            $m = Input::get('correo');
+
+            $esta = 'true';
+
+            //$user = Usuario::where('correo', '=', $m)->get();
+            $user = Usuario::where('correo', '=', $m)->whereNotIn( 'id', [$id_usuario])->get();
+
+            if($user->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+        }
+
+    }
+
+
+
     // PARTE CLIENTE //////////////////////////////////////////////////////////////////////////// ->
     public function datos_cliente($id)
     {

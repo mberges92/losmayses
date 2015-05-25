@@ -6,11 +6,13 @@
 
     <div class="container">
         <div class="col-sm-12 col-md-6">
+
             <b>FORMULARIO MODIFICAR PRODUCTO</b>
             {{ Form::open(array(
                 'url' => '/admin/productos/editar/'.$producto['id'],
                 'method' => 'post',
-                'action' => 'ProductosController@modificar')) }}
+                'action' => 'ProductosController@modificar',
+                'id' => 'editarProductoForm')) }}
 
             {{ Form::submit('Enviar') }}
             <br/>
@@ -57,6 +59,32 @@
 
         </div>
     </div>
+
+
+    <script>
+
+        $('#editarProductoForm').validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    maxlength: 255,
+                    remote: "http://"+location.host+"/losmayses/public/validation/comprobar_producto/{{$producto['id']}}"
+                },
+                iva: {
+                    required: true,
+                    digits: true,
+                    maxlength: 11
+                },
+                precio_total: {
+                    required: true,
+                    number: true
+                    //maxlength: 255
+                }
+            } // FIN DE RULES
+
+        });
+
+    </script>
 
 
 

@@ -77,6 +77,10 @@ Route::get('pedir_productos/{id}', 'PedidosController@pedir_productos_ajax'); //
 Route::get('buscar_producto/{id}', 'PedidosController@producto_ajax'); // LLAMADA AJAX
 
 
+Route::get('validation/comprobar_correo/{id_usuario}', 'UsuariosController@comprobar_email_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
+Route::get('validation/comprobar_producto/{id_producto}', 'ProductosController@comprobar_producto_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
+Route::get('validation/comprobar_categoria/{id_categoria}', 'CategoriasController@comprobar_categoria_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
+
 
 
 // Autenticación

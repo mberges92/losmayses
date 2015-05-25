@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'losmayses',
+			'database'  => 'losmayses_pruebas',
 			'username'  => 'root',
 			'password'  => 'root',
 			'charset'   => 'utf8',
