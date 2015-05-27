@@ -16,10 +16,12 @@
 <body>
 {{ HTML::link('/admin', 'RESUMEN/INICIO') }}
 <br/>
+{{ HTML::link('/admin/pedidos', 'PEDIDOS') }}
+<br/>
 {{ HTML::link('/admin/clientes', 'CLIENTES') }}
 <br/>
-{{ HTML::link('/admin/tiendas', 'TIENDAS') }}
-<br/>
+{{-- HTML::link('/admin/tiendas', 'TIENDAS') --}}
+<!-- <br/> -->
 {{ HTML::link('/admin/tarifas', 'TARIFAS') }}
 <br/>
 {{ HTML::link('/admin/categorias', 'CATEGORIAS') }}

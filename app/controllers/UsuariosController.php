@@ -71,6 +71,7 @@ class UsuariosController extends BaseController {
                 $cliente->telefono2 = Input::get('telefono2');
                 $cliente->codigo_postal = Input::get('codigo_postal');
                 $cliente->nombre_empresa = Input::get('nombre_empresa');
+                $cliente->completo = 1;
                 $cliente->save();
 
 
@@ -230,6 +231,7 @@ class UsuariosController extends BaseController {
         $usuario->password = Hash::make(Input::get('password'));
         $usuario->rol = Input::get('rol'); //CAMBIAR ESTO POR "cliente"
         $usuario->tarifa_id = 1;
+        $usuario->completo = 0;
         $usuario->save();
 
         return Redirect::to('/');

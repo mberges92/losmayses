@@ -4,16 +4,25 @@
 class PedidosController extends BaseController
 {
 
-    public function realizar_pedido_ajax()
+    public function listados_pedidos_admin()
     {
 
+        $pedidos = Pedido::with('productos', 'usuario')->get()->toArray();
+        //dd($pedidos);
 
+        return View::make('admin.pedidos')->with('pedidos', $pedidos);
+
+    }
+
+
+
+
+    public function realizar_pedido_ajax()
+    {
 
         ////////////////
         // PENSAR LA RELACION DE LOS ESTADOS PARA LOS PEDIDOS
         ////////////////
-
-
 
         $lista_compra = Input::get('objDatosColumna');
         //$lista1 = $lista_compra[1]['cantidad'];
@@ -59,18 +68,6 @@ class PedidosController extends BaseController
 
 
         } // FIN DEL IF GUARDAR
-
-
-
-/*
-        if (Request::ajax())
-        {
-            $variable = Input::all();
-            return Response::json($variable);
-
-            //echo (Input::all());
-        }
-*/
 
     }
 
@@ -155,22 +152,38 @@ class PedidosController extends BaseController
         return View::make('cliente.pedidos')->with(array('pedidos_usuario' => $pedidos_usuario, 'categoriasActivas' => $categorias_activas, 'datosUsuario' => $datos_usuario));
     }
 
-    public function borrar($id)
+    public function borrar($pedido_id)
     {
+        //if (DB::table('detalles_pedidos')->insert($t)) {
+
+        $detalles_pedido = DB::table('detalles_pedidos')->where('pedido_id', '=', $pedido_id)->delete();
+
+        $pedido = Pedido::find($pedido_id);
+        $pedido->delete();
+
+        return Redirect::to('/admin/pedidos');
 
     }
 
-    public function modiicar_pedido($id)
-    {
 
+    public function ver_pedido_admin($pedido_id)
+    {
+        $datos_pedido = Pedido::with('usuario')->where('id', '=', $pedido_id)->get()->toArray();
+        //dd($datos_pedido);
+
+        $datos_tienda = Tienda::where('usuario_id', '=', $datos_pedido[0]['usuario']['id'])->get()->toArray();
+        //dd($datos_tienda);
+
+        $productos_pedido = DB::table('detalles_pedidos')->where('pedido_id', '=', $pedido_id)->get();
+        //dd($productos_pedido);
+
+        $productos = Producto::all()->toArray();
+        //dd($productos);
+
+
+        return View::make('admin.pedidos_ver')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
 
     }
-
-    public function nuevo_pedido()
-    {
-
-    }
-
 
 
 

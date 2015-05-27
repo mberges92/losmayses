@@ -23,6 +23,10 @@ Route::get('/admin', function() {
     return View::make('admin.index');
 });
 
+Route::get('/admin/pedidos', 'PedidosController@listados_pedidos_admin');
+Route::get('/admin/pedidos/ver/{id}', 'PedidosController@ver_pedido_admin');
+Route::get('/admin/pedidos/eliminar/{id}', 'PedidosController@borrar');
+
 Route::get('/admin/clientes', 'UsuariosController@listado');
 Route::get('/admin/clientes/editar/{id}', 'UsuariosController@modificar');
 Route::post('/admin/clientes/editar/{id}', 'UsuariosController@modificar');
@@ -35,6 +39,8 @@ Route::get('/admin/tiendas/eliminar/{id}', 'TiendasController@eliminar');
 
 Route::get('/admin/tarifas', 'TarifasController@listado');
 Route::post('/admin/tarifas/nueva', 'TarifasController@nueva');
+Route::get('/admin/tarifas/editar/{id}', 'TarifasController@modificar');
+Route::post('/admin/tarifas/editar/{id}', 'TarifasController@modificar');
 Route::get('/admin/tarifas/eliminar/{id}', 'TarifasController@eliminar');
 
 Route::get('/admin/categorias', 'CategoriasController@listado');
@@ -80,6 +86,7 @@ Route::get('buscar_producto/{id}', 'PedidosController@producto_ajax'); // LLAMAD
 Route::get('validation/comprobar_correo/{id_usuario}', 'UsuariosController@comprobar_email_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
 Route::get('validation/comprobar_producto/{id_producto}', 'ProductosController@comprobar_producto_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
 Route::get('validation/comprobar_categoria/{id_categoria}', 'CategoriasController@comprobar_categoria_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
+Route::get('validation/comprobar_tarifa/{id_tarifa}', 'TarifasController@comprobar_tarifa_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
 
 
 

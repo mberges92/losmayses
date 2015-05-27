@@ -39,7 +39,8 @@
         <th>Activo</th>
         <th>Nombre</th>
         <th>Valor</th>
-        <th>Accion</th>
+        <th>Editar</th>
+        <th>Eliminar</th>
         </thead>
         <tbody>
         @foreach($tarifas as $tarifa)
@@ -47,7 +48,8 @@
                 <td>{{ $tarifa->activo }}</td>
                 <td>{{ $tarifa->nombre }}</td>
                 <td>{{ $tarifa->signo.'  '.$tarifa->valor }}</td>
-                <td>MODIFICAR / ELIMINAR</td>
+                <td>{{ HTML::link('/admin/tarifas/editar/'.$tarifa['id'], 'EDITAR') }}</td>
+                <td>{{ HTML::link('/admin/tarifas/eliminar/'.$tarifa['id'], 'ELIMINAR') }}</td>
             </tr>
         @endforeach
         </tbody>

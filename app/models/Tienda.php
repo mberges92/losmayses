@@ -19,4 +19,6 @@ class Tienda extends Eloquent {
         return $this->belongsTo('Usuario', 'usuario_id', 'id');
     }
 
+
+
 }

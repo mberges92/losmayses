@@ -10,7 +10,8 @@
             {{ Form::open(array(
                 'url' => '/cliente/'.$cliente->id.'/datos',
                 'method' => 'post',
-                'action' => 'UsuariosController@datos_cliente')) }}
+                'action' => 'UsuariosController@datos_cliente',
+                'id' => 'formDatosCliente')) }}
 
             {{ Form::label('correo', 'Correo') }}
             {{ Form::text('correo', $cliente->correo, array('class' => 'form-control')) }}
@@ -46,6 +47,61 @@
         </div>
     </div>
 
+
+    <script>
+
+        $('#formDatosCliente').validate({
+            rules: {
+                correo: {
+                    required: true,
+                    email: true,
+                    minlength: 5,
+                    maxlength: 255,
+                    remote: "http://"+location.host+"/losmayses/public/validation/comprobar_correo/{{ $cliente->id }}"
+                },
+                password: {
+                    required: true,
+                    minlength: 6,
+                    maxlength: 255
+                },
+                nombre_empresa: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                },
+                nombre_contacto: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                },
+                direccion: {
+                    required: true,
+                    minlength: 4,
+                    maxlength: 255
+                },
+                telefono1: {
+                    required: true,
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                telefono2: {
+                    required: true,
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                codigo_postal: {
+                    required: true,
+                    digits: true,
+                    minlength: 5,
+                    maxlength: 5
+                }
+            } // FIN DE RULES
+
+        });
+
+    </script>
 
 
 @stop

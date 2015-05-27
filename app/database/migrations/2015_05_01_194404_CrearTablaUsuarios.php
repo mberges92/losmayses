@@ -25,7 +25,7 @@ class CrearTablaUsuarios extends Migration {
             $tabla->string('telefono1');
             $tabla->string('telefono2');
             $tabla->string('codigo_postal');
-
+            $tabla->tinyInteger('completo');
             $tabla->string('nombre_empresa');
 
             $tabla->integer('tarifa_id');
@@ -45,6 +45,7 @@ class CrearTablaUsuarios extends Migration {
                 'telefono1' => '976123123',
                 'telefono2' => '654778899',
                 'codigo_postal' => '50008',
+                'completo' => 1,
                 'nombre_empresa' => 'Los Mayses',
                 'tarifa_id' => 1
             )
@@ -60,6 +61,7 @@ class CrearTablaUsuarios extends Migration {
                 'telefono1' => '976123123',
                 'telefono2' => '654778899',
                 'codigo_postal' => '50007',
+                'completo' => 1,
                 'nombre_empresa' => 'PANICHOP',
                 'tarifa_id' => 1
             )

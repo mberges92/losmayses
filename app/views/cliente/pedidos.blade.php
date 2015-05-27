@@ -94,7 +94,23 @@
 
     <script>
         $(document).ready(function() {
-
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            //////////////////////////////////////////////////////////////////////////////////////////// -----
+            // Solo se pueden introducir numeros enteros
+            $('#cantidadUnidad').keydown(function(event) {
+                // Allow special chars + arrows
+                if (event.keyCode == 46 || event.keyCode == 8 || event.keyCode == 9
+                        || event.keyCode == 27 || event.keyCode == 13
+                        || (event.keyCode == 65 && event.ctrlKey === true)
+                        || (event.keyCode >= 35 && event.keyCode <= 39)){
+                    return;
+                }else {
+                    // Si no es un numero, parar el keypress
+                    if (event.shiftKey || (event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+                        event.preventDefault();
+                    }
+                }
+            });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // PRODUCTO DE LAS CATEGORIAS
             $('#categoriasSelect').change(function(){
@@ -129,7 +145,10 @@
                 ivaproducto = $('#ivaUnidad').val();
                 precioproducto = $('#precioUnidad').val();
 
-                if (productoselect == '' || cantidadproducto == '' || ivaproducto == '') {
+
+                cantidadproducto = cantidadproducto.replace(/^0+/, '');
+
+                if (productoselect == '' || cantidadproducto == '' || ivaproducto == '' || parseInt(cantidadproducto) <= 0) {
                     alert('Seleccione un producto para añadir al pedido.');
                 } else {
 
