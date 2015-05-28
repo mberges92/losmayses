@@ -44,8 +44,6 @@
 
 
 
-
-
 <!-- VENTANA MODAL CREAR TIENDA -->
     <div id="nueva_tienda" class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
@@ -105,6 +103,22 @@
 <!-- FIN CONFIRMACIONES BORRAR TIENDAS -->
 
 
+        <script>
+            $(document).ready(function() {
 
+                    $('#nuevaTiendaForm').validate({
+                        rules: {
+                            nombre: {
+                                required: true,
+                                minlength: 1,
+                                maxlength: 255,
+                                remote: "http://" + location.host + "/losmayses/public/validation/comprobar_nuevaTienda/{{ Auth::user()->id }}"
+                            }
+                        }
+                    });
+
+            });
+
+        </script>
 
 @stop

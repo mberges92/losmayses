@@ -101,6 +101,7 @@ class UsuariosController extends BaseController {
 
     }
 
+
     public function modificar($id)
     {
 
@@ -160,6 +161,7 @@ class UsuariosController extends BaseController {
         return View::make('admin.usuarios_editar')->with(array('usuario' => $usuario, 'alltarifas' => $allTarifas));
 
     }
+
 
     public function eliminar($id)
     {

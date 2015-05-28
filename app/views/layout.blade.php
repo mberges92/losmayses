@@ -8,6 +8,7 @@
     {{HTML::script('js/bootstrap.min.js')}}
     {{ HTML::script('js/jquery.validate.min.js') }}
     {{ HTML::script('js/messages_es.js') }}
+    {{ HTML::script('js/cifES.js') }}
 
     {{HTML::style('css/bootstrap.min.css')}}
     {{HTML::style('css/bootstrap-theme.min.css')}}
@@ -23,7 +24,7 @@
 <hr/>
 
 
-@if(Auth::check() && Auth::user()->rol == "Admin")
+@if(Auth::check() && Auth::user()->rol == "admin")
     {{ HTML::link('/admin', 'ADMINISTRACION') }}
     <br/>
     {{ HTML::link('/logout', 'LOGOUT - '.Auth::user()->correo) }}

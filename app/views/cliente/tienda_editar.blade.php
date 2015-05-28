@@ -51,4 +51,62 @@
     {{ Form::close() }}
     </div>
 
+
+    <script>
+
+        $('#modificarTiendaForm').validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255,
+                    remote: "http://"+location.host+"/losmayses/public/validation/comprobar_tienda/{{ $tienda->id }}"
+                },
+                direccion: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                },
+                cif: {
+                    required: true,
+                    cifES: true
+                },
+                telefono_1: {
+                    required: true,
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                telefono_2: {
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                correo: {
+                    required: true,
+                    email: true,
+                    minlength: 5,
+                    maxlength: 255
+                },
+                provincia: {
+                    required: true,
+                    digits: true,
+                    minlength: 9,
+                    maxlength: 9
+                },
+                localidad: {
+                    required: true,
+                    digits: true,
+                    minlength: 5,
+                    maxlength: 5
+                },
+                cod_postal: {
+
+                }
+            } // FIN DE RULES
+
+        });
+
+    </script>
+
 @stop

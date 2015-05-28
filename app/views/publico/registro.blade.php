@@ -17,7 +17,7 @@
     Esto solo se ve en pruebas
     <br/>
     {{Form::label('rol', 'Rol')}}
-    {{Form::select('rol', array('Admin' => 'Admin', 'Usuario' => 'Usuario')) }}
+    {{Form::select('rol', array('admin' => 'admin', 'cliente' => 'cliente')) }}
     <br>
     {{Form::submit('Registrar usuario')}}
     {{ Form::close() }}

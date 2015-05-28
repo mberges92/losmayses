@@ -13,7 +13,9 @@
         <select id="tiendasSelect">
             <option selected disabled value="0">SELECCIONA TIENDA PEDIDO</option>
             @foreach($datosUsuario[0]['tiendas'] as $tienda)
+                @if($tienda['completo'] == 1)
                 <option value="{{ $tienda['id'] }}">{{ $tienda['nombre'] }}</option>
+                @endif
             @endforeach
         </select>
     </div>

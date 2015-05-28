@@ -4,6 +4,55 @@
 class TiendasController extends BaseController {
 
 
+    public function comprobar_tienda_nuevaTienda($id_usuario)
+    {
+
+
+        $t = Input::get('nombre');
+
+        $esta = 'true';
+
+        $busca_tienda = Tienda::where('nombre', '=', $t)->where('usuario_id', '=', $id_usuario)->get();
+
+        if ($busca_tienda->count()) {
+            $esta = 'false';
+
+        } else {
+            $esta = 'true';
+        }
+
+        echo $esta;
+
+
+    }
+
+    public function comprobar_tienda_existente($id_tienda) {
+
+        if(Request::ajax()) {
+            $m = Input::get('nombre');
+
+            $esta = 'true';
+
+            //$user = Usuario::where('correo', '=', $m)->get();
+            $tienda = Tienda::where('nombre', '=', $m)->whereNotIn( 'id', [$id_tienda])->get();
+
+            if($tienda->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+        }
+
+    }
+
+
     // CONTROLADORES CLIENTE //////////////////////////////////////////////////////////////////////////////// ->
     public function tiendas_usuario($id)
     {
@@ -25,6 +74,7 @@ class TiendasController extends BaseController {
         $tienda->nombre = Input::get('nombre');
         $tienda->activo = 0;
         $tienda->usuario_id = $idUsuario;
+        $tienda->completo = 0;
 
         $tienda->save();
 
@@ -39,6 +89,9 @@ class TiendasController extends BaseController {
 
         if (Request::isMethod('post')) {
 
+            // Aqui un if, si los campos requeridos estan, activar
+
+
             $tienda->nombre = Input::get('nombre');
             $tienda->direccion = Input::get('direccion');
             $tienda->cif = Input::get('cif');
@@ -48,8 +101,9 @@ class TiendasController extends BaseController {
             $tienda->provincia = Input::get('provincia');
             $tienda->localidad = Input::get('localidad');
             $tienda->cod_postal = Input::get('cod_postal');
+            $tienda->completo = 1;
 
-            $tienda->activo = 1; // Aqui un if, si los campos requeridos estan, activar
+            $tienda->activo = 1;
 
             $tienda->save();
 

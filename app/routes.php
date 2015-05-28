@@ -87,6 +87,8 @@ Route::get('validation/comprobar_correo/{id_usuario}', 'UsuariosController@compr
 Route::get('validation/comprobar_producto/{id_producto}', 'ProductosController@comprobar_producto_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
 Route::get('validation/comprobar_categoria/{id_categoria}', 'CategoriasController@comprobar_categoria_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
 Route::get('validation/comprobar_tarifa/{id_tarifa}', 'TarifasController@comprobar_tarifa_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
+Route::get('validation/comprobar_tienda/{id_tienda}', 'TiendasController@comprobar_tienda_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
+Route::get('validation/comprobar_nuevaTienda/{id_usuario}', 'TiendasController@comprobar_tienda_nuevaTienda'); // LLAMADA AJAX PARA JQUERY VALIDATION
 
 
 

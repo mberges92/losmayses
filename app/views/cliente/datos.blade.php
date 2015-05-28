@@ -86,7 +86,6 @@
                     maxlength: 9
                 },
                 telefono2: {
-                    required: true,
                     digits: true,
                     minlength: 9,
                     maxlength: 9

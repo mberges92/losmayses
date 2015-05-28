@@ -25,7 +25,7 @@ class CrearTablaTiendas extends Migration {
             $tabla->string('localidad');
             $tabla->string('cod_postal');
             $tabla->tinyInteger('activo');        // Poner limite de 1 caracter
-
+            $tabla->tinyInteger('completo');
             $tabla->integer('usuario_id');        // foreign_key para los usuarios
 
             $tabla->timestamps();
@@ -42,7 +42,7 @@ class CrearTablaTiendas extends Migration {
                 'provincia' => 'Zaragoza',
                 'localidad' => 'Zaragoza',
                 'cod_postal' => '50007',
-
+                'completo' => 1,
                 'usuario_id' => 2,                  //COMPROBAR SI CORRESPONDE CON EL ID de usuario cliente
                 'activo' => 1
             )

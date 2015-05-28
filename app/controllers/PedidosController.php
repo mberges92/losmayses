@@ -152,6 +152,7 @@ class PedidosController extends BaseController
         return View::make('cliente.pedidos')->with(array('pedidos_usuario' => $pedidos_usuario, 'categoriasActivas' => $categorias_activas, 'datosUsuario' => $datos_usuario));
     }
 
+
     public function borrar($pedido_id)
     {
         //if (DB::table('detalles_pedidos')->insert($t)) {

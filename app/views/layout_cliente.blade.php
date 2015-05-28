@@ -14,6 +14,8 @@
     {{HTML::script('js/bootstrap.min.js')}}
     {{ HTML::script('js/jquery.validate.min.js') }}
     {{ HTML::script('js/messages_es.js') }}
+    {{ HTML::script('js/cifES.js') }}
+
 
 
 
