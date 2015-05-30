@@ -60,7 +60,6 @@
                     remote: "http://"+location.host+"/losmayses/public/validation/comprobar_correo/{{ $cliente->id }}"
                 },
                 password: {
-                    required: true,
                     minlength: 6,
                     maxlength: 255
                 },

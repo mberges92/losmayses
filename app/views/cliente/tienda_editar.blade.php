@@ -90,18 +90,19 @@
                 },
                 provincia: {
                     required: true,
-                    digits: true,
-                    minlength: 9,
-                    maxlength: 9
+                    minlength: 1,
+                    maxlength: 255
                 },
                 localidad: {
+                    required: true,
+                    minlength: 1,
+                    maxlength: 255
+                },
+                cod_postal: {
                     required: true,
                     digits: true,
                     minlength: 5,
                     maxlength: 5
-                },
-                cod_postal: {
-
                 }
             } // FIN DE RULES
 

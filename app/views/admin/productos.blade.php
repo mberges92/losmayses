@@ -14,7 +14,6 @@
             <thead>
             <th>Activo</th>
             <th>Nombre</th>
-            <th>Cantidad minima</th>
             <th>IVA</th>
             <th>Precio Unidad o Pack</th>
             <th>Accion</th>
@@ -24,9 +23,8 @@
                 <tr>
                     <td>{{ $producto->activo }}</td>
                     <td>{{ $producto->nombre }}</td>
-                    <td>{{ $producto->cantidad_minima }}</td>
                     <td>{{ $producto->iva }}</td>
-                    <td>{{ $producto->precio_total }}</td>
+                    <td>{{ $producto->precio_total }} €</td>
                     <td>{{ HTML::link('/admin/productos/editar/'.$producto['id'], 'MODIFICAR') }}</td>
                     <td>
                         <button  data-toggle="modal" data-target="#modal_{{ $producto['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
@@ -99,5 +97,22 @@
         </div>
         @endforeach
     <!-- FIN CONFIRMACIONES BORRAR PRODUCTOS -->
+
+        <script>
+
+            $('#nuevoProductoForm').validate({
+                rules: {
+                    nombre: {
+                        required: true,
+                        maxlength: 255,
+                        remote: "http://"+location.host+"/losmayses/public/validation/comprobar_newProducto"
+                    }
+                } // FIN DE RULES
+
+            });
+
+        </script>
+
+
 
 @stop

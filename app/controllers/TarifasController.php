@@ -3,7 +3,31 @@
 
 class TarifasController extends BaseController {
 
+    public function comprobar_new_tarifa() {
 
+        if(Request::ajax()) {
+
+            $j = Input::get('nombre');
+
+            $esta = 'true';
+
+            $tarifa = Tarifa::where('nombre', '=', $j)->get();
+
+            if($tarifa->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+
+        }
+    }
 
 
     public function comprobar_tarifa_existente($id_tarifa) {
@@ -75,6 +99,25 @@ class TarifasController extends BaseController {
 
     public function modificar($id)
     {
+
+
+
+        if (Request::isMethod('post')) {
+
+            //dd(Input::all());
+
+            $ta = Tarifa::find($id);
+
+            $ta->nombre = Input::get('nombre');
+            $ta->signo = Input::get('signo');
+            $ta->valor = Input::get('valor');
+            $ta->save();
+
+
+
+            return Redirect::action('TarifasController@listado');
+
+        }
 
         $tarifa = Tarifa::find($id);
 

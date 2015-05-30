@@ -9,11 +9,16 @@
     {{ HTML::script('js/jquery.validate.min.js') }}
     {{ HTML::script('js/messages_es.js') }}
     {{ HTML::script('js/cifES.js') }}
+    {{ HTML::script('js/jquery-ui.js') }}
+
 
 
     {{HTML::style('css/bootstrap.min.css')}}
     {{HTML::style('css/bootstrap-theme.min.css')}}
+    {{HTML::style('css/jquery-ui.min.css')}}
+
     {{HTML::style('css/style.css')}}
+
 </head>
 <body>
 {{ HTML::link('/admin', 'RESUMEN/INICIO') }}

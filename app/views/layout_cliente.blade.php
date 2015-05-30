@@ -8,6 +8,8 @@
 
     {{HTML::style('css/bootstrap.min.css')}}
     {{HTML::style('css/bootstrap-theme.min.css')}}
+    {{HTML::style('css/jquery-ui.min.css')}}
+
     {{HTML::style('css/style.css')}}
 
     {{HTML::script('js/jquery-1.11.2.min.js')}}
@@ -15,6 +17,8 @@
     {{ HTML::script('js/jquery.validate.min.js') }}
     {{ HTML::script('js/messages_es.js') }}
     {{ HTML::script('js/cifES.js') }}
+    {{ HTML::script('js/jquery-ui.js') }}
+
 
 
 

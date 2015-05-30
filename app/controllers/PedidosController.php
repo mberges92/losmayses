@@ -35,6 +35,7 @@ class PedidosController extends BaseController
         $pedido->tienda_id = 1; // MANDAR LA TIENDA QUE REALIAZA EL PEIDDO POR AJAX
         $pedido->estado = 1;
         $pedido->fechaPedido = $fechaAhora_sql; // Solo se guarda fecha, campo en bd de solo fecha sin horas
+        //$pedido->fechaEntrega = ;
 
 
 

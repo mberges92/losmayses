@@ -65,24 +65,6 @@
                     minlength: 5,
                     maxlength: 255,
                     remote: "http://"+location.host+"/losmayses/public/validation/comprobar_correo/{{ $usuario[0]['id'] }}"
-                            /*
-                    {
-
-
-                        url:"http://"+location.host+"/losmayses/public/validation/comprobar_correo",
-                        type: "get",
-                        success: function(msg){
-                            if(msg.msg == 'true') {
-                                console.log('Correo esta en uso.');
-                                return true;
-                            }
-                            console.log('Este correo no existe, puedes usarlo.');
-                            return false;
-                        }
-
-
-                    }
-*/
                 },
                 password: {
                     required: true,

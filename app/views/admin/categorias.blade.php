@@ -94,6 +94,22 @@
                 <!-- FIN CONFIRMACIONES BORRAR CATEGORIA -->
 
 
+        <script>
+
+            $('#nuevaCategoriaForm').validate({
+                rules: {
+                    nombre: {
+                        required: true,
+                        maxlength: 255,
+                        remote: "http://"+location.host+"/losmayses/public/validation/comprobar_newCategoria"
+                    }
+                } // FIN DE RULES
+
+            });
+
+        </script>
+
+
 
 
 

@@ -5,6 +5,34 @@ class ProductosController extends BaseController
 {
 
 
+    public function comprobar_new_producto() {
+
+        if(Request::ajax()) {
+
+            $j = Input::get('nombre');
+
+            $esta = 'true';
+
+            $producto = Producto::where('nombre', '=', $j)->get();
+
+            if($producto->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+
+        }
+    }
+
+
+
     public function comprobar_producto_existente($id_producto) {
 
         if(Request::ajax()) {
@@ -67,6 +95,7 @@ class ProductosController extends BaseController
         if (Request::isMethod('post')) {
 
             $categorias_seleccionadas = Input::get('kcategoria');
+            //dd($categorias_seleccionadas);
 
             $pro = Producto::find($id);
             $pro->nombre = Input::get('nombre');
@@ -75,6 +104,7 @@ class ProductosController extends BaseController
             $pro->save();
 
             // SI NO LLEVA NADA NO ES UN ARRAY Y PETA
+            Producto::find($pro->id)->categorias()->detach();
             if (is_array($categorias_seleccionadas)) {
                 $pro->categorias()->sync($categorias_seleccionadas);
             }
@@ -95,6 +125,7 @@ class ProductosController extends BaseController
 
     public function eliminar($id)
     {
+
 
         Producto::find($id)->categorias()->detach(); // Esto borra las relaciones intermedias con categorias
         Producto::find($id)->delete(); // Esto borra el producto

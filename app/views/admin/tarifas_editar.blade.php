@@ -6,7 +6,7 @@
 
     <div class="container">
 
-        <b>FORMULARIO EDITAR CATEGORIA</b>
+        <b>FORMULARIO EDITAR TARIFA</b>
         {{ Form::open(array(
             'url' => '/admin/tarifas/editar/'.$tarifa['id'],
             'method' => 'post',
@@ -18,7 +18,7 @@
         <br/>
 
         {{ Form::label('signo', 'AUMENTO O DESCUENTO SOBRE PRODUCTOS') }} <br/>
-        {{ Form::select('signo', array('+', '-'), array('class' => 'form-control')) }}
+        {{ Form::select('signo', array('+' => '+', '-' => '-'), array('class' => 'form-control')) }}
         <br/><br/>
 
         {{ Form::label('valor', 'Valor') }}
@@ -45,7 +45,7 @@
                 valor: {
                     required: true,
                     digits: true,
-                    maxlength: 3
+                    maxlength: 5
                 }
             } // FIN DE RULES
 

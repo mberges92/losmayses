@@ -31,6 +31,14 @@
 
 <hr/>
 
+
+    <div class="container">
+        <p>Fecha entrega: <input type="text" id="datepicker"></p>
+    </div>
+
+
+<hr/>
+
 <div class="container">
     CATEGORIAS CON PRODUCTOS
 
@@ -96,6 +104,11 @@
 
     <script>
         $(document).ready(function() {
+
+
+            $( "#datepicker" ).datepicker({
+                    minDate: +1
+            });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // Solo se pueden introducir numeros enteros
@@ -116,6 +129,7 @@
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // PRODUCTO DE LAS CATEGORIAS
             $('#categoriasSelect').change(function(){
+                $('option:selected', this).attr('selected', false);
                 $.getJSON('/losmayses/public/pedir_productos/'+$(this).val(), function(data) {
                     $('#productosSelect').empty();   //Esto vacia el select multiple de productos
                         $.each(data, function() {
