@@ -152,7 +152,6 @@
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // AÑADIR ROWS A LA TABLA CON LOS DATOS DEL PRODUCTO AL PULSAR EL BOTON AÑADIR
             $('#addTabla').click(function() {
-
                 signotarifa = $('#signoTarifa').text();
                 valortarifa = $('#valorTarifa').text();
                 productoselect = $("#productosSelect option:selected" ).text();
