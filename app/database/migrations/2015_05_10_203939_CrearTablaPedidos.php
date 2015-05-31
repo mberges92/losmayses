@@ -20,6 +20,8 @@ class CrearTablaPedidos extends Migration {
             $tabla->date('fechaPedido');
             $tabla->date('fechaEntrega');
             $tabla->tinyInteger('estado');          // Lo usare para ver el estado del pedido
+            $tabla->integer('num_albaran');
+            $tabla->integer('num_factura');
 
             //$tabla->decimal('precio_pedido');    // Quizas un campo de precio final, o obtenerlo en una consulta
             //$tabla->timestamps();

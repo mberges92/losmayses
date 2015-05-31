@@ -4,6 +4,7 @@
 class PedidosController extends BaseController
 {
 
+
     public function generar_albaran()
     {
 
@@ -11,9 +12,25 @@ class PedidosController extends BaseController
     }
 
 
-    public function generar_factura() {
+    public function generar_factura($pedido_id) {
+
+        $datos_pedido = Pedido::with('usuario')->where('id', '=', $pedido_id)->get()->toArray();
+        //dd($datos_pedido);
+
+        $datos_tienda = Tienda::where('usuario_id', '=', $datos_pedido[0]['usuario']['id'])->get()->toArray();
+        //dd($datos_tienda);
+
+        $productos_pedido = DB::table('detalles_pedidos')->where('pedido_id', '=', $pedido_id)->get();
+        //dd($productos_pedido);
+
+        $productos = Producto::all()->toArray();
+        //dd($productos);
 
 
+        $numero = count($productos_pedido);
+        //dd($numero);
+
+        return View::make('factura')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
     }
 
     public function cambio_estado_pedido()

@@ -9,8 +9,8 @@
 
     @if($datosPedido[0]['estado'] == 4 || $datosPedido[0]['estado'] == 5)
         ALBARAN Y FACTURA
-        {{ HTML::link('/admin/pedidos/albaran', 'ALBARAN') }}
-        {{ HTML::link('/admin/pedidos/factura', 'FACTURA') }}
+        {{ HTML::link('/admin/pedidos/albaran/'.$datosPedido[0]['id'], 'ALBARAN') }}
+        {{ HTML::link('/admin/pedidos/factura/'.$datosPedido[0]['id'], 'FACTURA') }}
 
     @elseif($datosPedido[0]['estado'] == 3)
         ALBARAN
@@ -91,7 +91,6 @@
         <label for="conIVA">PRECIO CON IVA</label>
         <input disabled type="text" size="" maxlength="" value="0" name="cantidad_conIVA" id="conIVA">
     </div>
-
 
 
 </div>
