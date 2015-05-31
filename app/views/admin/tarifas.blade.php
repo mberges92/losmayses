@@ -14,7 +14,6 @@
     <table class="table">
         <legend>LISTADO</legend>
         <thead>
-        <th>Activo</th>
         <th>Nombre</th>
         <th>Valor</th>
         <th>Editar</th>
@@ -23,7 +22,6 @@
         <tbody>
         @foreach($tarifas as $tarifa)
             <tr>
-                <td>{{ $tarifa->activo }}</td>
                 <td>{{ $tarifa->nombre }}</td>
                 <td>{{ $tarifa->signo.'  '.$tarifa->valor }} %</td>
                 <td>{{ HTML::link('/admin/tarifas/editar/'.$tarifa['id'], 'EDITAR') }}</td>

@@ -27,6 +27,12 @@ Route::get('/admin/pedidos', 'PedidosController@listados_pedidos_admin');
 Route::get('/admin/pedidos/ver/{id}', 'PedidosController@ver_pedido_admin');
 Route::get('/admin/pedidos/eliminar/{id}', 'PedidosController@borrar');
 
+
+
+Route::get('/admin/pedidos/albaran', 'PedidosController@generar_albaran');
+
+
+
 Route::get('/admin/clientes', 'UsuariosController@listado');
 Route::get('/admin/clientes/editar/{id}', 'UsuariosController@modificar');
 Route::post('/admin/clientes/editar/{id}', 'UsuariosController@modificar');
@@ -77,6 +83,12 @@ Route::get('/cliente/{id}/pedidos', 'PedidosController@inicio');
 Route::get('/cliente/getProductos', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX
 Route::any('/cliente/nuevoPedido', 'PedidosController@realizar_pedido_ajax'); // LLAMADA AJAX
 
+Route::get('admin/productos/boolean_ajax/{id}/{valor}/activo', 'ProductosController@activar_ajax'); // AJAX ACTIVAR/DESACTIVAR PRODUCTO
+Route::get('admin/categorias/boolean_ajax/{id}/{valor}/activo', 'CategoriasController@activar_ajax'); // AJAX ACTIVAR/DESACTIVAR CATEGORIA
+Route::get('admin/usuarios/boolean_ajax/{id}/{valor}/activo', 'UsuariosController@activar_ajax'); // AJAX ACTIVAR/DESACTIVAR USUARIO
+
+
+Route::post('admin/pedidos/cambio_estado', 'PedidosController@cambio_estado_pedido'); //LLAMADA AJAX CAMBIO ESTADO PEDIDO
 
 
 Route::get('pedir_productos/{id}', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX
@@ -92,6 +104,7 @@ Route::get('validation/comprobar_tarifa/{id_tarifa}', 'TarifasController@comprob
 Route::get('validation/comprobar_newTarifa', 'TarifasController@comprobar_new_tarifa'); // LLAMADA AJAX PARA JQUERY VALIDATION
 Route::get('validation/comprobar_tienda/{id_tienda}', 'TiendasController@comprobar_tienda_existente'); // LLAMADA AJAX PARA JQUERY VALIDATION
 Route::get('validation/comprobar_nuevaTienda/{id_usuario}', 'TiendasController@comprobar_tienda_nuevaTienda'); // LLAMADA AJAX PARA JQUERY VALIDATION
+Route::get('validation/comprobar_newCorreo', 'UsuariosController@comprobar_new_correo'); // LLAMADA AJAX PARA JQUERY VALIDATION
 
 
 

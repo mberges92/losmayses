@@ -7,6 +7,19 @@
 <div class="container">
 
 
+    @if($datosPedido[0]['estado'] == 4 || $datosPedido[0]['estado'] == 5)
+        ALBARAN Y FACTURA
+        {{ HTML::link('/admin/pedidos/albaran', 'ALBARAN') }}
+        {{ HTML::link('/admin/pedidos/factura', 'FACTURA') }}
+
+    @elseif($datosPedido[0]['estado'] == 3)
+        ALBARAN
+        {{ HTML::link('/admin/pedidos/albaran', 'ALBARAN') }}
+
+
+    @endif
+
+
 
 
 

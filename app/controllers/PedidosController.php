@@ -4,6 +4,38 @@
 class PedidosController extends BaseController
 {
 
+    public function generar_albaran()
+    {
+
+        return View::make('albaran');   //->with(array('' => $gggggggggg));
+    }
+
+
+    public function generar_factura() {
+
+
+    }
+
+    public function cambio_estado_pedido()
+    {
+
+        $datos = Input::get('objDatosPedido');
+        //echo $datos[0]['estadoPedido'];
+
+        $idp = $datos[0]['idPedido'];
+        $esp = $datos[0]['estadoPedido'];
+
+        $pedido = Pedido::find($idp);
+
+        $pedido->estado = $esp;
+        $pedido->save();
+
+        return Response::json(array('status' => 'success'));
+
+    }
+
+
+
     public function listados_pedidos_admin()
     {
 
@@ -20,22 +52,23 @@ class PedidosController extends BaseController
     public function realizar_pedido_ajax()
     {
 
-        ////////////////
-        // PENSAR LA RELACION DE LOS ESTADOS PARA LOS PEDIDOS
-        ////////////////
 
         $lista_compra = Input::get('objDatosColumna');
         //$lista1 = $lista_compra[1]['cantidad'];
 
+        $datos_pedido = Input::get('objDatosCliente');
+
+
         $fechaAhora_sql = date('Y-m-d G:i:s');
+        $fechaEntrega = date("Y-m-d", strtotime($datos_pedido[0]['fechaEntrega']));
 
         $pedido = new Pedido();
 
         $pedido->usuario_id = Auth::user()->id;
-        $pedido->tienda_id = 1; // MANDAR LA TIENDA QUE REALIAZA EL PEIDDO POR AJAX
+        $pedido->tienda_id = $datos_pedido[0]['idtienda']; // MANDAR LA TIENDA QUE REALIAZA EL PEIDDO POR AJAX
         $pedido->estado = 1;
         $pedido->fechaPedido = $fechaAhora_sql; // Solo se guarda fecha, campo en bd de solo fecha sin horas
-        //$pedido->fechaEntrega = ;
+        $pedido->fechaEntrega = $fechaEntrega;
 
 
 
@@ -124,16 +157,6 @@ class PedidosController extends BaseController
 
     public function inicio()
     {
-
-        // AQUI NECESITO:
-        // USUARIO QUE HACE EL PEDIDO
-        // TIENDA QUE REALIZA EL PEDIDO
-        // FECHA QUE SE REALIZA EL PEDIDO
-        // FECHA PARA LA ENTREGA DEL PEDIDO
-        // ESTADO DEL PEDIDO
-        // QUIZAS LAS TARIFAS
-
-
 
         $datos_usuario = Usuario::with('tiendas', 'tarifa', 'pedidos')->where('id', '=', Auth::user()->id)->get()->toArray();
         //dd($datos_usuario);

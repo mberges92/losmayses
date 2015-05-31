@@ -9,14 +9,23 @@
 
     <p>{{ $datosUsuario[0]['nombre_contacto'] }}</p>
     <p>{{ $datosUsuario[0]['correo'] }}</p>
+    @if ($datosUsuario[0]['tarifa_id'] == 0)
+    <p><strong>Contacte con LosMayses para su activacion de pedidos</strong></p>
+    @endif
+
     <div>
         <select id="tiendasSelect">
             <option selected disabled value="0">SELECCIONA TIENDA PEDIDO</option>
-            @foreach($datosUsuario[0]['tiendas'] as $tienda)
-                @if($tienda['completo'] == 1)
-                <option value="{{ $tienda['id'] }}">{{ $tienda['nombre'] }}</option>
-                @endif
-            @endforeach
+
+            @if ($datosUsuario[0]['tarifa_id'] != 0)
+                @foreach($datosUsuario[0]['tiendas'] as $tienda)
+                    @if($tienda['completo'] == 1)
+                        <option value="{{ $tienda['id'] }}">{{ $tienda['nombre'] }}</option>
+                    @endif
+                @endforeach
+
+            @endif
+
         </select>
     </div>
 
@@ -33,7 +42,7 @@
 
 
     <div class="container">
-        <p>Fecha entrega: <input type="text" id="datepicker"></p>
+        <p>Fecha entrega: <input disabled type="text" id="datepicker"></p>
     </div>
 
 
@@ -104,10 +113,13 @@
 
     <script>
         $(document).ready(function() {
-
-
             $( "#datepicker" ).datepicker({
-                    minDate: +1
+                    minDate: +1,
+                    showOn: "button",
+                    buttonImage: "/losmayses/public/css/images/calendar.gif",
+                    buttonImageOnly: true,
+                    buttonText: "Selecciona fecha",
+                    dateFormat: "dd-mm-yy"
             });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
@@ -213,8 +225,9 @@
 
                 var numeroRows = $('#tablaPedidoActual tbody>tr').length;
 
+                //if (numeroRows == 0 || $('#datepicker').is(':empty')) {
                 if (numeroRows == 0) {
-                    alert('Seleccione al menos un producto para añadir al pedido.');
+                    alert('Seleccione al menos un producto para añadir al pedido o fecha para la entrega.');
                 } else {
 
                     $objDatosColumna = [];
@@ -239,13 +252,27 @@
 
                     }); // FIN DEL FOREACH
 
+                    $objDatosCliente = [];
+                    var idtienda = $("#tiendasSelect").val();
+                    var fechaEntrega = $("#datepicker").val();
+
+                    console.log(fechaEntrega);
+
+                    dat = {};
+                    dat['idtienda'] = idtienda;
+                    dat['fechaEntrega'] = fechaEntrega;
+
+                    $objDatosCliente.push(dat);
+
+
                     $.ajax({
                         async: false, // Puesta a false para que no pueda realizar otra llamada hasta que esta se complete
                         type: 'post',
                         datatype: JSON,
                         url: '/losmayses/public/cliente/nuevoPedido',
                         data: {
-                            objDatosColumna: $objDatosColumna
+                            objDatosColumna: $objDatosColumna,
+                            objDatosCliente: $objDatosCliente
                         },
                         success: function(data) {
                             if(data.status == 'success'){
@@ -254,6 +281,8 @@
                                 alert("Error en el pedido, intentelo de nuevo.");
                             }
                             $('#tablaPedidoActual tbody>tr').remove();
+                            $('option:selected', this).attr('selected', false);
+
                         }
                     }); // FIN FUNCION AJAX
                 } // FIN DE IF ELSE
@@ -266,9 +295,6 @@
             });
         }); // FIN DE DOCUMENT READY
     </script>
-
-
-
 
 
 @stop

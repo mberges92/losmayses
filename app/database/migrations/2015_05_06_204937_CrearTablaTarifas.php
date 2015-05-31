@@ -17,9 +17,8 @@ class CrearTablaTarifas extends Migration {
             $tabla->increments('id');
             $tabla->string('nombre');
             $tabla->string('signo');
-            //$tabla->decimal('valor');           // PORCENTAJE EN DECIMAL
             $tabla->integer('valor');           // PORCENTAJE INTEGER
-            $tabla->tinyInteger('activo');      // Poner limite de 1 caracter
+            //$tabla->tinyInteger('activo');      // Poner limite de 1 caracter
             $tabla->timestamps();
         });
 
@@ -28,7 +27,7 @@ class CrearTablaTarifas extends Migration {
                 'signo' => '+',
                 //'valor' => '30.00',
                 'valor' => 50,
-                'activo' => 1
+                //'activo' => 1
             )
         );
 

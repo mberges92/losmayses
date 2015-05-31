@@ -20,10 +20,10 @@
             <tbody>
             @foreach($pedidos as $pedido)
                 <tr>
-                    <td>{{ $pedido['usuario']['nombre_empresa'] }}</td>
+                    <td id="{{ $pedido['id'] }}">{{ $pedido['usuario']['nombre_empresa'] }}</td>
                     <td>{{ $pedido['fechaPedido'] }}</td>
                     <td>{{ $pedido['fechaEntrega'] }}</td>
-                    <td>
+                    <td id="{{$pedido['estado']}}">
                         @if ($pedido['estado'] == 1)
                             PENDIENTE
                         @elseif($pedido['estado'] == 2)
@@ -32,6 +32,8 @@
                             PREPARADO
                         @elseif($pedido['estado'] == 4)
                             EN REPARTO
+                        @elseif($pedido['estado'] == 5)
+                            COMPLETADO
                         @endif
                     </td>
                     <td>
@@ -41,18 +43,8 @@
                         <button  data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
                     </td>
                     <td>
-                        {{ HTML::link('/admin/pedidos/cambiar_estado/'.$pedido['id'], 'CAMBIAR ESTADO') }}
+                        <button id="cambiarEstadoBoton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEstado">CAMBIAR ESTADO</button>
                     </td>
-                    {{--
-
-                    <td>{{ $pedido[''] }}</td>
-                    <td>{{ $pedido->precio_total }}</td>
-                    <td>{{ HTML::link('/admin/productos/editar/'.$pedido['id'], 'MODIFICAR') }}</td>
-                    <td>
-                        <button  data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
-                    </td>
-
-                    --}}
                 </tr>
             @endforeach
             </tbody>
@@ -86,6 +78,138 @@
             <!-- FIN CONFIRMACIONES BORRAR PEDIDO -->
 
 
+
+    <div class="container">
+        <div class="row">
+
+            <div id="modalEstado" class="modal fade in">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+
+                        <div class="modal-header">
+                            <a class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span></a>
+                            <h4 class="modal-title">Cambiar estado del pedido</h4>
+                        </div>
+                        <div class="modal-body">
+
+                                <span id="m_id" style="display: none"></span>
+
+                                <div class="funkyradio">
+                                    <div class="funkyradio-success">
+                                        <input type="radio" name="radio" id="radio1" />
+                                        <label id="1" for="radio1">PENDIENTE</label>
+                                    </div>
+                                    <div class="funkyradio-success">
+                                        <input type="radio" name="radio" id="radio2"/>
+                                        <label id="2" for="radio2">EN PROCESO</label>
+                                    </div>
+                                    <div class="funkyradio-success">
+                                        <input type="radio" name="radio" id="radio3" />
+                                        <label id="3" for="radio3">PREPARADO + ALBARAN</label>
+                                    </div>
+                                    <div class="funkyradio-success">
+                                        <input type="radio" name="radio" id="radio4" />
+                                        <label id="4" for="radio4">EN REPARTO + ALBARAN</label>
+                                    </div>
+                                    <div class="funkyradio-success">
+                                        <input type="radio" name="radio" id="radio5" />
+                                        <label id="5" for="radio5">COMPLETADO, ALBARAN + FACTURA</label>
+                                    </div>
+                                </div>
+
+
+
+
+
+
+
+                        </div>
+                        <div class="modal-footer">
+                            <div class="btn-group">
+                                <button class="btn btn-danger" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancelar</button>
+                                <button id="guardarEstadoPedido" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span> Guardar</button>
+                            </div>
+                        </div>
+
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dalog -->
+            </div><!-- /.modal -->
+
+        </div>
+    </div>
+
+
+    <script>
+        $(document).ready(function() {
+
+            $(document).on('click', '#cambiarEstadoBoton', function() {
+                var $td = $(this).closest('tr').children('td');
+                var idpedidofila = $td.eq(0).attr('id');
+                var idestadofila = $td.eq(3).attr('id');
+
+                if (idestadofila == 1) {
+                    $('#radio1').prop('checked', true);
+                } else if (idestadofila == 2) {
+                    $('#radio2').prop('checked', true);
+                } else if (idestadofila == 3) {
+                    $('#radio3').prop('checked', true);
+                } else if (idestadofila == 4) {
+                    $('#radio4').prop('checked', true);
+                } else if (idestadofila == 5) {
+                    $('#radio5').prop('checked', true);
+                }
+
+                $('#m_id').text(idpedidofila);
+
+            }); // ASIGNAR CHECKED A RADIO BUTTONS SEGUN SU ESTADO ACTUAL
+
+
+            $('#guardarEstadoPedido').click(function() {
+
+                var idpedido_enModal = $('#m_id').text();
+                var newEstadopedido = $('input[type="radio"]:checked').parent().find('label').attr('id');
+
+                //alert(newEstadopedido);
+
+
+                $objDatosPedido = [];
+
+                dat = {};
+
+                dat['idPedido'] = idpedido_enModal;
+                dat['estadoPedido'] = newEstadopedido;
+
+                $objDatosPedido.push(dat);
+
+
+
+
+                $.ajax({
+                    async: false, // Puesta a false para que no pueda realizar otra llamada hasta que esta se complete
+                    type: 'post',
+                    datatype: JSON,
+                    url: '/losmayses/public/admin/pedidos/cambio_estado',
+                    data: {
+                        objDatosPedido: $objDatosPedido
+                    },
+                    success: function(data) {
+                        if(data.status == 'success'){
+                                $('#modalEstado').modal('toggle');
+                            location.reload();
+
+                        }else if(data.status == 'error'){
+                            alert("Error en la conexion, intentelo de nuevo.");
+                        }
+                        //$('#tablaPedidoActual tbody>tr').remove();
+                        //$('option:selected', this).attr('selected', false);
+
+                    }
+                }); // FIN FUNCION AJAX
+            });
+
+
+        });
+    </script>
 
 
 @stop

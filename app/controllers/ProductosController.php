@@ -4,6 +4,39 @@
 class ProductosController extends BaseController
 {
 
+    public function activar_ajax($producto_id=null, $valor=null)
+    {
+
+        if(Request::ajax()) {
+            if(!$producto_id ){
+                return 0;
+            }
+
+
+            $pro_id = Producto::find($producto_id);
+
+            if ($valor == "1") {
+                $pro_id->activo = 0;
+                $pro_id->save();
+                $valor = "0";
+            } elseif ($valor == "0") {
+                $pro_id->activo = 1;
+                $pro_id->save();
+                $valor = "1";
+            }
+
+
+            $data = array('estado' => $valor,
+                'id' => $producto_id,
+                'field' => 'activo');
+
+            return Response::json($data);
+
+        }
+
+    }
+
+
 
     public function comprobar_new_producto() {
 

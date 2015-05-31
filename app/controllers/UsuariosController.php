@@ -3,6 +3,41 @@
 
 class UsuariosController extends BaseController {
 
+
+    public function activar_ajax($usuario_id=null, $valor=null)
+    {
+
+        if(Request::ajax()) {
+            if(!$usuario_id ){
+                return 0;
+            }
+
+            $usu_id = Usuario::find($usuario_id);
+
+            if ($valor == "1") {
+                $usu_id->activo = 0;
+                $usu_id->save();
+                $valor = "0";
+            } elseif ($valor == "0") {
+                $usu_id->activo = 1;
+                $usu_id->save();
+                $valor = "1";
+            }
+
+
+            $data = array('estado' => $valor,
+                'id' => $usuario_id,
+                'field' => 'activo');
+
+            return Response::json($data);
+
+        }
+
+    }
+
+
+
+
     public function comprobar_email_existente($id_usuario) {
 
         if(Request::ajax()) {
@@ -183,6 +218,33 @@ class UsuariosController extends BaseController {
      *
      ----------------------------------------------------------- */
 
+    public function comprobar_new_correo()
+    {
+        if(Request::ajax()) {
+
+            $j = Input::get('correo');
+
+            $esta = 'true';
+
+            $correo = Usuario::where('correo', '=', $j)->get();
+
+            if($correo->count()) {
+                $esta = 'false';
+                //return 'true';
+                //return Response::json(array('msg' => 'true'));
+            } else {
+                $esta = 'true';
+
+                //return 'false';
+                //return Response::json(array('msg' => 'false'));
+            }
+
+            echo $esta;
+
+        }
+    }
+
+
     public function estaLogueado()
     {
         if (Auth::check()) {
@@ -231,8 +293,8 @@ class UsuariosController extends BaseController {
         $usuario = New Usuario();
         $usuario->correo = Input::get('correo');
         $usuario->password = Hash::make(Input::get('password'));
-        $usuario->rol = Input::get('rol'); //CAMBIAR ESTO POR "cliente"
-        $usuario->tarifa_id = 1;
+        $usuario->rol = 'cliente';             //Input::get('rol') //CAMBIAR ESTO POR "cliente"
+        $usuario->tarifa_id = 0;
         $usuario->completo = 0;
         $usuario->save();
 
