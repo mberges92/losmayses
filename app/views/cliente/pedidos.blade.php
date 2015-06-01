@@ -141,7 +141,7 @@
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // PRODUCTO DE LAS CATEGORIAS
             $('#categoriasSelect').change(function(){
-                $('option:selected', this).attr('selected', false);
+                //$('option:selected', this).attr('selected', false);
                 $.getJSON('/losmayses/public/pedir_productos/'+$(this).val(), function(data) {
                     $('#productosSelect').empty();   //Esto vacia el select multiple de productos
                         $.each(data, function() {
@@ -153,12 +153,31 @@
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             // PRECIO DEL PRODUCTO, IVA TIPO DE PRODUCTO
             $('#productosSelect').change(function(){
+
+                var elsignoTarifa = $('#signoTarifa').text();
+                var elvalorTarifa = $('#valorTarifa').text();
+
+                //alert(elvalorTarifa);
+
                 $('#precioUnidad').val("");
                 $.getJSON('/losmayses/public/buscar_producto/'+$(this).val(), function(data) {
                     //alert(data[0]['id']);
-                    $('#precioUnidad').val(data[0]['precio_total']);
+
+                    var mem2 = 1*data[0]['precio_total'];
+
+                    if (elsignoTarifa == "-") {
+                        $('#precioUnidad').val(parseFloat(mem2 - (elvalorTarifa * (mem2 / 100))).toFixed(2));
+
+                    } else {
+                        $('#precioUnidad').val(parseFloat(mem2 + (elvalorTarifa * (mem2 / 100))).toFixed(2));
+
+                    }
+
                     $('#ivaUnidad').val(data[0]['iva']);
+
                 });
+
+
             });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----
@@ -191,7 +210,7 @@
                 $(this).closest('tr').remove();
                 sumaTotales();
 
-                return false; //Revisar esto
+                return false;
             });
             //////////////////////////////////////////////////////////////////////////////////////////// -----
             //////////////////////////////////////////////////////////////////////////////////////////// -----

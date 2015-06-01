@@ -5,6 +5,7 @@ class Tarifa extends Eloquent {
 
     protected $table = 'tarifas';
     protected $fillable = array('*');
+    public $timestamps = false;
 
     // -----------------------| RELACIONES DEL MODELO TARIFA |----------------------- //
 

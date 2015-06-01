@@ -14,10 +14,9 @@
     {{Form::label('password', 'Contraseña')}}
     {{Form::text('password', '')}}
 
-    Esto solo se ve en pruebas
     <br/>
-    {{Form::label('rol', 'Rol')}}
-    {{Form::select('rol', array('admin' => 'admin', 'cliente' => 'cliente')) }}
+    {{-- Form::label('rol', 'Rol')--}}
+    {{--Form::select('rol', array('admin' => 'admin', 'cliente' => 'cliente')) --}}
     <br>
     {{Form::submit('Registrar usuario')}}
     {{ Form::close() }}

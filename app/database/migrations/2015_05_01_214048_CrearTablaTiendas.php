@@ -28,7 +28,7 @@ class CrearTablaTiendas extends Migration {
             $tabla->tinyInteger('completo');
             $tabla->integer('usuario_id');        // foreign_key para los usuarios
 
-            $tabla->timestamps();
+            //$tabla->timestamps();
         });
 
 

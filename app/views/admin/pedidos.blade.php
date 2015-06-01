@@ -27,12 +27,8 @@
                         @if ($pedido['estado'] == 1)
                             PENDIENTE
                         @elseif($pedido['estado'] == 2)
-                            EN PROCESO
-                        @elseif($pedido['estado'] == 3)
                             PREPARADO
-                        @elseif($pedido['estado'] == 4)
-                            EN REPARTO
-                        @elseif($pedido['estado'] == 5)
+                        @elseif($pedido['estado'] == 3)
                             COMPLETADO
                         @endif
                     </td>
@@ -100,28 +96,14 @@
                                         <label id="1" for="radio1">PENDIENTE</label>
                                     </div>
                                     <div class="funkyradio-success">
-                                        <input type="radio" name="radio" id="radio2"/>
-                                        <label id="2" for="radio2">EN PROCESO</label>
+                                        <input type="radio" name="radio" id="radio2" />
+                                        <label id="2" for="radio2">PREPARADO + ALBARAN</label>
                                     </div>
                                     <div class="funkyradio-success">
                                         <input type="radio" name="radio" id="radio3" />
-                                        <label id="3" for="radio3">PREPARADO + ALBARAN</label>
-                                    </div>
-                                    <div class="funkyradio-success">
-                                        <input type="radio" name="radio" id="radio4" />
-                                        <label id="4" for="radio4">EN REPARTO + ALBARAN</label>
-                                    </div>
-                                    <div class="funkyradio-success">
-                                        <input type="radio" name="radio" id="radio5" />
-                                        <label id="5" for="radio5">COMPLETADO, ALBARAN + FACTURA</label>
+                                        <label id="3" for="radio3">COMPLETADO, ALBARAN + FACTURA</label>
                                     </div>
                                 </div>
-
-
-
-
-
-
 
                         </div>
                         <div class="modal-footer">

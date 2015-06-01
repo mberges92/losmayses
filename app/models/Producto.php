@@ -6,6 +6,7 @@ class Producto extends Eloquent
 
     protected $table = 'productos';
     protected $fillable = array('*');
+    public $timestamps = false;
 
 
     // -----------------------| RELACIONES DEL MODELO PRODUCTO |----------------------- //

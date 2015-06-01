@@ -6,20 +6,14 @@
 
 <div class="container">
 
-
-    @if($datosPedido[0]['estado'] == 4 || $datosPedido[0]['estado'] == 5)
-        ALBARAN Y FACTURA
+<div class="container">
+    @if($datosPedido[0]['estado'] == 3)
         {{ HTML::link('/admin/pedidos/albaran/'.$datosPedido[0]['id'], 'ALBARAN') }}
         {{ HTML::link('/admin/pedidos/factura/'.$datosPedido[0]['id'], 'FACTURA') }}
-
-    @elseif($datosPedido[0]['estado'] == 3)
-        ALBARAN
+    @elseif($datosPedido[0]['estado'] == 2)
         {{ HTML::link('/admin/pedidos/albaran', 'ALBARAN') }}
-
-
     @endif
-
-
+</div>
 
 
 
@@ -50,7 +44,6 @@
             <h4>Código postal: </h4><p>{{ $datosTienda[0]['cod_postal'] }}</p>
         </div>
     </div>
-
 
     <hr/>
 

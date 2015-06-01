@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
     <meta charset="utf-8">
-    <title>Factura</title>
+    <title>Factura - LosMayses</title>
 
     {{HTML::script('js/jquery-1.11.2.min.js')}}
     {{HTML::script('js/bootstrap.min.js')}}
@@ -27,12 +27,19 @@
 </head>
 <body>
 
+@foreach($tarifas as $tar)
+    @if($tar['id'] == $datosPedido[0]['usuario']['tarifa_id'])
+        <p id="signoTarifa" style="display: none">{{ $tar['signo'] }}</p>
+        <p id="valorTarifa" style="display: none">{{ $tar['valor'] }}</p>
+    @endif
+@endforeach
+
 <div class="container">
 
     <div class="row">
 
         <div class="col-xs-6">
-            <h1><a href=" "><img alt="" src="logo.png" /> LosMayses </a></h1>
+            <h1>{{ HTML::image('imagenes/pasteleria-mayses-logo.jpg', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
         </div>
         <div class="col-xs-6 text-right">
             <h1>FACTURA</h1>
@@ -48,13 +55,11 @@
                         <h4>De: LosMayses</h4>
                     </div>
                     <div class="panel-body">
-                        Fecha de expedicion: {{ $datosPedido[0]['fechaEntrega'] }} <br/>
+                        Fecha de expedicion: {{ date("d-m-Y", strtotime($datosPedido[0]['fechaEntrega'])) }} <br/>
                         NIF: A58818501 <br/>
                         Dirección: C/ Miguel Servet, 5, Zaragoza, 50002 <br/>
                         Telefono: 976 425 259 <br/>
                         Email: <span>info@pasteleriamayses.com</span>
-
-
                     </div>
                 </div>
             </div>
@@ -107,7 +112,13 @@
                         @endif
                     @endforeach
                     <td>{{ $pro->cantidad }}</td>
-                    <td id="pvptabla">{{ $pro->precioUnidad }}</td>
+                    <td id="pvptabla">
+                        @if($tar['signo'] == "-")
+                            {{ 1*$pro->precioUnidad - ($tar['valor'] * (1*$pro->precioUnidad / 100)) }}
+                        @else
+                            {{ 1*$pro->precioUnidad + ($tar['valor'] * (1*$pro->precioUnidad / 100)) }}
+                        @endif
+                    </td>
                     <td>{{ $pro->iva }}</td>
                 </tr>
 
@@ -117,15 +128,12 @@
 
                 } elseif ($i == 10 || $i%10==0) {
 
-
                     echo "</tbody></table>";
                     echo "<div class='saltopagina'></div>"; ?>
 
 
-
-
                 <div class="col-xs-6">
-                    <h1><a href=" "><img alt="" src="logo.png" /> LosMayses </a></h1>
+                    <h1>{{ HTML::image('imagenes/pasteleria-mayses-logo.jpg', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
                 </div>
                 <div class="col-xs-6 text-right">
                     <h1>FACTURA</h1>

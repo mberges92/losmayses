@@ -38,7 +38,7 @@ class CrearTablaUsuarios extends Migration {
         DB::table('usuarios')->insert(array(
                 'correo' => 'admin@admin.com',
                 'password' => Hash::make('admin'),
-                'rol' => 'doble',
+                'rol' => 'admin',
                 'activo' => 1,
                 'nombre_contacto' => 'Administrador',
                 'direccion' => 'C/ Miguel Servet XX',

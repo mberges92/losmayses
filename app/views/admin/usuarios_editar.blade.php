@@ -67,7 +67,6 @@
                     remote: "http://"+location.host+"/losmayses/public/validation/comprobar_correo/{{ $usuario[0]['id'] }}"
                 },
                 password: {
-                    required: true,
                     minlength: 6,
                     maxlength: 255
                 },
@@ -93,7 +92,6 @@
                     maxlength: 9
                 },
                 telefono2: {
-                    required: true,
                     digits: true,
                     minlength: 9,
                     maxlength: 9

@@ -5,10 +5,39 @@ class PedidosController extends BaseController
 {
 
 
-    public function generar_albaran()
+    public function generar_albaran($pedido_id)
     {
+        $datos_pedido = Pedido::with('usuario')->where('id', '=', $pedido_id)->get()->toArray();
+        //dd($datos_pedido);
 
-        return View::make('albaran');   //->with(array('' => $gggggggggg));
+        $datos_tienda = Tienda::where('usuario_id', '=', $datos_pedido[0]['usuario']['id'])->get()->toArray();
+        //dd($datos_tienda);
+
+        $productos_pedido = DB::table('detalles_pedidos')->where('pedido_id', '=', $pedido_id)->get();
+        //dd($productos_pedido);
+
+        $productos = Producto::all()->toArray();
+        //dd($productos);
+
+
+        $tarifas = Tarifa::all()->toArray();
+        //dd($tarifas);
+
+
+        // LLevo los datos datos de la tarifa, solo signo y valor
+        foreach ($tarifas as $tar) {
+            if ($tar['id'] == $datos_pedido[0]['usuario']['tarifa_id']) {
+                $f = array('signo' => $tar['signo'],
+                           'valor' => $tar['valor']);
+            }
+        }
+        //dd($f);
+
+
+
+
+
+        return View::make('albaran')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda, 'tar' => $f));
     }
 
 
@@ -26,11 +55,20 @@ class PedidosController extends BaseController
         $productos = Producto::all()->toArray();
         //dd($productos);
 
+        $tarifas = Tarifa::all()->toArray();
+        //dd($tarifas);
 
-        $numero = count($productos_pedido);
-        //dd($numero);
 
-        return View::make('factura')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
+        // LLevo los datos datos de la tarifa, solo signo y valor
+        foreach ($tarifas as $tar) {
+            if ($tar['id'] == $datos_pedido[0]['usuario']['tarifa_id']) {
+                $f = array('signo' => $tar['signo'],
+                    'valor' => $tar['valor']);
+            }
+        }
+        //dd($f);
+
+        return View::make('factura')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda, 'tarifas' => $tarifas, 'tar' => $f));
     }
 
     public function cambio_estado_pedido()
@@ -222,11 +260,24 @@ class PedidosController extends BaseController
         $productos = Producto::all()->toArray();
         //dd($productos);
 
+        $tarifas = Tarifa::all()->toArray();
+        //dd($tarifas);
+
+
+        // LLevo los datos datos de la tarifa, solo signo y valor
+        foreach ($tarifas as $tar) {
+            if ($tar['id'] == $datos_pedido[0]['usuario']['tarifa_id']) {
+                $f = array('signo' => $tar['signo'],
+                    'valor' => $tar['valor']);
+            }
+        }
+        //dd($f);
+
+
 
         return View::make('admin.pedidos_ver')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
 
     }
-
 
 
 

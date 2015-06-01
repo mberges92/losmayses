@@ -29,7 +29,7 @@ Route::get('/admin/pedidos/eliminar/{id}', 'PedidosController@borrar');
 
 
 
-Route::get('/admin/pedidos/albaran', 'PedidosController@generar_albaran');
+Route::get('/admin/pedidos/albaran/{id}', 'PedidosController@generar_albaran');
 Route::get('/admin/pedidos/factura/{id}', 'PedidosController@generar_factura');
 
 

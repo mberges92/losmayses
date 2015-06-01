@@ -32,12 +32,17 @@
             <td>{{ $usuario->nombre_contacto }}</td>
             <td>{{ $usuario->correo }}</td>
             <td>{{ $usuario->nombre_empresa }}</td>
-@foreach($tarifas as $tarifa)
-            @if($usuario->tarifa_id == $tarifa->id)
-            <td>{{ $tarifa->nombre }}</td>
-                @break
+            @if($usuario->tarifa_id == 0)
+                <td id="sinTarifa">SIN TARIFA</td>
+            @else
+                @foreach($tarifas as $tarifa)
+                    @if($usuario->tarifa_id == $tarifa->id)
+                        <td>{{ $tarifa->nombre }}</td>
+                        @break
+                    @endif
+                @endforeach
             @endif
-@endforeach
+
 
             <td>{{ HTML::link('/admin/clientes/editar/'.$usuario['id'], 'MODIFICAR') }}</td>
             <td>

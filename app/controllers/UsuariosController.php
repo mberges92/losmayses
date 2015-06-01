@@ -82,7 +82,7 @@ class UsuariosController extends BaseController {
                 'nombre_contacto' => 'required|between:1,255',
                 'direccion' => 'required|between:1,255',
                 'telefono1' => array('required','numeric','digits_between:9,14'),
-                'telefono2' => array('required','numeric','digits_between:9,14'),
+                'telefono2' => array('numeric','digits_between:9,14'),
                 'codigo_postal' => 'required|digits:5|integer'
             );
 
@@ -143,16 +143,16 @@ class UsuariosController extends BaseController {
         if (Request::isMethod('post')) {
 
             $rules = array(
-                'correo' => 'required|email|between:1,255|unique:usuarios,correo,'.Auth::user()->id,
+                'correo' => 'required|email|between:1,255|unique:usuarios,correo,'.$id,
                 'password' => 'alpha_num|between:1,255',
                 'nombre_empresa' => 'required|between:1,255',
                 'nombre_contacto' => 'required|between:1,255',
                 'direccion' => 'required|between:1,255',
                 'telefono1' => array('required','numeric','digits_between:9,14'),
-                'telefono2' => array('required','numeric','digits_between:9,14'),
+                'telefono2' => array('numeric','digits_between:9,14'),
                 'codigo_postal' => 'required|digits:5|integer',
-                'rol' => 'required|alpha',
-                'tarifa' => 'required|alpha'
+                'rol' => 'required',
+                'tarifa' => 'required'
             );
 
             $validator = Validator::make(Input::all(), $rules);
@@ -180,6 +180,8 @@ class UsuariosController extends BaseController {
                 $usu->nombre_empresa = Input::get('nombre_empresa');
                 $usu->tarifa_id = Input::get('tarifa');
                 $usu->save();
+
+                return Redirect::to('/admin/clientes');
 
             }
 

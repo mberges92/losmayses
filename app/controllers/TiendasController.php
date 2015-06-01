@@ -89,26 +89,43 @@ class TiendasController extends BaseController {
 
         if (Request::isMethod('post')) {
 
-            // Aqui un if, si los campos requeridos estan, activar
+            $rules = array(
+                'nombre' => 'required|between:1,255',
+                'direccion' => 'required|between:1,255',
+                'cod_postal' => 'required|digits:5|integer',
+                'telefono_1' => array('required','numeric','digits_between:9,14'),
+                'telefono_2' => array('numeric','digits_between:9,14'),
+                'provincia' => 'required|between:1,255',
+                'localidad' => 'required|between:1,255',
+                'correo' => 'required|email|between:1,255|unique:tiendas,correo,'.Auth::user()->id
+                );
+
+            $validator = Validator::make(Input::all(), $rules);
+
+            if ($validator->fails())
+            {
+                // No ha pasado la validacion
+
+            } else {
 
 
-            $tienda->nombre = Input::get('nombre');
-            $tienda->direccion = Input::get('direccion');
-            $tienda->cif = Input::get('cif');
-            $tienda->telefono_1 = Input::get('telefono_1');
-            $tienda->telefono_2 = Input::get('telefono_2');
-            $tienda->correo = Input::get('correo');
-            $tienda->provincia = Input::get('provincia');
-            $tienda->localidad = Input::get('localidad');
-            $tienda->cod_postal = Input::get('cod_postal');
-            $tienda->completo = 1;
+                $tienda->nombre = Input::get('nombre');
+                $tienda->direccion = Input::get('direccion');
+                $tienda->cif = Input::get('cif');
+                $tienda->telefono_1 = Input::get('telefono_1');
+                $tienda->telefono_2 = Input::get('telefono_2');
+                $tienda->correo = Input::get('correo');
+                $tienda->provincia = Input::get('provincia');
+                $tienda->localidad = Input::get('localidad');
+                $tienda->cod_postal = Input::get('cod_postal');
+                $tienda->completo = 1;
 
-            $tienda->activo = 1;
+                $tienda->activo = 1;
 
-            $tienda->save();
+                $tienda->save();
 
-            return Redirect::to('/cliente/'.$id_usuario.'/tiendas');
-
+                return Redirect::to('/cliente/' . $id_usuario . '/tiendas');
+            }
 
         }
 
@@ -169,11 +186,6 @@ class TiendasController extends BaseController {
         }
     }
 
-    public function modificar($id)
-    {
-        //DE MOMENTO SIN USO, CARACTERISTICA PARA ADMINISTRADOR NO IMPLEMENTADA
-
-    }
 
 
     public function eliminar($id)
