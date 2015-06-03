@@ -8,7 +8,7 @@ Route::get('/', function()
 {
     return View::make('publico.index');
 });
-Route::get('/trabajos', function() {
+Route::get('/productos', function() {
     return View::make('publico.trabajos');
 });
 Route::get('/contacto', function() {

@@ -23,6 +23,10 @@ class CrearTablaPedidos extends Migration {
             $tabla->integer('num_albaran');
             $tabla->integer('num_factura');
 
+            $tabla->string('signo_tarifa');
+            $tabla->string('valor_tarifa');
+
+
             //$tabla->decimal('precio_pedido');    // Quizas un campo de precio final, o obtenerlo en una consulta
             //$tabla->timestamps();
         });

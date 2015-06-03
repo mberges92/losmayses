@@ -17,7 +17,7 @@
     {{HTML::style('css/bootstrap-theme.min.css')}}
     {{HTML::style('css/jquery-ui.min.css')}}
 
-    {{HTML::style('css/style.css')}}
+    {{HTML::style('css/style_boot_modal.css')}}
 
 </head>
 <body>

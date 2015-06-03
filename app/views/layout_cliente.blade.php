@@ -10,7 +10,7 @@
     {{HTML::style('css/bootstrap-theme.min.css')}}
     {{HTML::style('css/jquery-ui.min.css')}}
 
-    {{HTML::style('css/style.css')}}
+    {{HTML::style('css/style_boot_modal.css')}}
 
     {{HTML::script('js/jquery-1.11.2.min.js')}}
     {{HTML::script('js/bootstrap.min.js')}}
