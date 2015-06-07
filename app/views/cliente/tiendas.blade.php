@@ -4,43 +4,79 @@
 
 @section('content')
 
-    <hr/>
-    <a href="#"><button class="btn btn-primary" data-toggle="modal" data-target="#nueva_tienda">Nueva Tienda</button></a>
 
 
-
-    <hr/>
-
-    <div class="container">
-        <table class="table">
-            <legend>MIS TIENDAS</legend>
-            <thead>
-            <th>Nombre</th>
-            <th>Direccion</th>
-            <th>Telefono</th>
-            <th>Localidad</th>
-            <th>Editar</th>
-            <th>Borrar</th>
-            </thead>
-            <tbody>
-            @foreach($tiendas as $tienda)
-                <tr>
-                    <td>{{ $tienda['nombre'] }}</td>
-                    <td>{{ $tienda['direccion'] }}</td>
-                    <td>{{ $tienda['telefono_1'] }}</td>
-                    <td>{{ $tienda['localidad'] }}</td>
-                    <td>{{ HTML::link('/cliente/'.Auth::user()->id.'/tiendas/'.$tienda['id'], 'MODIFICAR') }}</td>
-                    <td>
-                        <button  data-toggle="modal" data-target="#modal_{{ $tienda['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-            <tfoot>
-            </tfoot>
-
-        </table>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Tiendas</h1>
+        </div>
     </div>
+
+
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <a href="#"><button class="btn btn-primary btn-lg btn-success" data-toggle="modal" data-target="#nueva_tienda">Nueva Tienda</button></a>
+        </div>
+    </div>
+
+    <br/>
+
+
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Listado de tiendas
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+
+
+                    <table class="table">
+                    <thead>
+                    <th>Nombre</th>
+                    <th>Direccion</th>
+                    <th>Telefono</th>
+                    <th>Localidad</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                    </thead>
+                    <tbody>
+                    @foreach($tiendas as $tienda)
+                        <tr>
+                            <td>{{ $tienda['nombre'] }}</td>
+                            <td>{{ $tienda['direccion'] }}</td>
+                            <td>{{ $tienda['telefono_1'] }}</td>
+                            <td>{{ $tienda['localidad'] }}</td>
+                            <td>{{ HTML::link('/cliente/'.Auth::user()->id.'/tiendas/'.$tienda['id'], 'MODIFICAR', array('class' => 'btn btn-primary btn-sm')) }}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $tienda['id'] }}"> <i class="fa fa-times ">ELIMINAR</i></button>
+                            </td>
+                        </tr>
+                    @endforeach
+                    </tbody>
+                    <tfoot>
+                    </tfoot>
+
+                </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
 
 
 

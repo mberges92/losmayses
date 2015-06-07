@@ -113,17 +113,7 @@
 <script src="/losmayses/public/js/bootstrap.min.js"></script>
 
 <!-- Metis Menu Plugin JavaScript -->
-
 <script src="/losmayses/public/js/metisMenu.min.js"></script>
-
-<!-- Morris Charts JavaScript -->
-<!--
-<script src="/losmayses/public/js/raphael-min.js"></script>
-
-
-<script src="/losmayses/public/js/morris.min.js"></script>
-<script src="/losmayses/public/js/morris-data.js"></script>
--->
 
 <!-- Custom Theme JavaScript -->
 <script src="/losmayses/public/js/sb-admin-2.js"></script>

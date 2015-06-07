@@ -4,112 +4,156 @@
 
 @section('content')
 
-<div class="container">
-    TABLAS CON LOS PEDIDOS DEL CLIENTE
-
-    <p>{{ $datosUsuario[0]['nombre_contacto'] }}</p>
-    <p>{{ $datosUsuario[0]['correo'] }}</p>
-    @if ($datosUsuario[0]['tarifa_id'] == 0)
-    <p><strong>Contacte con LosMayses para su activacion de pedidos</strong></p>
-    @endif
-
-    <div>
-        <select id="tiendasSelect">
-            <option selected disabled value="0">SELECCIONA TIENDA PEDIDO</option>
-
-            @if ($datosUsuario[0]['tarifa_id'] != 0)
-                @foreach($datosUsuario[0]['tiendas'] as $tienda)
-                    @if($tienda['completo'] == 1)
-                        <option value="{{ $tienda['id'] }}">{{ $tienda['nombre'] }}</option>
-                    @endif
-                @endforeach
-
-            @endif
-
-        </select>
-    </div>
-
-    <div>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Pedidos > Nuevo pedido</h1>
+        </div>
+        @if ($datosUsuario[0]['tarifa_id'] == 0)
+            <p><strong>Contacte con LosMayses para su activacion de pedidos</strong></p>
+        @endif
+        <div>
             @foreach($datosUsuario as $usu)
                 <p id="signoTarifa" style="display: none;">{{ $usu['tarifa']['signo'] }}</p>
                 <p id="valorTarifa" style="display: none;">{{ $usu['tarifa']['valor'] }}</p>
             @endforeach
-    </div>
-
-</div>
-
-<hr/>
-
-
-    <div class="container">
-        <p>Fecha entrega: <input disabled type="text" id="datepicker"></p>
+        </div>
     </div>
 
 
-<hr/>
 
-<div class="container">
-    CATEGORIAS CON PRODUCTOS
+    <div class="row">
+        <div class="col-md-12">
 
 
-        <div>
-            <select disabled id="categoriasSelect">
-                <!-- <option selected disabled>SELECCIONA CATEGORIA</option> -->
-                <option selected disabled value="0">SELECCIONA CATEGORIA</option>
-                @foreach($categoriasActivas as $cat)
-                    <option value="{{ $cat['id'] }}">{{ $cat['nombre'] }}</option>
-                @endforeach
-            </select>
+            <div class="form-group">
+                <p>Fecha entrega: <input disabled type="text" id="datepicker"></p>
+
+            </div>
+
+            <div class="form-group">
+                <select id="tiendasSelect" class="form-control">
+                    <option selected disabled value="0">SELECCIONA TIENDA PEDIDO</option>
+                    @if ($datosUsuario[0]['tarifa_id'] != 0)
+                        @foreach($datosUsuario[0]['tiendas'] as $tienda)
+                            @if($tienda['completo'] == 1)
+                                <option value="{{ $tienda['id'] }}">{{ $tienda['nombre'] }}</option>
+                            @endif
+                        @endforeach
+
+                    @endif
+                </select>
+            </div>
+
+
+            <div class="form-group">
+                <select disabled id="categoriasSelect" class="form-control">
+                    <!-- <option selected disabled>SELECCIONA CATEGORIA</option> -->
+                    <option selected disabled value="0">SELECCIONA CATEGORIA</option>
+                    @foreach($categoriasActivas as $cat)
+                        <option value="{{ $cat['id'] }}">{{ $cat['nombre'] }}</option>
+                    @endforeach
+                </select>
+            </div>
+
+
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <select id="productosSelect" class="form-control" size="12" style="max-width: 100%;">
+                        <option disabled value="0">DEFAULT</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                        <div class="form-group">
+                        <label for="precioUnidad">Precio producto: </label>
+                        <input type="text" class="form-control" disabled size="" maxlength="" value="" name="precio_unidad" id="precioUnidad">
+                        </div>
+
+                        <div class="form-group">
+                        <label for="ivaUnidad">Iva producto: </label>
+                        <input type="text" class="form-control" disabled size="" maxlength="" value="" name="iva_unidad" id="ivaUnidad">
+                        </div>
+
+                        <div class="form-group">
+                        <label for="cantidadUnidad">Cantidad a comprar: </label>
+                        <input type="text" class="form-control" size="" maxlength="" value="1" name="cantidad_unidad" id="cantidadUnidad">
+                        </div>
+                </div>
+            </div>
+
+            <button type="button" id="addTabla" class="btn btn-success btn-block">Añadir producto</button>
+            <br/>
+            <hr/>
+            <br/>
+
+        </div> <!-- FIN DEL PRIMER ROW DE 6-->
+
+
+
+    </div>
+
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+            <div class="panel panel-primary">
+
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover" id="tablaPedidoActual">
+                            <thead>
+                            <th>Articulo</th>
+                            <th>Cantidad</th>
+                            <th>Precio por unidad</th>
+                            <th>IVA</th>
+                            <th>Accion</th>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-    <hr/>
+    </div> <!-- FIN DEL ROW TABLA DE PEDIDO-->
 
-        <div>
-            <select id="productosSelect" size="10" style="width: 200px;">
-                <option disabled value="0">DEFAULT</option>
-            </select>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+
+            <div class="pull-right">
+            <label for="sinIVA">Precio SIN IVA: </label>
+            <input disabled class="form-control" type="text" size="" maxlength="" value="0" name="cantidad_sinIVA" id="sinIVA">
+            </div>
+            <br/><br/><br/>
+            <div class="pull-right">
+            <label for="conIVA">PRECIO CON IVA</label>
+            <input disabled class="form-control" type="text" size="" maxlength="" value="0" name="cantidad_conIVA" id="conIVA">
+            </div>
+            <br/><br/>      <br/><br/>
+            <button id="hacerPedido" class="btn btn-block btn-warning">Realizar pedido</button>
+
         </div>
 
-    <hr/>
-    <label for="precioUnidad">Precio producto: </label>
-    <input type="text" disabled size="" maxlength="" value="" name="precio_unidad" id="precioUnidad">
-    <br/>
-    <label for="ivaUnidad">Iva producto: </label>
-    <input type="text"  disabled size="" maxlength="" value="" name="iva_unidad" id="ivaUnidad">
-    <br/>
-    <label for="cantidadUnidad">Cantidad a comprar: </label>
-    <input type="text" size="" maxlength="" value="1" name="cantidad_unidad" id="cantidadUnidad">
-
-    <button type="button" id="addTabla" class="btn btn-success">Añadir</button>
-    <hr/>
-
-    <div class="container">
-        <table class="table" id="tablaPedidoActual">
-            <legend>PEDIDO ACTUAL</legend>
-            <thead>
-            <th>Articulo</th>
-            <th>Cantidad</th>
-            <th>Precio por unidad</th>
-            <th>IVA</th>
-            <th>Accion</th>
-            </thead>
-            <tbody>
-            </tbody>
-            <tfoot>
-            </tfoot>
-        </table>
     </div>
 
-    <label for="sinIVA">Precio SIN IVA: </label>
-    <input disabled type="text" size="" maxlength="" value="0" name="cantidad_sinIVA" id="sinIVA">
-    <br/>
-    <label for="conIVA">PRECIO CON IVA</label>
-    <input disabled type="text" size="" maxlength="" value="0" name="cantidad_conIVA" id="conIVA">
-
-    <button id="hacerPedido" class="btn btn-block btn-success">Realizar pedido</button>
 
 
-</div>
 
     <script>
         $(document).ready(function() {
