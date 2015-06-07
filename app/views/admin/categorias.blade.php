@@ -4,44 +4,75 @@
 
 @section('content')
 
-    <a href="#"><button class="btn btn-primary" data-toggle="modal" data-target="#nueva_categoria">Nueva Categoria</button></a>
-
-    <hr/>
-
-    <div class="container">
-        <table class="table">
-            <legend>LISTADO</legend>
-            <thead>
-            <th>Activo</th>
-            <th>Nombre</th>
-            <th>Accion</th>
-            </thead>
-            <tbody>
-            @foreach($categorias as $categoria)
-                <tr>
-                    <td>
-                        @if ($categoria->activo == 1)
-                            <a class="ajax_bool btn btn-sm btn-success-alt" href="/losmayses/public/admin/categorias/boolean_ajax/{{ $categoria->id }}/1/activo">
-                                <span class="estado_activo">Activo</span></a>
-                        @else
-                            <a class="ajax_bool btn btn-sm btn-danger-alt" href="/losmayses/public/admin/categorias/boolean_ajax/{{ $categoria->id }}/0/activo">
-                                <span class="estado_inactivo">Inactivo</span></a>
-                        @endif
-                    </td>
-                    <td>{{ $categoria->nombre }}</td>
-                    <td>{{ HTML::link('/admin/categorias/editar/'.$categoria['id'], 'MODIFICAR') }}</td>
-                    <td>
-                        <button  data-toggle="modal" data-target="#modal_{{ $categoria['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
-                    </td>
-
-                </tr>
-            @endforeach
-            </tbody>
-            <tfoot>
-            </tfoot>
-
-        </table>
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="page-header">Categorías</h1>
+        </div>
     </div>
+
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <a href="#"><button class="btn btn-primary btn-lg btn-success" data-toggle="modal" data-target="#nueva_categoria">Nueva Categoria</button></a>
+        </div>
+
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Listado de categorías
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <th>Activo</th>
+                            <th>Nombre</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                            </thead>
+                            <tbody>
+                            @foreach($categorias as $categoria)
+                                <tr>
+                                    <td>
+                                        @if ($categoria->activo == 1)
+                                            <a class="ajax_bool btn btn-sm btn-success-alt" href="/losmayses/public/admin/categorias/boolean_ajax/{{ $categoria->id }}/1/activo">
+                                                <span class="estado_activo">Activo</span></a>
+                                        @else
+                                            <a class="ajax_bool btn btn-sm btn-danger-alt" href="/losmayses/public/admin/categorias/boolean_ajax/{{ $categoria->id }}/0/activo">
+                                                <span class="estado_inactivo">Inactivo</span></a>
+                                        @endif
+                                    </td>
+                                    <td>{{ $categoria->nombre }}</td>
+                                    <td>{{ HTML::link('/admin/categorias/editar/'.$categoria['id'], 'MODIFICAR', array('class' => 'btn btn-primary btn-sm')) }}</td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $categoria['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
+                                    </td>
+
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
 
 
 

@@ -4,6 +4,10 @@ Author URL: http://w3layouts.com
 License: Creative Commons Attribution 3.0 Unported
 License URL: http://creativecommons.org/licenses/by/3.0/
 --*/
+html {
+    position: relative;
+    min-height: 100%;
+}
 body{
 	margin:0;
 	font-family: 'Neuton', serif;
@@ -36,6 +40,10 @@ body a:hover{
 .header{
 	padding: 2em 0;
 	margin:0;
+    /*CAMBIOS*/
+    min-height: 100%;
+    margin-bottom: 150px;
+
 }
 .header-logo{
 	float:left;
@@ -100,7 +108,21 @@ span.menu {
 	transform: translateY(-100%);
 	color:red;
 }
-
+ .google-maps {
+     top: 45px;
+     position: relative;
+     padding-bottom: 75%; // This is the aspect ratio
+ height: 0;
+     overflow: hidden;
+ }
+.google-maps iframe {
+    position: absolute;
+    top: 5%;
+    left: 5%;
+    bottom: 15%;
+    /*width: 100% !important;
+    height: 100% !important;*/
+}
 /* Effect 5: same word slide in and border bottom */
 /*--banner--*/
 .banner {
@@ -683,8 +705,14 @@ overflow:hidden;
 /*--//gallery--*/
 /*--footer--*/
 .footer {
-  background: #3b3b3b;
+    background: #3b3b3b;
   padding: 5em 0;
+    /*CAMBIOS*/
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+
 }
 .footer-left ul {
   padding: 0;
@@ -929,7 +957,7 @@ input#datepicker {
   display: inline-block;
   width: 42%;
 }
-.reservation-right lable{
+.reservation-right label{
   font-size: 17px;
   color: #555454;
   margin: 0 .5em 0 3em;
@@ -1610,7 +1638,7 @@ ul#myList {
 .reservation-right input[type="text"] {
   padding: 6px 15px;
 }
-.reservation-right lable {
+.reservation-right label {
   margin: 0 .1em 0 1.5em;
 }
 .reservation-right input[type="time"] {
@@ -1734,6 +1762,8 @@ ul#myList {
 @media(max-width:640px){
 .header {
   padding: 2em 0 0;
+    margin-bottom: 150px;
+
 }
 .top-nav {
   width: 5.5%;
@@ -1893,7 +1923,7 @@ div#loadMore {
 input#datepicker {
   display: block;
 }
-.reservation-right lable {
+.reservation-right label {
   margin: 0 .1em 0 0;
 }
 .btn1 {
@@ -2266,6 +2296,8 @@ div#loadMore {
 @media(max-width:320px){
 .header-logo {
   margin-left: 0;
+    margin-bottom: 150px;
+
 }
 .header-logo a img {
   width: 77%;

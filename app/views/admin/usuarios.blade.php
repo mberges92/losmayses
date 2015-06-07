@@ -5,57 +5,90 @@
 @section('content')
 
 
-<div class="container">
-    <table class="table">
-        <legend>LISTADO</legend>
-        <thead>
-        <th>Activo</th>
-        <th>Nombre de cliente</th>
-        <th>Correo</th>
-        <th>Empresa</th>
-        <th>Tarifa</th>
-        <th>Accion</th>
-        </thead>
-        <tbody>
-        @foreach($usuarios as $usuario)
-        <tr>
-            <td>
-                @if ($usuario->activo == 1)
-                    <a class="ajax_bool btn btn-sm btn-success-alt" href="/losmayses/public/admin/usuarios/boolean_ajax/{{ $usuario->id }}/1/activo">
-                        <span class="estado_activo">Activo</span></a>
-                @else
-                    <a class="ajax_bool btn btn-sm btn-danger-alt" href="/losmayses/public/admin/usuarios/boolean_ajax/{{ $usuario->id }}/0/activo">
-                        <span class="estado_inactivo">Inactivo</span></a>
-                @endif
-
-            </td>
-            <td>{{ $usuario->nombre_contacto }}</td>
-            <td>{{ $usuario->correo }}</td>
-            <td>{{ $usuario->nombre_empresa }}</td>
-            @if($usuario->tarifa_id == 0)
-                <td id="sinTarifa">SIN TARIFA</td>
-            @else
-                @foreach($tarifas as $tarifa)
-                    @if($usuario->tarifa_id == $tarifa->id)
-                        <td>{{ $tarifa->nombre }}</td>
-                        @break
-                    @endif
-                @endforeach
-            @endif
 
 
-            <td>{{ HTML::link('/admin/clientes/editar/'.$usuario['id'], 'MODIFICAR') }}</td>
-            <td>
-                <button  data-toggle="modal" data-target="#modal_{{ $usuario['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
-            </td>
-        </tr>
-        @endforeach
-        </tbody>
-        <tfoot>
-        </tfoot>
 
-    </table>
-</div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+            <h1 class="page-header">Clientes</h1>
+        </div>
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Datos de clientes
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                            <th>Activo</th>
+                            <th>Nombre de cliente</th>
+                            <th>Correo</th>
+                            <th>Empresa</th>
+                            <th>Tarifa</th>
+                            <th>Modificar</th>
+                            <th>Eliminar</th>
+                            </thead>
+                            <tbody>
+                            @foreach($usuarios as $usuario)
+                                <tr>
+                                    <td>
+                                        @if ($usuario->activo == 1)
+                                            <a class="ajax_bool btn btn-sm btn-success-alt" href="/losmayses/public/admin/usuarios/boolean_ajax/{{ $usuario->id }}/1/activo">
+                                                <span class="estado_activo">Activo</span></a>
+                                        @else
+                                            <a class="ajax_bool btn btn-sm btn-danger-alt" href="/losmayses/public/admin/usuarios/boolean_ajax/{{ $usuario->id }}/0/activo">
+                                                <span class="estado_inactivo">Inactivo</span></a>
+                                        @endif
+
+                                    </td>
+                                    <td>{{ $usuario->nombre_contacto }}</td>
+                                    <td>{{ $usuario->correo }}</td>
+                                    <td>{{ $usuario->nombre_empresa }}</td>
+                                    @if($usuario->tarifa_id == 0)
+                                        <td id="sinTarifa">SIN TARIFA</td>
+                                    @else
+                                        @foreach($tarifas as $tarifa)
+                                            @if($usuario->tarifa_id == $tarifa->id)
+                                                <td>{{ $tarifa->nombre }}</td>
+                                                @break
+                                            @endif
+                                        @endforeach
+                                    @endif
+
+
+                                    <td>
+                                        {{ HTML::link('/admin/clientes/editar/'.$usuario['id'], 'MODIFICAR', array('class' => 'btn btn-primary btn-sm')) }}
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $usuario['id'] }}"> <i class="fa fa-times ">ELIMINAR</i></button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                            <tfoot>
+                            </tfoot>
+
+                        </table>
+                    </div>
+                </div>
+                <!-- /.panel-body -->
+            </div>
+
+        </div>
+
+
+    </div>
 
 
 
@@ -83,11 +116,11 @@
 
 
 
+@section('script_pagina')
 
     <script>
 
         $(document).ready(function(){
-
 
             $('A.ajax_bool').click(function(e){
                 e.preventDefault();
@@ -130,12 +163,11 @@
 
             }); // FIN DE ACTIVAR/DESACTIVAR POR AJAX
 
-
         });
-
 
     </script>
 
+@stop
 
 
 @stop

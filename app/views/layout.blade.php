@@ -60,7 +60,7 @@
 <body>
 
 
-<div class="header">
+<div class="header" style="margin-bottom: 300px;">
     <div class="container">
         <div class="header-logo">
             <a href="/losmayses/public/"><img src="images/logo.png" alt="logo"/></a>
@@ -129,12 +129,12 @@
         </div>
         <div class="clearfix"> </div>
     </div>
-</div>
+
 <!--//header-->
 
 
 @yield('content')
-
+</div>
 
 <!--footer-->
 <div class="footer">

@@ -4,53 +4,78 @@
 
 @section('content')
 
-{{-- dd($pedidos[0]) --}}
-    <div class="container">
-        <table class="table">
-            <legend>LISTADO PEDIDOS</legend>
-            <thead>
-            <th>Empresa</th>
-            <th>Fecha pedido</th>
-            <th>Fecha entrega</th>
-            <th>Estado</th>
-            <th>Ver</th>
-            <th>Borrar</th>
-            <th>Estado</th>
-            </thead>
-            <tbody>
-            @foreach($pedidos as $pedido)
-                <tr>
-                    <td id="{{ $pedido['id'] }}">{{ $pedido['usuario']['nombre_empresa'] }}</td>
-                    <td>{{ $pedido['fechaPedido'] }}</td>
-                    <td>{{ $pedido['fechaEntrega'] }}</td>
-                    <td id="{{$pedido['estado']}}">
-                        @if ($pedido['estado'] == 1)
-                            PENDIENTE
-                        @elseif($pedido['estado'] == 2)
-                            PREPARADO
-                        @elseif($pedido['estado'] == 3)
-                            COMPLETADO
-                        @endif
-                    </td>
-                    <td>
-                        {{ HTML::link('/admin/pedidos/ver/'.$pedido['id'], 'VER') }}
-                    </td>
-                    <td>
-                        <button  data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
-                    </td>
-                    <td>
-                        <button id="cambiarEstadoBoton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEstado">CAMBIAR ESTADO</button>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-            <tfoot>
-            </tfoot>
 
-        </table>
+    <div class="row">
+
+        <div class="col-md-12">
+            <h1 class="page-header">Pedidos</h1>
+        </div>
+
     </div>
 
 
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <i class="fa fa-bar-chart-o fa-fw"></i> Listado de pedidos
+                </div>
+
+                <div class="panel-body">
+
+                    <div class="table-responsive">
+
+                            <table class="table table-hover">
+                                <thead>
+                                <th>Empresa</th>
+                                <th>Fecha pedido</th>
+                                <th>Fecha entrega</th>
+                                <th>Estado</th>
+                                <th>Ver</th>
+                                <th>Borrar</th>
+                                <th>Estado</th>
+                                </thead>
+                                <tbody>
+                                @foreach($pedidos as $pedido)
+                                    <tr>
+                                        <td id="{{ $pedido['id'] }}">{{ $pedido['usuario']['nombre_empresa'] }}</td>
+                                        <td>{{ $pedido['fechaPedido'] }}</td>
+                                        <td>{{ $pedido['fechaEntrega'] }}</td>
+                                        <td id="{{$pedido['estado']}}">
+                                            @if ($pedido['estado'] == 1)
+                                                PENDIENTE
+                                            @elseif($pedido['estado'] == 2)
+                                                PREPARADO
+                                            @elseif($pedido['estado'] == 3)
+                                                COMPLETADO
+                                            @endif
+                                        </td>
+                                        <td>
+                                            {{ HTML::link('/admin/pedidos/ver/'.$pedido['id'], 'VER', array('class' => 'btn btn-primary btn-sm')) }}
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
+                                        </td>
+                                        <td>
+                                            <button class="btn btn-primary btn-sm btn-success" id="cambiarEstadoBoton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEstado">CAMBIAR ESTADO</button>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                                <tfoot>
+                                </tfoot>
+
+                            </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
 
 
 
@@ -71,7 +96,7 @@
         </div>
     </div>
     @endforeach
-            <!-- FIN CONFIRMACIONES BORRAR PEDIDO -->
+<!-- FIN CONFIRMACIONES BORRAR PEDIDO -->
 
 
 

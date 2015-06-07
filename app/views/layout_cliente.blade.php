@@ -17,7 +17,6 @@
     {{ HTML::script('js/jquery.validate.min.js') }}
     {{ HTML::script('js/messages_es.js') }}
     {{ HTML::script('js/cifES.js') }}
-    {{ HTML::script('js/jquery-ui.js') }}
 
 
 
@@ -40,13 +39,6 @@
 
 @yield('content')
 
-
-@if (Auth::check())
-    <hr/>
-    {{  HTML::link('/logout', '// Cerrar Sesion - '.Auth::user()->correo.' //')  }}
-@endif
-
-{{-- HTML::script('js/bootstrap-modal.js') --}}
 
 </body>
 </html>
