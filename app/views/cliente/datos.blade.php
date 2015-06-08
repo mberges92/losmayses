@@ -89,8 +89,6 @@
         $(document).ready(function() {
 
 
-
-
                 $('#formDatosCliente').validate({
                     rules: {
                         correo: {

@@ -100,7 +100,9 @@ span.menu {
 	-moz-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
 }
-
+.espacio-login {
+    margin-top: 100px;
+}
 .cl-effect-5 li a:hover span,
 .cl-effect-5 li a:focus span,.cl-effect-5 li a.active span {
 	-webkit-transform: translateY(-100%);
@@ -126,7 +128,7 @@ span.menu {
 /* Effect 5: same word slide in and border bottom */
 /*--banner--*/
 .banner {
-  background: url(../imagenes/pastel_portada.jpg)no-repeat 0px 0px;
+  background: url(../imagenes_mini/pastel_portada.jpg)no-repeat 0px 0px;
   background-size: cover;
   min-height: 600px;
   display: block;
@@ -1995,6 +1997,9 @@ textarea {
 }
 }
 @media(max-width:480px){
+.espacio-footer {
+    margin-bottom: 450px;
+}    
 .banner {
   min-height: 250px;
 }
@@ -2593,4 +2598,12 @@ div#loadMore {
 .menu-page-grids p {
   font-size: 15px;
 }
+}
+.estrellita-imagen {
+    max-width: 50px;
+    max-height: 50px;
+}
+.imagenes-reduccion {
+    max-width: 370px;
+    max-height: 273px;
 }

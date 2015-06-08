@@ -4,6 +4,38 @@
 class CategoriasController extends BaseController
 {
 
+    public function activar_ajax($categoria_id=null, $valor=null)
+    {
+
+        if(Request::ajax()) {
+            if(!$categoria_id ){
+                return 0;
+            }
+
+
+            $cat_id = Categoria::find($categoria_id);
+
+            if ($valor == "1") {
+                $cat_id->activo = 0;
+                $cat_id->save();
+                $valor = "0";
+            } elseif ($valor == "0") {
+                $cat_id->activo = 1;
+                $cat_id->save();
+                $valor = "1";
+            }
+
+
+            $data = array('estado' => $valor,
+                'id' => $categoria_id,
+                'field' => 'activo');
+
+            return Response::json($data);
+
+        }
+
+    }
+
 
     public function comprobar_new_categoria() {
 

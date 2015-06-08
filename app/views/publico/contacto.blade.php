@@ -5,15 +5,10 @@
 @section('content')
 
 
-    <style>
 
 
-    </style>
-
-
-
-    <div class="container" style="margin-bottom: 280px;">
-        <div class="row">
+    <div class="container">
+        <div class="row espacio-login">
 
 
             <div class="col-md-6">
@@ -70,6 +65,8 @@
 
         </div>
     </div>
+
+    <div class="espacio-footer"></div>
 
 
 

@@ -39,7 +39,7 @@
     <div class="row">
 
         <div class="col-xs-6">
-            <h1>{{ HTML::image('imagenes/pasteleria-mayses-logo.jpg', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
+            <h1>{{ HTML::image('imagenes_mini', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
         </div>
         <div class="col-xs-6 text-right">
             <h1>FACTURA</h1>
@@ -133,7 +133,7 @@
 
 
                 <div class="col-xs-6">
-                    <h1>{{ HTML::image('imagenes/pasteleria-mayses-logo.jpg', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
+                    <h1>{{ HTML::image('imagenes_mini', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
                 </div>
                 <div class="col-xs-6 text-right">
                     <h1>FACTURA</h1>
