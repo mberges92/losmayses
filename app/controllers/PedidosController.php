@@ -65,6 +65,7 @@ class PedidosController extends BaseController
 
 
 
+
     public function generar_albaran($pedido_id)
     {
         $datos_pedido = Pedido::with('usuario')->where('id', '=', $pedido_id)->get()->toArray();
