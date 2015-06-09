@@ -1814,7 +1814,7 @@ ul#myList {
   left: 12%;
 }
 .dishes1 {
-  margin: 3em 0 2em;
+  margin: 3em 0em 2em;
 }
 .menu-tag h4 {
   padding: .5em 3em .8em;
@@ -2029,7 +2029,7 @@ textarea {
 }
 div#loadMore {
   font-size: 16px;
-  width: 29%;
+  width: 35%;
   background-position: 104px 14px;
 }
 div#loadMore:hover{
@@ -2037,7 +2037,7 @@ div#loadMore:hover{
 }
 #showLess {
   font-size: 16px;
-  width: 29%;
+  width: 35%;
   background-position: 104px 14px;
 }
 #showLess:hover{

@@ -319,12 +319,16 @@
                     $objDatosCliente = [];
                     var idtienda = $("#tiendasSelect").val();
                     var fechaEntrega = $("#datepicker").val();
+                    var signoTarifaActual = $('#signoTarifa').text();
+                    var valorTarifaActual = $('#valorTarifa').text();
 
                     console.log(fechaEntrega);
 
                     dat = {};
                     dat['idtienda'] = idtienda;
                     dat['fechaEntrega'] = fechaEntrega;
+                    dat['signoTarifa'] = signoTarifaActual;
+                    dat['valorTarifa'] = valorTarifaActual;
 
                     $objDatosCliente.push(dat);
 

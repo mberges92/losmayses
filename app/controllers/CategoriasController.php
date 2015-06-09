@@ -37,6 +37,7 @@ class CategoriasController extends BaseController
     }
 
 
+
     public function comprobar_new_categoria() {
 
         if(Request::ajax()) {

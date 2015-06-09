@@ -48,12 +48,12 @@
                 <ul class="rslides" id="slider3">
                     <li>
                         <div class="dishes">
+
                             <div class="col-md-3 dishes-grids">
                                 <img class="img-responsive"  src="imagenes_mini/brazo2_m.jpg" alt="" title=""/>
                                 <div class="dishes-text">
-                                    <p>Brazo de gitano relleno de frambuesa</p>
+                                    <p>Brazo relleno de frambuesa</p>
                                     <h4 class="rs"></h4>
-
                                 </div>
                             </div>
                             <div class="col-md-3 dishes-grids">
@@ -61,28 +61,33 @@
                                 <div class="dishes-text">
                                     <p>Tarta para los novios</p>
                                     <h4 class="rs"></h4>
-
                                 </div>
                             </div>
+
+
+
                             <div class="col-md-3 dishes-grids">
                                 <img class="img-responsive" src="imagenes_mini/pastas3_m.jpg" alt="" title=""/>
                                 <div class="dishes-text">
                                     <p>Surtido de pastas clásico</p>
                                     <h4 class="rs"></h4>
-
                                 </div>
                             </div>
+
                             <div class="col-md-3 dishes-grids">
                                 <img class="img-responsive" src="imagenes_mini/croissant1_m.jpg" alt="" title=""/>
                                 <div class="dishes-text">
                                     <p>Croissant artesano recién hecho</p>
                                     <h4 class="rs"></h4>
-
                                 </div>
                             </div>
+
                             <div class="clearfix"> </div>
+
+
                         </div>
                     </li>
+
                     <li>
                         <div class="dishes">
                             <div class="col-md-3 dishes-grids">
@@ -104,8 +109,8 @@
                             <div class="col-md-3 dishes-grids">
                                 <img class="img-responsive" src="imagenes_mini/brazo1_m.jpg" alt="" title=""/>
                                 <div class="dishes-text">
-                                    <p>Brazo relleno de crema y virutas de chocolate</p>
-                                    <h4 class="rs">$60</h4>
+                                    <p>Brazo de crema y virutas de chocolate</p>
+                                    <h4 class="rs"></h4>
 
                                 </div>
                             </div>
@@ -114,11 +119,13 @@
                                 <div class="dishes-text">
                                     <p>Muffin con nata y fresa</p>
                                     <h4 class="rs"></h4>
-
                                 </div>
                             </div>
+
                             <div class="clearfix"> </div>
+
                         </div>
+
                     </li>
                 </ul>
             </div>

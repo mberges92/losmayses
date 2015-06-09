@@ -90,6 +90,13 @@ Route::get('admin/usuarios/boolean_ajax/{id}/{valor}/activo', 'UsuariosControlle
 
 
 Route::post('admin/pedidos/cambio_estado', 'PedidosController@cambio_estado_pedido'); //LLAMADA AJAX CAMBIO ESTADO PEDIDO
+Route::post('admin/pedidos/gen_num_albaran', 'PedidosController@gen_num_albaran'); //LLAMADA AJAX GENERAR NUMERO ALBARAN
+Route::post('admin/pedidos/gen_num_factura', 'PedidosController@gen_num_factura'); //LLAMADA AJAX GENERAR NUMERO FACTURA
+
+// RUTA DE PRUEBA PARA DEBUG DE GENERAR NUMERO ALBARAN
+Route::any('admin/a', 'PedidosController@gen_num_albaran'); //LLAMADA AJAX GENERAR NUMERO ALBARAN
+
+
 
 
 Route::get('pedir_productos/{id}', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX

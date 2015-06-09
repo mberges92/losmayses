@@ -27,23 +27,19 @@
 </head>
 <body>
 
-@foreach($tarifas as $tar)
-    @if($tar['id'] == $datosPedido[0]['usuario']['tarifa_id'])
-        <p id="signoTarifa" style="display: none">{{ $tar['signo'] }}</p>
-        <p id="valorTarifa" style="display: none">{{ $tar['valor'] }}</p>
-    @endif
-@endforeach
+        <p id="signoTarifa" style="display: none">{{ $datosPedido[0]['signo_tarifa'] }}</p>
+        <p id="valorTarifa" style="display: none">{{ $datosPedido[0]['valor_tarifa'] }}</p>
 
 <div class="container">
 
     <div class="row">
 
         <div class="col-xs-6">
-            <h1>{{ HTML::image('imagenes_mini', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
+            <h1>{{ HTML::image('imagenes_normal/losmayses-logo.jpg', 'los mayses', array('class' => 'img img-responsive', 'height' => '250px', 'width' => '270px')) }}</h1>
         </div>
         <div class="col-xs-6 text-right">
             <h1>FACTURA</h1>
-            <h1><small>Factura #001</small></h1>
+            <h1><small>Factura #{{ $datosPedido[0]['num_factura'] }}</small></h1>
         </div>
 
         <hr />
@@ -113,10 +109,10 @@
                     @endforeach
                     <td>{{ $pro->cantidad }}</td>
                     <td id="pvptabla">
-                        @if($tar['signo'] == "-")
-                            {{ 1*$pro->precioUnidad - ($tar['valor'] * (1*$pro->precioUnidad / 100)) }}
+                        @if($datosPedido[0]['signo_tarifa'] == "-")
+                            {{ 1*$pro->precioUnidad - ($datosPedido[0]['valor_tarifa'] * (1*$pro->precioUnidad / 100)) }}
                         @else
-                            {{ 1*$pro->precioUnidad + ($tar['valor'] * (1*$pro->precioUnidad / 100)) }}
+                            {{ 1*$pro->precioUnidad + ($datosPedido[0]['valor_tarifa'] * (1*$pro->precioUnidad / 100)) }}
                         @endif
                     </td>
                     <td>{{ $pro->iva }}</td>
@@ -207,9 +203,9 @@
 
         <div class="row text-right">
             <div class="col-xs-3 col-xs-offset-6"><strong>
-                    Sub Total: <br/>
-                    Impuestos: <br/>
-                    Total:
+                    Sub Total: €<br/>
+                    Impuestos: €<br/>
+                    Total: €
                 </strong></div>
             <div class="col-xs-2"><strong>
                     <input disabled type="text" size="" maxlength="" value="0" name="cantidad_sinIVA" id="sinIVA">

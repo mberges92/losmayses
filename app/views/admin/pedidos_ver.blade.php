@@ -15,18 +15,49 @@
 
     </div>
 
+    {{-- dd($datosPedido[0]) --}}
 
     <div class="row">
         <div class="container">
+            <span id="idDelPedido" style="display: none;">{{ $datosPedido[0]['id'] }}</span>
+
+
             @if($datosPedido[0]['estado'] == 3)
-                {{ HTML::link('/admin/pedidos/albaran/'.$datosPedido[0]['id'], 'ALBARAN') }}
-                {{ HTML::link('/admin/pedidos/factura/'.$datosPedido[0]['id'], 'FACTURA') }}
+
+                @if($datosPedido[0]['num_factura'] != 0 && $datosPedido[0]['num_albaran'] != 0)
+                    {{-- SI HAY ALBARAN Y HAY FACTURA --}}
+
+                    {{ HTML::link('/admin/pedidos/albaran/'.$datosPedido[0]['id'], 'VER ALBARAN', array('class' => 'btn btn-primary btn-info btn-block')) }}
+                    {{ HTML::link('/admin/pedidos/factura/'.$datosPedido[0]['id'], 'VER FACTURA', array('class' => 'btn btn-primary btn-danger btn-block')) }}
+
+                @elseif ($datosPedido[0]['num_albaran'] != 0 && $datosPedido[0]['num_factura'] == 0)
+                    {{-- SI HAY ALBARAN PERO NO FACTURA --}}
+
+                    {{ HTML::link('/admin/pedidos/albaran/'.$datosPedido[0]['id'], 'ALBARAN', array('class' => 'btn btn-primary btn-info btn-block')) }}
+
+                    <button id="genNumFactura" type="button" class="btn btn-primary btn-warning btn-block">GENERAR NUMERO FACTURA</button>
+
+                @elseif ($datosPedido[0]['num_factura'] == 0 && $datosPedido[0]['num_albaran'] == 0)
+                    {{-- SI NO HAY ALBARAN Y NO HAY FACTURA --}}
+                    <button id="genNumAlbaran" type="button" class="btn btn-primary btn-warning btn-block">GENERAR NUMERO ALBARAN</button>
+
+                @endif
+
+
             @elseif($datosPedido[0]['estado'] == 2)
-                {{ HTML::link('/admin/pedidos/albaran', 'ALBARAN') }}
+
+                @if($datosPedido[0]['num_albaran'] == 0)
+                    <button id="genNumAlbaran" type="button" class="btn btn-primary btn-warning btn-block">GENERAR NUMERO ALBARAN</button>
+                @else
+                    {{ HTML::link('/admin/pedidos/albaran/'.$datosPedido[0]['id'], 'ALBARAN', array('class' => 'btn btn-primary btn-info btn-block')) }}
+                @endif
+
             @endif
         </div>
 
     </div>
+
+    <hr/>
 
 
 
@@ -56,8 +87,6 @@
             </div>
 
 
-
-
             <div class="col-md-6">
 
                 <div class="panel panel-primary">
@@ -76,8 +105,6 @@
                 </div>
 
             </div>
-
-
 
     </div>
 
@@ -107,7 +134,16 @@
                                 @endif
                             @endforeach
                             <td>{{ $pro->cantidad }}</td>
-                            <td id="pvptabla">{{ $pro->precioUnidad }}</td>
+                            <td id="pvptabla">
+
+                                @if($datosPedido[0]['signo_tarifa'] == "-")
+                                    {{ 1*$pro->precioUnidad - ($datosPedido[0]['valor_tarifa'] * (1*$pro->precioUnidad / 100)) }}
+                                @else
+                                    {{ 1*$pro->precioUnidad + ($datosPedido[0]['valor_tarifa'] * (1*$pro->precioUnidad / 100)) }}
+                                @endif
+
+
+                            </td>
                             <td>{{ $pro->iva }}</td>
                         </tr>
                     @endforeach
@@ -142,7 +178,6 @@
             </div>
 
 
-
         </div>
 
     </div>
@@ -156,7 +191,77 @@
 
 <script>
     $(document).ready(function() {
-    sumaTotales();
+
+
+        $(document).on('click', '#genNumAlbaran', function() {
+            $objDatos = [];
+
+            dat = {};
+            dat['accion'] = 'generar_albaran';
+            dat['idPedido'] = $('#idDelPedido').text();
+
+            $objDatos.push(dat);
+
+            $.ajax({
+                async: false, // Puesta a false para que no pueda realizar otra llamada hasta que esta se complete
+                type: 'post',
+                datatype: JSON,
+                url: '/losmayses/public/admin/pedidos/gen_num_albaran',
+                data: {
+                    objDatos: $objDatos
+                },
+                success: function(data) {
+                    if(data.status == 'success'){
+                        location.reload();
+
+                    }else if(data.status == 'error'){
+                        alert("Error en la conexion, intentelo de nuevo.");
+                    }
+                    //$('#tablaPedidoActual tbody>tr').remove();
+                    //$('option:selected', this).attr('selected', false);
+                }
+            }); // FIN FUNCION AJAX
+        }); // FIN FUNCION ON CLICK GENERAR ALBARAN
+
+
+
+
+
+        $(document).on('click', '#genNumFactura', function() {
+
+            $objDatos = [];
+
+            dat = {};
+            dat['accion'] = 'generar_factura';
+            dat['idPedido'] = $('#idDelPedido').text();
+
+            $objDatos.push(dat);
+
+            $.ajax({
+                async: false, // Puesta a false para que no pueda realizar otra llamada hasta que esta se complete
+                type: 'post',
+                datatype: JSON,
+                url: '/losmayses/public/admin/pedidos/gen_num_factura',
+                data: {
+                    objDatos: $objDatos
+                },
+                success: function(data) {
+                    if(data.status == 'success'){
+                        location.reload();
+
+                    }else if(data.status == 'error'){
+                        alert("Error en la conexion, intentelo de nuevo.");
+                    }
+                    //$('#tablaPedidoActual tbody>tr').remove();
+                    //$('option:selected', this).attr('selected', false);
+
+                }
+            }); // FIN FUNCION AJAX
+
+        }); // FIN FUNCION ON CLICK GENERAR ALBARAN
+
+
+        sumaTotales();
 
     // FUNCION PARA CALCULAR EL PRECIO FINAL CON Y SIN IVA, Y ACTUALIZARLO
     function sumaTotales() {

@@ -5,6 +5,66 @@ class PedidosController extends BaseController
 {
 
 
+    public function gen_num_albaran()
+    {
+
+        if (Request::ajax()) {
+
+            $numero_max = DB::table('pedidos')->max('num_albaran');
+            $numero_max += 1;
+
+            $datos = Input::get('objDatos');
+
+            $idpedido = $datos[0]['idPedido'];
+
+            $pedido = Pedido::find($idpedido);
+
+            $pedido->num_albaran = $numero_max;
+
+            if ($pedido->save()) {
+                return Response::json(array('status' => 'success'));
+
+            } else {
+
+                return Response::json(array('status' => 'error'));
+            }
+
+
+        }
+
+    }
+
+    public function gen_num_factura()
+    {
+
+        if (Request::ajax()) {
+
+            $numero_max = DB::table('pedidos')->max('num_factura');
+            $numero_max += 1;
+
+            $datos = Input::get('objDatos');
+
+            $idpedido = $datos[0]['idPedido'];
+
+            $pedido = Pedido::find($idpedido);
+
+            $pedido->num_factura = $numero_max;
+
+            if ($pedido->save()) {
+                return Response::json(array('status' => 'success'));
+
+            } else {
+
+                return Response::json(array('status' => 'error'));
+            }
+
+
+        }
+
+    }
+
+
+
     public function generar_albaran($pedido_id)
     {
         $datos_pedido = Pedido::with('usuario')->where('id', '=', $pedido_id)->get()->toArray();
@@ -20,24 +80,7 @@ class PedidosController extends BaseController
         //dd($productos);
 
 
-        $tarifas = Tarifa::all()->toArray();
-        //dd($tarifas);
-
-
-        // LLevo los datos datos de la tarifa, solo signo y valor
-        foreach ($tarifas as $tar) {
-            if ($tar['id'] == $datos_pedido[0]['usuario']['tarifa_id']) {
-                $f = array('signo' => $tar['signo'],
-                           'valor' => $tar['valor']);
-            }
-        }
-        //dd($f);
-
-
-
-
-
-        return View::make('albaran')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda, 'tar' => $f));
+        return View::make('albaran')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
     }
 
 
@@ -55,37 +98,30 @@ class PedidosController extends BaseController
         $productos = Producto::all()->toArray();
         //dd($productos);
 
-        $tarifas = Tarifa::all()->toArray();
-        //dd($tarifas);
 
-
-        // LLevo los datos datos de la tarifa, solo signo y valor
-        foreach ($tarifas as $tar) {
-            if ($tar['id'] == $datos_pedido[0]['usuario']['tarifa_id']) {
-                $f = array('signo' => $tar['signo'],
-                    'valor' => $tar['valor']);
-            }
-        }
-        //dd($f);
-
-        return View::make('factura')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda, 'tarifas' => $tarifas, 'tar' => $f));
+        return View::make('factura')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
     }
 
     public function cambio_estado_pedido()
     {
 
-        $datos = Input::get('objDatosPedido');
-        //echo $datos[0]['estadoPedido'];
+        if (Request::ajax()) {
 
-        $idp = $datos[0]['idPedido'];
-        $esp = $datos[0]['estadoPedido'];
 
-        $pedido = Pedido::find($idp);
+            $datos = Input::get('objDatosPedido');
+            //echo $datos[0]['estadoPedido'];
 
-        $pedido->estado = $esp;
-        $pedido->save();
+            $idp = $datos[0]['idPedido'];
+            $esp = $datos[0]['estadoPedido'];
 
-        return Response::json(array('status' => 'success'));
+            $pedido = Pedido::find($idp);
+
+            $pedido->estado = $esp;
+            $pedido->save();
+
+            return Response::json(array('status' => 'success'));
+
+        }
 
     }
 
@@ -124,6 +160,8 @@ class PedidosController extends BaseController
         $pedido->estado = 1;
         $pedido->fechaPedido = $fechaAhora_sql; // Solo se guarda fecha, campo en bd de solo fecha sin horas
         $pedido->fechaEntrega = $fechaEntrega;
+        $pedido->signo_tarifa = $datos_pedido[0]['signoTarifa'];
+        $pedido->valor_tarifa = $datos_pedido[0]['valorTarifa'];
 
 
 
