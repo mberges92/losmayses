@@ -99,12 +99,8 @@
             @foreach($productosPedido as $pro)
                 <?php $i++ ?>
                 <tr>
-                    @foreach($productos as $k)
-                        @if ($pro->producto_id == $k['id'])
-                            <td>{{ $k['nombre'] }}</td>
-                            @break
-                        @endif
-                    @endforeach
+                    <td>{{ $pro->nombre_producto }}</td>
+
                     <td>{{ $pro->cantidad }}</td>
                     <td id="pvptabla">
                         @if($datosPedido[0]['signo_tarifa'] == "-")

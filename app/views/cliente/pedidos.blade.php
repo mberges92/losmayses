@@ -304,6 +304,8 @@
                         var cantidad2 = $(this).find('td').eq(1).html();
                         var precio2 = $(this).find('td').eq(2).html();
                         var iva2 = $(this).find('td').eq(3).html();
+                        var nombre_articulo2 = $(this).find('td').eq(0).html();
+
 
                         valor = {};
                         valor['idarticulo'] = idarticulo;
@@ -311,6 +313,7 @@
                         valor["cantidad"] = cantidad2;
                         valor["precio"] = precio2;
                         valor["iva"] = iva2;
+                        valor["nombre_articulo"] = nombre_articulo2;
 
                         $objDatosColumna.push(valor);
 

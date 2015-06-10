@@ -4,6 +4,42 @@
 class PedidosController extends BaseController
 {
 
+    public function ver_pedido_cliente($id_cliente, $pedido_id)
+    {
+        $datos_pedido = Pedido::with('usuario')->where('id', '=', $pedido_id)->get()->toArray();
+        //dd($datos_pedido);
+
+        $datos_tienda = Tienda::where('usuario_id', '=', $datos_pedido[0]['usuario']['id'])->get()->toArray();
+        //dd($datos_tienda);
+
+        $productos_pedido = DB::table('detalles_pedidos')->where('pedido_id', '=', $pedido_id)->get();
+        //dd($productos_pedido);
+
+        $productos = Producto::all()->toArray();
+        //dd($productos);
+
+
+
+
+        return View::make('cliente.ver_pedido_cliente')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
+
+
+    }
+
+
+        public function ver_ultimos_pedidos_cliente($id_cliente)
+        {
+
+            $pedidos = Pedido::where('usuario_id', '=', $id_cliente)->take(10)->get()->toArray();
+            //dd($pedidos);
+
+            $tiendas = Tienda::where('usuario_id', '=', $id_cliente)->get()->toArray();
+            //dd($tiendas);
+
+            return View::make('cliente.mispedidos')->with(array('pedidos' => $pedidos, 'tiendas' => $tiendas));
+
+        }
+
 
     public function gen_num_albaran()
     {
@@ -28,7 +64,6 @@ class PedidosController extends BaseController
 
                 return Response::json(array('status' => 'error'));
             }
-
 
         }
 
@@ -166,6 +201,7 @@ class PedidosController extends BaseController
 
 
 
+
         if ($pedido->save())
         {
             $t = array();
@@ -177,7 +213,8 @@ class PedidosController extends BaseController
                     'producto_id' => $lis['idarticulo'],
                     'precioUnidad' => $lis['precio'],
                     'cantidad' => $lis['cantidad'],
-                    'iva' => $lis['iva']);
+                    'iva' => $lis['iva'],
+                    'nombre_producto' => $lis['nombre_articulo']);
 
                 array_push($t, $mas);
 

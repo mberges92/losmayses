@@ -38,11 +38,24 @@
                                 <th>Estado</th>
                                 </thead>
                                 <tbody>
+
+
                                 @foreach($pedidos as $pedido)
                                     <tr>
+
+                                        <?php
+                                        // CALCULA LOS AÑOS DESDE QUE SE ENTREGO EL PEDIDO A LA FECHA ACTUAL
+                                        // PARA PODER BORRRAR UN PEDIDO CON FACTURA
+                                        $datetime1 = new DateTime($pedido['fechaEntrega']);
+                                        $datetime2 = new DateTime();
+                                        $interval = $datetime1->diff($datetime2);
+                                        $a = $interval->format('%y');
+                                        ?>
+
+
                                         <td id="{{ $pedido['id'] }}">{{ $pedido['usuario']['nombre_empresa'] }}</td>
-                                        <td>{{ $pedido['fechaPedido'] }}</td>
-                                        <td>{{ $pedido['fechaEntrega'] }}</td>
+                                        <td>{{ date("d-m-Y", strtotime($pedido['fechaPedido'])) }}</td>
+                                        <td>{{ date("d-m-Y", strtotime($pedido['fechaEntrega'])) }}</td>
                                         <td id="{{$pedido['estado']}}">
                                             @if ($pedido['estado'] == 1)
                                                 PENDIENTE
@@ -56,7 +69,11 @@
                                             {{ HTML::link('/admin/pedidos/ver/'.$pedido['id'], 'VER', array('class' => 'btn btn-primary btn-sm')) }}
                                         </td>
                                         <td>
-                                            <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
+                                            @if($pedido['num_factura'] != 0 && $interval->format('%Y') <= 4 )
+                                                <button disabled="disabled" class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
+                                            @else
+                                                <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $pedido['id'] }}"> <i class="fa fa-times ">BORRAR</i></button>
+                                            @endif
                                         </td>
                                         <td>
                                             <button class="btn btn-primary btn-sm btn-success" id="cambiarEstadoBoton" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalEstado">CAMBIAR ESTADO</button>

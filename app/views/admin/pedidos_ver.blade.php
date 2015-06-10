@@ -18,7 +18,7 @@
     {{-- dd($datosPedido[0]) --}}
 
     <div class="row">
-        <div class="container">
+        <div class="col-md-12">
             <span id="idDelPedido" style="display: none;">{{ $datosPedido[0]['id'] }}</span>
 
 
@@ -127,12 +127,7 @@
                     @foreach($productosPedido as $pro)
 
                         <tr>
-                            @foreach($productos as $k)
-                                @if ($pro->producto_id == $k['id'])
-                                    <td>{{ $k['nombre'] }}</td>
-                                    @break
-                                @endif
-                            @endforeach
+                            <td>{{ $pro->nombre_producto }}</td>
                             <td>{{ $pro->cantidad }}</td>
                             <td id="pvptabla">
 
@@ -182,7 +177,7 @@
 
     </div>
 
-
+    <br/>
 
 
 

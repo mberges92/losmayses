@@ -20,7 +20,7 @@ Route::get('/contacto', function() {
 
 // Parte administración --------------------------------------------------------------------------------------
 Route::get('/admin', function() {
-    return View::make('admin.index');
+    return Redirect::to('/admin/clientes');
 });
 
 Route::get('/admin/pedidos', 'PedidosController@listados_pedidos_admin');
@@ -79,6 +79,9 @@ Route::get('/cliente/{id}/tiendas/{tienda}', 'TiendasController@modificar_tienda
 Route::post('/cliente/{id}/tiendas/{tienda}', 'TiendasController@modificar_tienda');
 Route::get('/cliente/{id}/tiendas/eliminar/{tienda}', 'TiendasController@eliminar_tienda');
 Route::get('/cliente/{id}/pedidos', 'PedidosController@inicio');
+Route::get('/cliente/{id}/mispedidos', 'PedidosController@ver_ultimos_pedidos_cliente');
+Route::get('/cliente/{id}/pedidos/ver/{id_pedido}', 'PedidosController@ver_pedido_cliente');
+
 
 
 Route::get('/cliente/getProductos', 'PedidosController@pedir_productos_ajax'); // LLAMADA AJAX

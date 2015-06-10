@@ -75,9 +75,11 @@
                     <li>
                         <a href="/losmayses/public/cliente/{{ Auth::user()->id }}/tiendas"><i class="fa fa-table fa-fw"></i> Tiendas</a>
                     </li>
-
                     <li>
-                        <a href="/losmayses/public/cliente/{{ Auth::user()->id }}/pedidos"><i class="fa fa-files-o fa-fw"></i> Pedidos</a>
+                        <a href="/losmayses/public/cliente/{{ Auth::user()->id }}/mispedidos"><i class="fa fa-files-o fa-fw"></i> Ver Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="/losmayses/public/cliente/{{ Auth::user()->id }}/pedidos"><i class="fa fa-files-o fa-fw"></i> Nuevo Pedido</a>
                     </li>
                 </ul>
             </div>
