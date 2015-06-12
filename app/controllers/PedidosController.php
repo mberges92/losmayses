@@ -19,8 +19,6 @@ class PedidosController extends BaseController
         //dd($productos);
 
 
-
-
         return View::make('cliente.ver_pedido_cliente')->with(array('datosPedido' => $datos_pedido, 'productosPedido' => $productos_pedido, 'productos' => $productos, 'datosTienda' => $datos_tienda));
 
 
@@ -297,9 +295,6 @@ class PedidosController extends BaseController
         //dd($pedidos_usuario[0]['productos']);
 
 
-        // Categorias activas con los productos
-        //$categorias_y_productos = Categoria::with('productos')->where('activo', '=', 1)->get()->toArray();
-        //dd($categorias_y_productos[0]);
         $categorias_activas = Categoria::where('activo', '=', 1)->get()->toArray();
         //dd($categorias_activas);
 
@@ -310,7 +305,6 @@ class PedidosController extends BaseController
 
     public function borrar($pedido_id)
     {
-        //if (DB::table('detalles_pedidos')->insert($t)) {
 
         $detalles_pedido = DB::table('detalles_pedidos')->where('pedido_id', '=', $pedido_id)->delete();
 

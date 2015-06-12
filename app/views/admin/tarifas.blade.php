@@ -46,7 +46,9 @@
                             <td>{{ $tarifa->nombre }}</td>
                             <td>{{ $tarifa->signo.'  '.$tarifa->valor }} %</td>
                             <td>{{ HTML::link('/admin/tarifas/editar/'.$tarifa['id'], 'MODIFICAR', array('class' => 'btn btn-primary btn-sm')) }}</td>
-                            <td>{{ HTML::link('/admin/tarifas/eliminar/'.$tarifa['id'], 'ELIMINAR', array('class' => 'btn btn-primary btn-sm btn-warning')) }}</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm btn-warning" data-toggle="modal" data-target="#modal_{{ $tarifa['id'] }}"> <i class="fa fa-times ">ELIMINAR</i></button>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -110,6 +112,26 @@
         </div>
     </div>
     <!-- FIN VENTANA MODAL CREAR TARIFA -->
+
+<!-- CONFIRMACIONES BORRAR TARIFA -->
+@foreach($tarifas as $tarifa)
+    <div id="modal_{{ $tarifa->id }}" class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button aria-hidden="true" data-dismiss="modal" class="close" type="button">&times;</button>
+                    <h4 class="modal-title">Borrar '{{ $tarifa['nombre'] }}'</h4>
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de querer borrar la tarifa '{{ $tarifa['nombre'] }}'?<br/>
+                    {{ HTML::link('/admin/tarifas/eliminar/'.$tarifa['id'], 'SI') }}
+                </div>
+            </div>
+        </div>
+    </div>
+    @endforeach
+            <!-- FIN CONFIRMACIONES BORRAR TARIFA -->
+
 
 
     <script>

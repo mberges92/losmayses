@@ -4,6 +4,9 @@
     <title>Los mayses - @section('titulo') @show</title>
     {{HTML::style('css/bootstrap.min.css')}}
     {{HTML::style('css/style.css')}}
+    <!-- SI HACIA EL MINIFY DE LOS CSS QUE VENIAN DE LA PLANTILLA SE ROMPIA EL DISENIO
+    PARECE SER QUE TIENEN FALLOS EN ALGUN LADO, HE HECHO TODOS LOS MINIELD QUE NO PETABAN-->
+
     @section('css_especifico') @show
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -11,12 +14,15 @@
     <meta name="keywords" content="Pabulum Responsive web template, Bootstrap Web Templates, Flat Web Templates, Andriod Compatible web template,
 	Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyErricsson, Motorola web design" />
     <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
     {{HTML::script('js/jquery-1.11.2.min.js')}}
+    <!-- ESTO IBA CON LA PLANTILLA AQUI, YA SE QUE NO SE PONE AQUI LOS SCRIPTS, LOS HE MINIFICADO -->
+    <!--
     <script src="js/modernizr.custom.js"></script>
     <script type="text/javascript" src="js/move-top.js"></script>
     <script type="text/javascript" src="js/easing.js"></script>
     <script type="text/javascript" src="js/modernizr.custom.53451.js"></script>
+    -->
     <script type="text/javascript">
         jQuery(document).ready(function($) {
             $(".scroll").click(function(event){
@@ -42,11 +48,6 @@
         });
     </script>
 
-    {{HTML::script('js/bootstrap.min.js')}}
-    {{ HTML::script('js/jquery.validate.min.js') }}
-    {{ HTML::script('js/messages_es.js') }}
-    {{ HTML::script('js/cifES.js') }}
-    {{ HTML::script('js/jquery-ui.js') }}
 
     {{-- HTML::style('css/bootstrap-theme.min.css') --}}
     {{-- HTML::style('css/jquery-ui.min.css') --}}
@@ -189,6 +190,7 @@
 <a href="#" id="toTop" style="display: block;"> <span id="toTopHover" style="opacity: 1;"> </span></a>
 <!--//smooth-scrolling-of-move-up-->
 
+<script src="js/scripts_plantilla.js"></script>
 
 
 

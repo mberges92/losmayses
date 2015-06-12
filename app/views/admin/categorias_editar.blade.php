@@ -47,16 +47,19 @@
 
 <script>
 
-    $('#editarCategoriaForm').validate({
-        rules: {
-            nombre: {
-                required: true,
-                maxlength: 255,
-                remote: "http://"+location.host+"/losmayses/public/validation/comprobar_categoria/{{$categoria['id']}}"
-            }
-        } // FIN DE RULES
+    $(document).ready(function () {
+        $('#editarCategoriaForm').validate({
+            rules: {
+                nombre: {
+                    required: true,
+                    maxlength: 255,
+                    remote: "http://"+location.host+"/losmayses/public/validation/comprobar_categoria/{{$categoria['id']}}"
+                }
+            } // FIN DE RULES
 
+        });
     });
+
 
 </script>
 

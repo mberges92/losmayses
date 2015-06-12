@@ -75,23 +75,27 @@
 
     <script>
 
-        $('#formContactoPublico').validate({
-            rules: {
-                correo: {
-                    required: true,
-                    email: true,
-                    minlength: 5,
-                    maxlength: 255
-                },
-                name: {
-                    required: true,
-                    maxlength: 255
-                },
-                message: {
-                    required: true,
-                    maxlength: 255
-                }
-            } // FIN DE RULES
+        $(document).ready(function() {
+            $('#formContactoPublico').validate({
+                rules: {
+                    correo: {
+                        required: true,
+                        email: true,
+                        minlength: 5,
+                        maxlength: 255
+                    },
+                    name: {
+                        required: true,
+                        maxlength: 255
+                    },
+                    message: {
+                        required: true,
+                        maxlength: 255
+                    }
+                } // FIN DE RULES
+            });
+
+
         });
 
     </script>

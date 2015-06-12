@@ -8,15 +8,10 @@
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <title>Los mayses - @section('titulo') @show</title>
 
-    {{HTML::style('css/bootstrap.min.css')}}
-    {{HTML::style('css/jquery-ui.min.css')}}
-    {{HTML::style('css/style_boot_modal.css')}}
 
-    {{HTML::style('css/admin_layout/metisMenu.css')}}
-    {{HTML::style('css/admin_layout/timeline.css')}}
-    {{HTML::style('css/admin_layout/sb-admin-2.css')}}
-    {{HTML::style('css/admin_layout/morris.css')}}
     {{HTML::style('css/admin_layout/font-awesome.min.css')}}
+    {{HTML::style('css/style.admin.min.css')}}
+
 
 
     <script src="/losmayses/public/js/jquery-1.11.2.min.js"></script>
@@ -99,21 +94,12 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/losmayses/public/js/jquery-1.11.2.min.js"></script>
-    <script src="/losmayses/public/js/jquery.validate.min.js"></script>
-    <script src="/losmayses/public/js/cifES.js"></script>
-    <script src="/losmayses/public/js/messages_es.js"></script>
-    <script src="/losmayses/public/js/jquery-ui.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/losmayses/public/js/bootstrap.min.js"></script>
 
-    <!-- Metis Menu Plugin JavaScript -->
-    <script src="/losmayses/public/js/metisMenu.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script src="/losmayses/public/js/sb-admin-2.js"></script>
+<script src="/losmayses/public/js/admin_layout.min.js"></script>
+<script src="/losmayses/public/js/jquery-ui.min.js"></script>
+
 
 </body>
 </html>

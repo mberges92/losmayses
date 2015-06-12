@@ -1,4 +1,4 @@
-@extends('layout_admin')
+@extends('layout_cliente')
 @section('titulo') Cliente - Ver pedido @stop
 
 

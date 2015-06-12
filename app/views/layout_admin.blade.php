@@ -8,18 +8,11 @@
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
     <title>Los mayses - @section('titulo') @show</title>
 
-    {{HTML::style('css/bootstrap.min.css')}}
-    {{HTML::style('css/admin_layout/metisMenu.css')}}
-    {{HTML::style('css/admin_layout/timeline.css')}}
-    {{HTML::style('css/admin_layout/sb-admin-2.css')}}
-    {{HTML::style('css/admin_layout/morris.css')}}
     {{HTML::style('css/admin_layout/font-awesome.min.css')}}
+    {{HTML::style('css/style.admin.min.css')}}
 
 
-    {{HTML::style('css/style_boot_modal.css')}}
 
-
-    <script src="/losmayses/public/js/jquery-1.11.2.min.js"></script>
 
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -27,6 +20,7 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <script src="/losmayses/public/js/jquery-1.11.2.min.js"></script>
 </head>
 <body>
 
@@ -103,20 +97,9 @@
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="/losmayses/public/js/jquery-1.11.2.min.js"></script>
-<script src="/losmayses/public/js/jquery.validate.min.js"></script>
-<script src="/losmayses/public/js/cifES.js"></script>
-<script src="/losmayses/public/js/messages_es.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="/losmayses/public/js/bootstrap.min.js"></script>
+<script src="/losmayses/public/js/admin_layout.min.js"></script>
 
-<!-- Metis Menu Plugin JavaScript -->
-<script src="/losmayses/public/js/metisMenu.min.js"></script>
-
-<!-- Custom Theme JavaScript -->
-<script src="/losmayses/public/js/sb-admin-2.js"></script>
 
 @section('script_pagina') @show
 
